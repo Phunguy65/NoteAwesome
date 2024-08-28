@@ -1,0 +1,15 @@
+.searchBarGlobal{
+    -fx-background-image: url("/images/avatar-boy-svgrepo-com.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right center;
+    -fx-text-fill: #b0b9c6;
+    -fx-border-width: 1;
+    -fx-border-color: #e0e6ed;
+    -fx-border-radius: 20;
+    /*-fx-background-radius: 20;*/
+    -fx-font-size: 12;
+}
+
+.searchBarGlobal:hover{
+    -fx-border-color: #d9d9d9;
+}
