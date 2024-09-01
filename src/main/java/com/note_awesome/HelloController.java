@@ -1,4 +1,4 @@
-package com.mediaplayerulti.mediaplayerulti;
+package com.note_awesome;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

@@ -1,0 +1,61 @@
+@import "burgerButton.css";
+
+.noteEditor{
+    -fx-background-color: #ffffff;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+.toolBarButton{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-border-radius: 100;
+    -fx-background-radius: 100;
+    -fx-pref-height: 40;
+    -fx-pref-width: 40;
+    -fx-font-family: "SF Pro Display";
+}
+
+.toolBarButton:hover{
+    -fx-background-color: #dcdcdc;
+    -fx-cursor: hand;
+}
+
+.toolBarButton:pressed{
+    -fx-background-color: #dcdcdc;
+    -fx-cursor: hand;
+}
+
+.closeButton{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.closeButton:hover{
+    -fx-background-color: #dcdcdc;
+    -fx-cursor: hand;
+}
+
+.text-area{
+    -fx-background-color: #ffffff;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
+
+.text-area .content{
+    -fx-background-color: #ffffff;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
+
+.text-area:pressed{
+    -fx-border-color: #ffffff;
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}

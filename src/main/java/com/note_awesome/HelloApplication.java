@@ -1,4 +1,4 @@
-package com.mediaplayerulti.mediaplayerulti;
+package com.note_awesome;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +11,7 @@ import java.io.IOException;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/views/MainWindow.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/mediaplayerulti/mediaplayerulti/views/MainWindow.fxml"));
         Scene scene = new Scene(fxmlLoader.load(),1920,1080);
         stage.setTitle("Hello!");
         stage.setScene(scene);
