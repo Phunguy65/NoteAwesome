@@ -17,7 +17,7 @@ public class User {
     @Column(name = "user_name", nullable = false, unique = false, length = 50)
     private String username;
     
-    @Column(name = "password_hash", nullable = false, unique = false, length = 100)
+    @Column(name = "password_hash", nullable = true, unique = false, length = 100)
     private String passwordHash;
     
     @Column(name = "created_at", nullable = false, updatable = false)
@@ -73,7 +73,7 @@ public class User {
     }
 
     @Column(name = "updated_at", nullable = false)
-    @Temporal(TemporalType.DATE)
+    @CreationTimestamp
     private Date updatedAt;
     
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)

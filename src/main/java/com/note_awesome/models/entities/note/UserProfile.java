@@ -1,6 +1,7 @@
 package com.note_awesome.models.entities.note;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
 
@@ -22,11 +23,11 @@ public class UserProfile {
     private String profileLocationUrl;
     
     @Column(name = "last_used", nullable = false)
-    @Temporal(TemporalType.DATE)
+    @CreationTimestamp    
     private Date lastUsed;
     
     @Column(name = "created_at", nullable = false)
-    @Temporal(TemporalType.DATE)
+    @CreationTimestamp
     private Date createdAt;
 
     public boolean isActive() {

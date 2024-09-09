@@ -26,9 +26,9 @@ public class StageInitializer implements ApplicationListener<StageReadyEvent> {
             Stage stage = event.getStage();
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/MainWindow.fxml"));
             fxmlLoader.setControllerFactory(applicationContext::getBean);
-            Parent parent = fxmlLoader.load();
-            Scene scene = new Scene(parent, 1920, 1080);
-            stage.setTitle("Note Awesome");
+            Scene scene = new Scene(fxmlLoader.load(),1920,1080);
+            stage.setScene(scene);
+            stage.centerOnScreen();
             stage.show();
         } catch (Exception e) {
             throw new RuntimeException(e);
