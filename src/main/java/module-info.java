@@ -1,12 +1,41 @@
-module com.mediaplayerulti.mediaplayerulti {
+module com.note_awesome {
+    requires javafx.controls;
     requires javafx.fxml;
-    requires org.fxmisc.richtext;
-    requires reactfx;
     requires java.compiler;
     requires transitive org.controlsfx.controls;
-    requires org.fxmisc.flowless;
-
-    opens com.note_awesome to javafx.fxml;
+    requires javafx.graphics;
+    requires com.h2database;
+    requires java.sql;
+    requires jakarta.persistence;
+    requires spring.context;
+    requires spring.orm;
+    requires spring.core;
+    requires spring.jdbc;
+    requires spring.boot;
+    requires spring.beans;
+    requires spring.data.jpa;
+    requires spring.tx;
+    requires org.hibernate.orm.core;
+    requires org.hibernate.orm.envers;
+    requires spring.data.commons;
+    requires spring.boot.autoconfigure;
     
+    opens com.note_awesome to javafx.fxml, spring.core;
     exports com.note_awesome;
+
+    opens com.note_awesome.views to javafx.fxml;
+    exports com.note_awesome.views;
+    
+    opens com.note_awesome.models.repositories.note to spring.core;
+    exports com.note_awesome.models.repositories.note;
+
+    opens com.note_awesome.models.entities.note to org.hibernate.orm.core, spring.core;
+    exports com.note_awesome.models.entities.note;
+    
+    exports com.note_awesome.models.entities;
+    opens com.note_awesome.models.entities to org.hibernate.orm.core, spring.core;
+    
+    exports com.note_awesome.controllers;
+    opens com.note_awesome.controllers to spring.core;
+
 }
