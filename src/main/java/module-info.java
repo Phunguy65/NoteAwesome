@@ -31,5 +31,11 @@ module com.note_awesome {
 
     opens com.note_awesome.models.entities.note to org.hibernate.orm.core, spring.core;
     exports com.note_awesome.models.entities.note;
+    
+    exports com.note_awesome.models.entities;
+    opens com.note_awesome.models.entities to org.hibernate.orm.core, spring.core;
+    
+    exports com.note_awesome.controllers;
+    opens com.note_awesome.controllers to spring.core;
 
 }

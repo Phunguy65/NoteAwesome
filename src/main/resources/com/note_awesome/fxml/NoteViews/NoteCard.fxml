@@ -11,11 +11,11 @@
 <?import javafx.scene.paint.Stop?>
 
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="noteEditor" stylesheets="@../css/lightStyle.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="noteEditor" stylesheets="@../../css/lightStyle.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox alignment="CENTER_RIGHT" prefHeight="55.0" prefWidth="600.0" VBox.vgrow="NEVER">
          <children>
-            <Button contentDisplay="GRAPHIC_ONLY" minWidth="42.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="42.0" styleClass="closeButton" stylesheets="@../css/lightStyle.css" text="Button">
+            <Button contentDisplay="GRAPHIC_ONLY" minWidth="42.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="42.0" styleClass="closeButton" stylesheets="@../../css/lightStyle.css" text="Button">
                <graphic>
                   <FontAwesomeIconView glyphName="PAPERCLIP" />
                </graphic>
@@ -32,7 +32,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="44.0" prefWidth="136.0" spacing="10.0" VBox.vgrow="NEVER">
                <children>
-                  <Button alignment="CENTER" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" styleClass="toolBarButton" stylesheets="@../css/lightStyle.css" text="Button" HBox.hgrow="ALWAYS">
+                  <Button alignment="CENTER" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" styleClass="toolBarButton" stylesheets="@../../css/lightStyle.css" text="Button" HBox.hgrow="ALWAYS">
                      <graphic>
                         <MaterialIconView fill="TRANSPARENT" glyphName="ADD_ALERT" stroke="BLACK">
                            <selectionFill>
@@ -54,12 +54,12 @@
                         </MaterialIconView>
                      </graphic>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" styleClass="toolBarButton" stylesheets="@../css/lightStyle.css" text="Button" HBox.hgrow="ALWAYS">
+                  <Button alignment="CENTER" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" styleClass="toolBarButton" stylesheets="@../../css/lightStyle.css" text="Button" HBox.hgrow="ALWAYS">
                      <graphic>
                         <MaterialIconView fill="TRANSPARENT" glyphName="PALETTE" stroke="BLACK" />
                      </graphic>
                   </Button>
-                  <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" styleClass="toolBarButton" stylesheets="@../css/lightStyle.css" text="Button" HBox.hgrow="ALWAYS">
+                  <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" styleClass="toolBarButton" stylesheets="@../../css/lightStyle.css" text="Button" HBox.hgrow="ALWAYS">
                      <graphic>
                         <MaterialIconView fill="TRANSPARENT" glyphName="IMAGE" stroke="BLACK" text="">
                            <selectionFill>
@@ -81,12 +81,12 @@
                         </MaterialIconView>
                      </graphic>
                   </Button>
-                  <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" styleClass="toolBarButton" stylesheets="@../css/lightStyle.css" text="Button" HBox.hgrow="ALWAYS">
+                  <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" styleClass="toolBarButton" stylesheets="@../../css/lightStyle.css" text="Button" HBox.hgrow="ALWAYS">
                      <graphic>
                         <MaterialIconView fill="WHITE" glyphName="ARCHIVE" stroke="BLACK" />
                      </graphic>
                   </Button>
-                  <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" styleClass="toolBarButton" stylesheets="@../css/lightStyle.css" text="Button" HBox.hgrow="ALWAYS">
+                  <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" styleClass="toolBarButton" stylesheets="@../../css/lightStyle.css" text="Button" HBox.hgrow="ALWAYS">
                      <graphic>
                         <MaterialIconView glyphName="MORE_VERT" />
                      </graphic>

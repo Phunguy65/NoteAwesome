@@ -1,13 +1,14 @@
 package com.note_awesome.models.entities.note;
 
+import com.note_awesome.models.entities.AuditorEntity;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "profile_settings")
-public class ProfileSetting {
+public class ProfileSetting extends AuditorEntity {
     @Id
     @Column(name = "profile_setting_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     
     @Column(name = "theme", nullable = false, unique = false, length = 50)

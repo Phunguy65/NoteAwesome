@@ -4,13 +4,14 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "user_profiles")
 public class UserProfile {
     @Id
     @Column(name = "user_profile_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     
     @Column(name = "profile_name", nullable = false, unique = true, length = 50)
@@ -25,10 +26,6 @@ public class UserProfile {
     @Column(name = "last_used", nullable = false)
     @CreationTimestamp    
     private Date lastUsed;
-    
-    @Column(name = "created_at", nullable = false)
-    @CreationTimestamp
-    private Date createdAt;
 
     public boolean isActive() {
         return isActive;
@@ -78,14 +75,6 @@ public class UserProfile {
         this.lastUsed = lastUsed;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
     public User getUser() {
         return user;
     }
@@ -111,5 +100,8 @@ public class UserProfile {
     
     @OneToOne(mappedBy = "userProfile", cascade = CascadeType.ALL)
     private ProfileSetting profileSetting;
+    
+    @OneToMany(mappedBy = "userProfile", cascade = CascadeType.ALL)
+    private Set<NoteContent> noteContents;
     
 }

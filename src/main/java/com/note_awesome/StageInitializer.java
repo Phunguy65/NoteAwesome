@@ -1,5 +1,7 @@
 package com.note_awesome;
 
+import com.note_awesome.controllers.MainWindowController;
+import com.note_awesome.views.MainWindowView;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,18 +17,18 @@ import java.io.IOException;
 @Component
 public class StageInitializer implements ApplicationListener<StageReadyEvent> {
     private final ApplicationContext applicationContext;
+    private final MainWindowController mainWindowController;
     
-    public StageInitializer(ApplicationContext applicationContext) {
+    public StageInitializer(ApplicationContext applicationContext, MainWindowController mainWindowController) {
         this.applicationContext = applicationContext;
+        this.mainWindowController = mainWindowController;
     }
     
     @Override
     public void onApplicationEvent(StageReadyEvent event) {
         try{
             Stage stage = event.getStage();
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/MainWindow.fxml"));
-            fxmlLoader.setControllerFactory(applicationContext::getBean);
-            Scene scene = new Scene(fxmlLoader.load(),1920,1080);
+            Scene scene = new Scene(mainWindowController.getView(), 1920, 1080);
             stage.setScene(scene);
             stage.centerOnScreen();
             stage.show();

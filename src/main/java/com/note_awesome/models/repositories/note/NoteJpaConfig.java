@@ -30,8 +30,8 @@ public class NoteJpaConfig {
         var dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(Driver.class.getName());
         dataSource.setUrl("jdbc:h2:file:./db/note_awesome");
-        dataSource.setUsername("sa");
-        dataSource.setPassword("");
+        dataSource.setUsername("root");
+        dataSource.setPassword("root");
         return dataSource;
     } 
     
