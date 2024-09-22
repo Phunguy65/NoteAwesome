@@ -2,18 +2,22 @@ package com.note_awesome.controllers;
 
 import com.note_awesome.views.MainWindowViewBuilder;
 import javafx.scene.layout.Region;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Scope;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 @Component
 public class MainWindowController {
     private final MainWindowViewBuilder mainWindowViewBuilder;
-
-    public MainWindowController(){
-        this.mainWindowViewBuilder = new MainWindowViewBuilder();
+    
+    private final NoteViewController noteViewController;
+    
+    @Autowired
+    public MainWindowController(NoteViewController noteViewController){
+        this.noteViewController = noteViewController;
+        this.mainWindowViewBuilder = new MainWindowViewBuilder(noteViewController.getView());
     }
+    
 
     public Region getView(){
         return mainWindowViewBuilder.build();

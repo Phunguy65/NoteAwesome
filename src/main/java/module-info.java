@@ -19,7 +19,9 @@ module com.note_awesome {
     requires org.hibernate.orm.envers;
     requires spring.data.commons;
     requires spring.boot.autoconfigure;
-    
+    requires org.antlr.antlr4.runtime;
+    requires org.fxmisc.richtext;
+
     opens com.note_awesome to javafx.fxml, spring.core;
     exports com.note_awesome;
 
@@ -36,6 +38,10 @@ module com.note_awesome {
     opens com.note_awesome.models.entities to org.hibernate.orm.core, spring.core;
     
     exports com.note_awesome.controllers;
-    opens com.note_awesome.controllers to spring.core;
+    opens com.note_awesome.controllers to javafx.fxml, spring.core;
+    exports com.note_awesome.views.core_editors;
+    opens com.note_awesome.views.core_editors to javafx.fxml;
+    exports com.note_awesome.views.note_views;
+    opens com.note_awesome.views.note_views to javafx.fxml;
 
 }

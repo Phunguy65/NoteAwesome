@@ -59,3 +59,7 @@
     -fx-border-radius: 0;
     -fx-background-radius: 0;
 }
+
+.note-editor-shadow{
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 10, 0, 0, 0);
+}
