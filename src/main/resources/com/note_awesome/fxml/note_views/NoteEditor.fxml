@@ -12,7 +12,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="198.0" prefWidth="600.0" styleClass="noteEditor" stylesheets="@../../css/lightStyle.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="rootVBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="198.0" prefWidth="600.0" styleClass="noteEditor" stylesheets="@../../css/lightStyle.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.note_awesome.views.core_editors.NoteEditorFxController">
    <children>
       <HBox alignment="CENTER" prefHeight="21.0" prefWidth="600.0">
          <children>
@@ -24,7 +24,6 @@
             </Button>
          </children>
       </HBox>
-      <TextArea prefHeight="194.0" prefWidth="590.0" promptText="Create note..." styleClass="text-area" stylesheets="@../../css/lightStyle.css" VBox.vgrow="ALWAYS" />
       <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="580.0" VBox.vgrow="NEVER">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="136.0" spacing="10.0" HBox.hgrow="ALWAYS">
@@ -92,17 +91,17 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="259.0" spacing="10.0" HBox.hgrow="ALWAYS">
                <children>
-                  <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" styleClass="toolBarButton" stylesheets="@../../css/lightStyle.css" text="Button">
+                  <Button fx:id="boldBtn" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" styleClass="toolBarButton" stylesheets="@../../css/lightStyle.css" text="Button">
                      <graphic>
                         <MaterialIconView glyphName="FORMAT_BOLD" />
                      </graphic>
                   </Button>
-                  <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" styleClass="toolBarButton" stylesheets="@../../css/lightStyle.css" text="Button">
+                  <Button fx:id="italicBtn" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" styleClass="toolBarButton" stylesheets="@../../css/lightStyle.css" text="Button">
                      <graphic>
                         <MaterialIconView glyphName="FORMAT_ITALIC" />
                      </graphic>
                   </Button>
-                  <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" styleClass="toolBarButton" stylesheets="@../../css/lightStyle.css" text="Button">
+                  <Button fx:id="underlineBtn" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" styleClass="toolBarButton" stylesheets="@../../css/lightStyle.css" text="Button">
                      <graphic>
                         <MaterialIconView glyphName="FORMAT_UNDERLINED" />
                      </graphic>

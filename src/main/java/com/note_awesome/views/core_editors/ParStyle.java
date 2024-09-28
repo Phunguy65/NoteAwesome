@@ -23,6 +23,8 @@ import java.io.IOException;
 import java.util.Objects;
 import java.util.Optional;
 
+import static javafx.scene.text.TextAlignment.*;
+
 public class ParStyle {
     public static final ParStyle EMPTY = new ParStyle();
 

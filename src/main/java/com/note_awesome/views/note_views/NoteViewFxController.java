@@ -7,7 +7,7 @@ import javafx.scene.layout.StackPane;
 public class NoteViewFxController {
     
     @FXML
-    private NoteEditorFxController noteEditorFxController;
+    private NoteEditorFxController noteEditorController;
     
     @FXML
     private NoteBarFxController noteBarFxController;
@@ -18,9 +18,10 @@ public class NoteViewFxController {
     public NoteViewFxController () {
         
     }
+    
     @FXML
     private void initialize(){
-        this.spEditorManager.getChildren().get(1).setVisible(false);
-        this.spEditorManager.getChildren().get(0).setVisible(true);
+        this.spEditorManager.getChildren().get(0).setVisible(false);
+        this.spEditorManager.getChildren().get(1).setVisible(true);
     }
 }

@@ -12,7 +12,7 @@ public class NoteViewBuilder implements Builder<Region> {
 
     @Override
     public Region build() {
-        var loader = new FXMLLoader(NoteAwesomeFX.class.getResource("fxml/NoteViews/NoteView.fxml"));
+        var loader = new FXMLLoader(NoteAwesomeFX.class.getResource("fxml/note_views/NoteView.fxml"));
         loader.setController(new NoteViewFxController());
         try {
             return loader.load();

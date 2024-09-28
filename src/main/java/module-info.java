@@ -21,6 +21,8 @@ module com.note_awesome {
     requires spring.boot.autoconfigure;
     requires org.antlr.antlr4.runtime;
     requires org.fxmisc.richtext;
+    requires reactfx;
+    requires org.fxmisc.flowless;
 
     opens com.note_awesome to javafx.fxml, spring.core;
     exports com.note_awesome;

@@ -9,12 +9,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class MainWindowController {
     private final MainWindowViewBuilder mainWindowViewBuilder;
-    
-    private final NoteViewController noteViewController;
-    
+
     @Autowired
     public MainWindowController(NoteViewController noteViewController){
-        this.noteViewController = noteViewController;
         this.mainWindowViewBuilder = new MainWindowViewBuilder(noteViewController.getView());
     }
     

@@ -9,7 +9,7 @@
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <StackPane fx:id="spEditorManager" prefHeight="150.0" prefWidth="200.0" stylesheets="@../css/lightStyle.css" VBox.vgrow="ALWAYS">
+            <StackPane fx:id="spEditorManager" prefHeight="150.0" prefWidth="200.0" stylesheets="@../../css/lightStyle.css" VBox.vgrow="ALWAYS">
                <fx:include fx:id="noteBarFx" source="NoteBar.fxml" stylesheets="@../../css/lightStyle.css" StackPane.alignment="CENTER" />
                <fx:include fx:id="noteEditorFx" source="NoteEditor.fxml" StackPane.alignment="CENTER" />  
              </StackPane>
