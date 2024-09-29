@@ -7,7 +7,7 @@ import javafx.scene.layout.StackPane;
 public class NoteViewFxController {
     
     @FXML
-    private NoteEditorFxController noteEditorController;
+    private NoteEditorFxController noteEditorFx;
     
     @FXML
     private NoteBarFxController noteBarFxController;

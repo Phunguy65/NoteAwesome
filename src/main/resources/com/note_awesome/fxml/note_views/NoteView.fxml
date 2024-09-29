@@ -4,14 +4,16 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import org.controlsfx.control.GridView?>
+<?import com.note_awesome.views.core_editors.NoteEditorFxController?>
 
+<?import com.note_awesome.views.core_editors.NoteEditorFxController?>
 <AnchorPane prefHeight="343.0" prefWidth="549.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <StackPane fx:id="spEditorManager" prefHeight="150.0" prefWidth="200.0" stylesheets="@../../css/lightStyle.css" VBox.vgrow="ALWAYS">
                <fx:include fx:id="noteBarFx" source="NoteBar.fxml" stylesheets="@../../css/lightStyle.css" StackPane.alignment="CENTER" />
-               <fx:include fx:id="noteEditorFx" source="NoteEditor.fxml" StackPane.alignment="CENTER" />  
+               <NoteEditorFxController fx:id="noteEditorFx" />
              </StackPane>
             <GridView VBox.vgrow="ALWAYS" />
          </children>

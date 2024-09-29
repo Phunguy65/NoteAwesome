@@ -1,6 +1,8 @@
 package com.note_awesome.views.core_editors;
 
+import com.note_awesome.NoteAwesomeFX;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.IndexRange;
 import javafx.scene.layout.VBox;
@@ -11,15 +13,14 @@ import org.fxmisc.richtext.model.StyleSpans;
 import org.fxmisc.richtext.model.TwoDimensional;
 import org.reactfx.util.Either;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.function.Function;
 
-public class NoteEditorFxController {
+public class NoteEditorFxController extends VBox{
     
     private final FoldableStyleArea area = new FoldableStyleArea();
     
-    @FXML
-    private VBox rootVBox;
     
     @FXML
     private Button boldBtn;
@@ -31,6 +32,14 @@ public class NoteEditorFxController {
     private Button underlineBtn;
     
     public NoteEditorFxController() {
+        try{
+            FXMLLoader loader = new FXMLLoader(NoteAwesomeFX.class.getResource("fxml/note_views/NoteEditor.fxml"));
+            loader.setRoot(this);
+            loader.setController(this);
+            loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
     
     @FXML
@@ -38,8 +47,7 @@ public class NoteEditorFxController {
         // Add the area to the root VBox
         VirtualizedScrollPane<GenericStyledArea<ParStyle, Either<String, LinkedImage>, TextStyle>> vsPane = new VirtualizedScrollPane<>(area);
         VBox.setVgrow(vsPane, javafx.scene.layout.Priority.ALWAYS);
-        rootVBox.getChildren().add(1, vsPane);
-        
+        getChildren().add(1, vsPane);
         // assign event handlers
         boldBtn.setOnAction(e -> {
             toggleBold();
