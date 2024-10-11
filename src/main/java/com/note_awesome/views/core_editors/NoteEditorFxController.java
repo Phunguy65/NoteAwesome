@@ -12,6 +12,7 @@ import org.fxmisc.richtext.GenericStyledArea;
 import org.fxmisc.richtext.model.Paragraph;
 import org.fxmisc.richtext.model.StyleSpans;
 import org.fxmisc.richtext.model.TwoDimensional;
+import org.reactfx.SuspendableNo;
 import org.reactfx.util.Either;
 
 import java.io.IOException;
@@ -31,6 +32,8 @@ public class NoteEditorFxController extends VBox {
 
     @FXML
     private Button underlineBtn;
+
+    private SuspendableNo updatingToolbar = new SuspendableNo();
 
     public NoteEditorFxController() {
         super();
@@ -72,7 +75,7 @@ public class NoteEditorFxController extends VBox {
         area.beingUpdatedProperty().addListener((obs, old, beingUpdated) -> {
             if (!beingUpdated) {
                 boolean bold, italic, underline;
-                
+
                 IndexRange selection = area.getSelection();
 
                 if (selection.getLength() != 0) {
@@ -90,9 +93,32 @@ public class NoteEditorFxController extends VBox {
                     underline = style.underline.orElse(Boolean.valueOf(false));
                 }
 
-                int startPar = area.offsetToPosition(selection.getStart(), TwoDimensional.Bias.Forward).getMajor();
-                int endPar = area.offsetToPosition(selection.getEnd(), TwoDimensional.Bias.Backward).getMajor();
-                List<Paragraph<ParStyle, Either<String, LinkedImage>, TextStyle>> pars = area.getParagraphs().subList(startPar, endPar);
+                updatingToolbar.suspendWhile(() -> {
+                    if (bold) {
+                        if (!boldBtn.getStyleClass().contains("pressed")) {
+                            boldBtn.getStyleClass().add("pressed");
+                        }
+                    } else {
+                        boldBtn.getStyleClass().remove("pressed");
+                    }
+
+                    if (italic) {
+                        if (!italicBtn.getStyleClass().contains("pressed")) {
+                            italicBtn.getStyleClass().add("pressed");
+                        }
+                    } else {
+                        italicBtn.getStyleClass().remove("pressed");
+                    }
+
+                    if (underline) {
+                        if (!underlineBtn.getStyleClass().contains("pressed")) {
+                            underlineBtn.getStyleClass().add("pressed");
+                        }
+                    } else {
+                        underlineBtn.getStyleClass().remove("pressed");
+                    }
+                });
+
             }
         });
 
@@ -107,6 +133,16 @@ public class NoteEditorFxController extends VBox {
             area.setStyleSpans(selection.getStart(), newStyles);
         }
     }
+
+    private void updateStyleInSelection(TextStyle mixin) {
+        IndexRange selection = area.getSelection();
+        if (selection.getLength() != 0) {
+            StyleSpans<TextStyle> styles = area.getStyleSpans(selection);
+            StyleSpans<TextStyle> newStyles = styles.mapStyles(style -> style.updateWith(mixin));
+            area.setStyleSpans(selection.getStart(), newStyles);
+        }
+    }
+
 
     private void toggleBold() {
         updateStyleInSelection(spans -> TextStyle.bold(!spans.styleStream().allMatch(style -> style.bold.orElse(Boolean.valueOf(false)))));

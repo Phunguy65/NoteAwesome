@@ -28,55 +28,55 @@ import java.util.function.BiConsumer;
 import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
 
-public class FoldableStyleArea extends GenericStyledArea<ParStyle, Either<String, LinkedImage>,TextStyle> {
-   private final static TextOps<String, TextStyle> styledTextOps = SegmentOps.styledTextOps();
-   private final static LinkedImageOps<TextStyle> linkedImageOps = new LinkedImageOps<>();
-   
-   public FoldableStyleArea(){
-       super(
-               ParStyle.EMPTY,
+public class FoldableStyleArea extends GenericStyledArea<ParStyle, Either<String, LinkedImage>, TextStyle> {
+    private final static TextOps<String, TextStyle> styledTextOps = SegmentOps.styledTextOps();
+    private final static LinkedImageOps<TextStyle> linkedImageOps = new LinkedImageOps<>();
+
+    public FoldableStyleArea() {
+        super(
+                ParStyle.EMPTY,
                 (paragraph, style) -> paragraph.setStyle(style.toCss()),
                 TextStyle.EMPTY.updateFontSize(12).updateFontFamily("Arial"),
                 styledTextOps._or(linkedImageOps, (s1, s2) -> Optional.empty()),
-               seg -> createNode(seg, (textExt, style) -> textExt.setStyle(style.toCss()))
-       );
-   }
+                seg -> createNode(seg, (textExt, style) -> textExt.setStyle(style.toCss()))
+        );
+    }
 
     private static Node createNode(StyledSegment<Either<String, LinkedImage>, TextStyle> seg,
-                                   BiConsumer<? super TextExt, TextStyle> applyStyle ) {
+                                   BiConsumer<? super TextExt, TextStyle> applyStyle) {
         return seg.getSegment().unify(
                 text -> StyledTextArea.createStyledTextNode(text, seg.getStyle(), applyStyle),
                 LinkedImage::createNode
         );
     }
 
-    public void foldParagraphs( int startPar, int endPar ) {
-        foldParagraphs( startPar, endPar, getAddFoldStyle() );
+    public void foldParagraphs(int startPar, int endPar) {
+        foldParagraphs(startPar, endPar, getAddFoldStyle());
     }
 
     public void foldSelectedParagraphs() {
-        foldSelectedParagraphs( getAddFoldStyle() );
+        foldSelectedParagraphs(getAddFoldStyle());
     }
 
-    public void foldText( int start, int end ) {
-        fold( start, end, getAddFoldStyle() );
+    public void foldText(int start, int end) {
+        fold(start, end, getAddFoldStyle());
     }
 
-    public void unfoldParagraphs( int startingFromPar ) {
-        unfoldParagraphs( startingFromPar, getFoldStyleCheck(), getRemoveFoldStyle() );
+    public void unfoldParagraphs(int startingFromPar) {
+        unfoldParagraphs(startingFromPar, getFoldStyleCheck(), getRemoveFoldStyle());
     }
 
-    public void unfoldText( int startingFromPos ) {
-        startingFromPos = offsetToPosition( startingFromPos, Bias.Backward ).getMajor();
-        unfoldParagraphs( startingFromPos, getFoldStyleCheck(), getRemoveFoldStyle() );
+    public void unfoldText(int startingFromPos) {
+        startingFromPos = offsetToPosition(startingFromPos, Bias.Backward).getMajor();
+        unfoldParagraphs(startingFromPos, getFoldStyleCheck(), getRemoveFoldStyle());
     }
 
     protected UnaryOperator<ParStyle> getAddFoldStyle() {
-        return pstyle -> pstyle.updateFold( true );
+        return style -> style.updateFold(true);
     }
 
     protected UnaryOperator<ParStyle> getRemoveFoldStyle() {
-        return pstyle -> pstyle.updateFold( false );
+        return style -> style.updateFold(false);
     }
 
     protected Predicate<ParStyle> getFoldStyleCheck() {
