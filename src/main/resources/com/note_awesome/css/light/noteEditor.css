@@ -23,11 +23,15 @@
 .toolBarButton:pressed{
     -fx-background-color: #dcdcdc;
     -fx-cursor: hand;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
 }
 
 .toolBarButton.pressed{
     -fx-background-color: #dcdcdc;
     -fx-cursor: hand;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
 }
 
 .closeButton{
