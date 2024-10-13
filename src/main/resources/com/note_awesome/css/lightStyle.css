@@ -1,0 +1,9 @@
+@import "fonts.css";
+@import "light/sideBarButton.css";
+@import "light/burgerButton.css";
+@import "light/searchBarGlobal.css";
+@import "light/noteEditor.css";
+.root {
+    -fx-font-family: "SF Pro Display";
+    -fx-background-color: #ffffff;
+}
