@@ -1,16 +1,15 @@
 package com.note_awesome.models.entities.note;
 
+import com.note_awesome.models.entities.AuditorEntity;
 import jakarta.persistence.*;
-import org.hibernate.annotations.CreationTimestamp;
 
-import java.util.Date;
 import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User extends AuditorEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private long id;
     
@@ -19,10 +18,6 @@ public class User {
     
     @Column(name = "password_hash", nullable = true, unique = false, length = 100)
     private String passwordHash;
-    
-    @Column(name = "created_at", nullable = false, updatable = false)
-    @CreationTimestamp
-    private Date createdAt;
 
     public long getId() {
         return id;
@@ -48,22 +43,6 @@ public class User {
         this.passwordHash = passwordHash;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
     public Set<UserProfile> getProfiles() {
         return profiles;
     }
@@ -72,10 +51,6 @@ public class User {
         this.profiles = profiles;
     }
 
-    @Column(name = "updated_at", nullable = false)
-    @CreationTimestamp
-    private Date updatedAt;
-    
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<UserProfile> profiles;
     

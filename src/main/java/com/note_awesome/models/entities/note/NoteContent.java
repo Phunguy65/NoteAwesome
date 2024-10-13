@@ -1,22 +1,19 @@
 package com.note_awesome.models.entities.note;
 
+import com.note_awesome.models.entities.AuditorEntity;
 import jakarta.persistence.*;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import java.util.Date;
 
 @Entity
 @Table(name = "note_content")
 @Audited
 @EntityListeners(AuditingEntityListener.class)
-public class NoteContent {
+public class NoteContent extends AuditorEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long contentId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     
     @Column(name = "text_content", nullable = false, unique = false, length = 1000)
     private String textContent;
@@ -27,20 +24,12 @@ public class NoteContent {
     @Column(name = "title", nullable = true, unique = false, length = 50)
     private String title;
 
-    public Date getCreatedAt() {
-        return createdAt;
+    public long getId() {
+        return id;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public long getContentId() {
-        return contentId;
-    }
-
-    public void setContentId(long contentId) {
-        this.contentId = contentId;
+    public void setId(long contentId) {
+        this.id = contentId;
     }
 
     public String getTextContent() {
@@ -67,14 +56,6 @@ public class NoteContent {
         this.title = title;
     }
 
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
     public NoteTag getNoteTag() {
         return noteTag;
     }
@@ -83,17 +64,14 @@ public class NoteContent {
         this.noteTag = noteTag;
     }
 
-    @CreatedDate
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private Date createdAt;
-    
-    @LastModifiedDate
-    @Column(name = "updated_at", nullable = false)
-    private Date updatedAt;
-    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "notetag_id", nullable = false)
     @NotAudited
     private NoteTag noteTag;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_profile_id", nullable = false)
+    @NotAudited
+    private UserProfile userProfile;
     
 }
