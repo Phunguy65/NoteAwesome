@@ -41,6 +41,17 @@
             <artifactId>javafx-base</artifactId>
             <version>22.0.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-web</artifactId>
+            <version>22.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-swing</artifactId>
+            <version>22.0.1</version>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/de.jensd/fontawesomefx-fontawesome -->
         <dependency>
             <groupId>de.jensd</groupId>
@@ -95,7 +106,30 @@
             <artifactId>richtextfx</artifactId>
             <version>0.11.3</version>
         </dependency>
-
+        <!-- https://mvnrepository.com/artifact/net.raumzeitfalle.fx/scenic-view -->
+        <dependency>
+            <groupId>net.raumzeitfalle.fx</groupId>
+            <artifactId>scenic-view</artifactId>
+            <version>11.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-swing</artifactId>
+            <version>22.0.1</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-web</artifactId>
+            <version>22.0.1</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-web</artifactId>
+            <version>22.0.1</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <build>

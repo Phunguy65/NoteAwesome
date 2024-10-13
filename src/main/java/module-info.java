@@ -1,9 +1,6 @@
 module com.note_awesome {
-    requires javafx.controls;
-    requires javafx.fxml;
     requires java.compiler;
     requires transitive org.controlsfx.controls;
-    requires javafx.graphics;
     requires com.h2database;
     requires java.sql;
     requires jakarta.persistence;
@@ -23,22 +20,25 @@ module com.note_awesome {
     requires org.fxmisc.richtext;
     requires reactfx;
     requires org.fxmisc.flowless;
+    requires org.scenicview.scenicview;
+    requires javafx.web;
+    requires javafx.swing;
 
     opens com.note_awesome to javafx.fxml, spring.core;
     exports com.note_awesome;
 
     opens com.note_awesome.views to javafx.fxml;
     exports com.note_awesome.views;
-    
+
     opens com.note_awesome.models.repositories.note to spring.core;
     exports com.note_awesome.models.repositories.note;
 
     opens com.note_awesome.models.entities.note to org.hibernate.orm.core, spring.core;
     exports com.note_awesome.models.entities.note;
-    
+
     exports com.note_awesome.models.entities;
     opens com.note_awesome.models.entities to org.hibernate.orm.core, spring.core;
-    
+
     exports com.note_awesome.controllers;
     opens com.note_awesome.controllers to javafx.fxml, spring.core;
     exports com.note_awesome.views.core_editors;
