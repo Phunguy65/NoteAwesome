@@ -9,7 +9,7 @@
 <?import org.controlsfx.control.textfield.*?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="528.0"
-            prefWidth="878.0" styleClass="root" stylesheets="@../css/lightStyle.css"
+            prefWidth="878.0" styleClass="root" stylesheets="@../css/LightStylesheet.css"
             xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
@@ -24,8 +24,8 @@
                             <children>
                                 <Button alignment="TOP_LEFT" graphicTextGap="5.0" maxHeight="1.7976931348623157E308"
                                         maxWidth="1.7976931348623157E308" mnemonicParsing="false"
-                                        nodeOrientation="LEFT_TO_RIGHT" prefWidth="69.0" styleClass="sideBarButtonStyle"
-                                        stylesheets="@../css/lightStyle.css" text="Note" VBox.vgrow="ALWAYS">
+                                        nodeOrientation="LEFT_TO_RIGHT" prefWidth="69.0" styleClass="side-bar-button"
+                                        stylesheets="@../css/LightStylesheet.css" text="Note" VBox.vgrow="ALWAYS">
                                     <graphic>
                                         <HBox alignment="CENTER" prefHeight="30.0" prefWidth="30.0">
                                             <children>
@@ -40,7 +40,7 @@
                                 <Button alignment="TOP_LEFT" graphicTextGap="5.0" layoutX="10.0" layoutY="15.0"
                                         maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
                                         mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefWidth="69.0"
-                                        styleClass="sideBarButtonStyle" stylesheets="@../css/lightStyle.css"
+                                        styleClass="side-bar-button" stylesheets="@../css/LightStylesheet.css"
                                         text="Notifications">
                                     <graphic>
                                         <HBox alignment="CENTER" prefHeight="30.0" prefWidth="30.0">
@@ -56,7 +56,7 @@
                                 <Button alignment="TOP_LEFT" graphicTextGap="5.0" layoutX="10.0" layoutY="55.0"
                                         maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
                                         mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefWidth="69.0"
-                                        styleClass="sideBarButtonStyle" stylesheets="@../css/lightStyle.css"
+                                        styleClass="side-bar-button" stylesheets="@../css/LightStylesheet.css"
                                         text="Labels">
                                     <graphic>
                                         <HBox alignment="CENTER" prefHeight="30.0" prefWidth="30.0">
@@ -72,7 +72,7 @@
                                 <Button alignment="TOP_LEFT" graphicTextGap="5.0" layoutX="10.0" layoutY="95.0"
                                         maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
                                         mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefWidth="69.0"
-                                        styleClass="sideBarButtonStyle" stylesheets="@../css/lightStyle.css"
+                                        styleClass="side-bar-button" stylesheets="@../css/LightStylesheet.css"
                                         text="Archives">
                                     <graphic>
                                         <HBox alignment="CENTER" prefHeight="30.0" prefWidth="30.0">
@@ -111,7 +111,7 @@
                                 <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="238.0" HBox.hgrow="ALWAYS">
                                     <children>
                                         <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false"
-                                                styleClass="burgerButton" stylesheets="@../css/lightStyle.css"
+                                                styleClass="burger-button" stylesheets="@../css/LightStylesheet.css"
                                                 text="Button">
                                             <graphic>
                                                 <MaterialIconView fill="#6e7783" glyphName="MENU"/>
@@ -131,8 +131,8 @@
                                         <Insets left="10.0"/>
                                     </HBox.margin>
                                     <children>
-                                        <CustomTextField promptText="Search notes..." styleClass="searchBarGlobal"
-                                                         stylesheets="@../css/lightStyle.css"
+                                        <CustomTextField promptText="Search notes..." styleClass="search-bar"
+                                                         stylesheets="@../css/LightStylesheet.css"
                                                          AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="10.0"
                                                          AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
                                             <right>
@@ -153,21 +153,24 @@
                                               AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <children>
                                                 <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false"
-                                                        styleClass="burgerButton" stylesheets="@../css/lightStyle.css"
+                                                        styleClass="burger-button"
+                                                        stylesheets="@../css/LightStylesheet.css"
                                                         text="Button">
                                                     <graphic>
                                                         <MaterialIconView fill="#6e7783" glyphName="NOTIFICATIONS"/>
                                                     </graphic>
                                                 </Button>
                                                 <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false"
-                                                        styleClass="burgerButton" stylesheets="@../css/lightStyle.css"
+                                                        styleClass="burger-button"
+                                                        stylesheets="@../css/LightStylesheet.css"
                                                         text="Button">
                                                     <graphic>
                                                         <MaterialIconView fill="#6e7783" glyphName="HELP"/>
                                                     </graphic>
                                                 </Button>
                                                 <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false"
-                                                        styleClass="burgerButton" stylesheets="@../css/lightStyle.css"
+                                                        styleClass="burger-button"
+                                                        stylesheets="@../css/LightStylesheet.css"
                                                         text="Button">
                                                     <graphic>
                                                         <MaterialIconView fill="#6e7783" glyphName="SETTINGS"/>
@@ -180,7 +183,7 @@
                                 <HBox alignment="CENTER" prefHeight="70.0" prefWidth="131.0" HBox.hgrow="ALWAYS">
                                     <children>
                                         <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false"
-                                                styleClass="burgerButton" stylesheets="@../css/lightStyle.css"
+                                                styleClass="burger-button" stylesheets="@../css/LightStylesheet.css"
                                                 text="Button">
                                             <graphic>
                                                 <MaterialIconView fill="#6e7783" glyphName="LIST"/>

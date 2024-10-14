@@ -30,6 +30,17 @@ public class NoteViewFxController {
 
     @FXML
     private void initialize() {
+
+        this.noteEditorFxController.visibleProperty().subscribe(e -> {
+            if (e) {
+                if (!this.spEditorManager.getStyleClass().contains("opened")) {
+                    this.spEditorManager.getStyleClass().add("opened");
+                }
+            } else {
+                this.spEditorManager.getStyleClass().remove("opened");
+            }
+        });
+
         this.noteBarFxController.visibleProperty().bind(noteEditorOpened.not());
         this.noteEditorFxController.visibleProperty().bind(noteEditorOpened);
 
@@ -38,19 +49,6 @@ public class NoteViewFxController {
                 noteEditorOpened.set(true);
             }
         });
-
-        this.noteEditorOpened.subscribe(newVal -> {
-//            if (newVal) {
-//                this.spEditorManager.getChildren().remove(this.noteBarFxController);
-//            } else {
-//                if (!this.spEditorManager.getChildren().contains(this.noteBarFxController)) {
-//                    this.spEditorManager.getChildren().add(this.noteBarFxController);
-//                }
-//            }
-
-        });
-
-        //this.spEditorManager.setMouseTransparent(true);
 
         this.rootView.setOnMouseClicked(e -> {
             if (noteEditorOpened.get()) {

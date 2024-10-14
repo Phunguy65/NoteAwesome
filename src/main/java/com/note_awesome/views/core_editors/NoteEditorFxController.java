@@ -6,7 +6,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.IndexRange;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import org.fxmisc.flowless.VirtualizedScrollPane;
 import org.fxmisc.richtext.GenericStyledArea;
 import org.fxmisc.richtext.model.Paragraph;
@@ -33,6 +36,15 @@ public class NoteEditorFxController extends VBox {
     @FXML
     private Button underlineBtn;
 
+    @FXML
+    private TextArea noteTitleTxtArea;
+
+    @FXML
+    private VBox noteVBox;
+
+    @FXML
+    private Button pinNoteBtn;
+
     private SuspendableNo updatingToolbar = new SuspendableNo();
 
     public NoteEditorFxController() {
@@ -52,8 +64,8 @@ public class NoteEditorFxController extends VBox {
         // Add the area to the root VBox
         VirtualizedScrollPane<GenericStyledArea<ParStyle, Either<String, LinkedImage>, TextStyle>> vsPane = new VirtualizedScrollPane<>(area);
         VBox.setVgrow(vsPane, javafx.scene.layout.Priority.ALWAYS);
-        VBox.setMargin(vsPane, new Insets(0, 10, 0, 10));
-        getChildren().add(1, vsPane);
+        VBox.setMargin(vsPane, new Insets(0, 9, 0, 9));
+        this.noteVBox.getChildren().add(1, vsPane);
         // assign event handlers
         boldBtn.setOnAction(e -> {
             toggleBold();
@@ -70,6 +82,8 @@ public class NoteEditorFxController extends VBox {
             area.requestFocus();
         });
 
+        area.setWrapText(true);
+        this.noteTitleTxtArea.setFont(Font.font("SF Pro Display", FontWeight.BOLD, 16));
 
         // Add listeners to area
         area.beingUpdatedProperty().addListener((obs, old, beingUpdated) -> {

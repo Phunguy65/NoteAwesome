@@ -11,7 +11,8 @@
 <VBox prefHeight="343.0" prefWidth="549.0" xmlns="http://javafx.com/javafx/11.0.14-internal"
       xmlns:fx="http://javafx.com/fxml/1" fx:id="rootView" alignment="TOP_CENTER">
     <children>
-        <StackPane fx:id="spEditorManager" prefHeight="150.0" prefWidth="200.0" stylesheets="@../../css/lightStyle.css"
+        <StackPane fx:id="spEditorManager" prefHeight="150.0" prefWidth="200.0"
+                   stylesheets="@../../css/LightStylesheet.css"
                    VBox.vgrow="NEVER" alignment="TOP_CENTER" styleClass="note-editor-shadow">
             <maxWidth>
                 <PopupControl fx:constant="USE_PREF_SIZE"/>
@@ -20,7 +21,7 @@
                 <PopupControl fx:constant="USE_PREF_SIZE"/>
             </maxHeight>
             <NoteBarFxController fx:id="noteBarFxController"
-                                 stylesheets="@../../css/lightStyle.css"
+                                 stylesheets="@../../css/LightStylesheet.css"
                                  StackPane.alignment="CENTER"/>
             <NoteEditorFxController fx:id="noteEditorFxController" StackPane.alignment="CENTER"/>
         </StackPane>
