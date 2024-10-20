@@ -1,9 +1,9 @@
-package com.note_awesome.models.entities.note;
+package com.note_awesome.core.entities.note;
 
-import com.note_awesome.models.entities.AuditorEntity;
+import com.note_awesome.core.entities.AuditorEntity;
 import jakarta.persistence.*;
 
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -12,19 +12,19 @@ public class User extends AuditorEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private long id;
-    
+
     @Column(name = "user_name", nullable = false, unique = false, length = 50)
     private String username;
-    
+
     @Column(name = "password_hash", nullable = true, unique = false, length = 100)
     private String passwordHash;
 
+    @Column(name = "user_location", nullable = false, unique = true, length = 255)
+    private String userLocation;
+    
+
     public long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getUsername() {
@@ -43,15 +43,23 @@ public class User extends AuditorEntity {
         this.passwordHash = passwordHash;
     }
 
-    public Set<UserProfile> getProfiles() {
+    public List<UserProfile> getProfiles() {
         return profiles;
     }
 
-    public void setProfiles(Set<UserProfile> profiles) {
+    public String getUserLocation() {
+        return userLocation;
+    }
+
+    public void setUserLocation(String userLocation) {
+        this.userLocation = userLocation;
+    }
+
+    public void setProfiles(List<UserProfile> profiles) {
         this.profiles = profiles;
     }
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private Set<UserProfile> profiles;
-    
+    @OneToMany(mappedBy = "userData", cascade = CascadeType.ALL)
+    private List<UserProfile> profiles;
+
 }

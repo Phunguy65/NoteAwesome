@@ -1,6 +1,6 @@
-package com.note_awesome.models.entities.note;
+package com.note_awesome.core.entities.note;
 
-import com.note_awesome.models.entities.AuditorEntity;
+import com.note_awesome.core.entities.AuditorEntity;
 import jakarta.persistence.*;
 
 @Entity
@@ -10,18 +10,14 @@ public class ProfileSetting extends AuditorEntity {
     @Column(name = "profile_setting_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    
+
     @Column(name = "theme", nullable = false, unique = false, length = 50)
     private String theme;
 
     public long getId() {
         return id;
     }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
+    
     public String getTheme() {
         return theme;
     }
@@ -41,5 +37,5 @@ public class ProfileSetting extends AuditorEntity {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_profile_id", nullable = false)
     private UserProfile userProfile;
-    
+
 }

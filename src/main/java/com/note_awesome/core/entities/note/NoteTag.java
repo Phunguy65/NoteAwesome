@@ -1,8 +1,9 @@
-package com.note_awesome.models.entities.note;
+package com.note_awesome.core.entities.note;
 
-import com.note_awesome.models.entities.AuditorEntity;
+import com.note_awesome.core.entities.AuditorEntity;
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -11,18 +12,14 @@ public class NoteTag extends AuditorEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    
+
     @Column(name = "tag_name", nullable = false, unique = true, length = 50)
     private String tagName;
 
     public long getId() {
         return id;
     }
-
-    public void setId(long tagId) {
-        this.id = tagId;
-    }
-
+    
     public String getTagName() {
         return tagName;
     }
@@ -31,14 +28,14 @@ public class NoteTag extends AuditorEntity {
         this.tagName = tagName;
     }
 
-    public Set<NoteContent> getNoteTagMaps() {
+    public List<NoteContent> getNoteTagMaps() {
         return noteContents;
     }
 
-    public void setNoteTagMaps(Set<NoteContent> noteContents) {
+    public void setNoteTagMaps(List<NoteContent> noteContents) {
         this.noteContents = noteContents;
     }
 
     @OneToMany(mappedBy = "noteTag", cascade = CascadeType.ALL)
-    private Set<NoteContent> noteContents;
+    private List<NoteContent> noteContents;
 }

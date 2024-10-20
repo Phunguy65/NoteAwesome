@@ -1,10 +1,10 @@
-package com.note_awesome.models.entities.note;
+package com.note_awesome.core.entities.note;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "user_profiles")
@@ -13,18 +13,15 @@ public class UserProfile {
     @Column(name = "user_profile_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    
+
     @Column(name = "profile_name", nullable = false, unique = true, length = 50)
     private String profileName;
-    
-    @Column(name = "profile_picture_url", nullable = true, unique = false, length = 100)
-    private String profilePictureUrl;
-    
+
     @Column(name = "profile_location_url", nullable = true, unique = false, length = 100)
     private String profileLocationUrl;
-    
+
     @Column(name = "last_used", nullable = false)
-    @CreationTimestamp    
+    @CreationTimestamp
     private Date lastUsed;
 
     public boolean isActive() {
@@ -39,24 +36,12 @@ public class UserProfile {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
     public String getProfileName() {
         return profileName;
     }
 
     public void setProfileName(String profileName) {
         this.profileName = profileName;
-    }
-
-    public String getProfilePictureUrl() {
-        return profilePictureUrl;
-    }
-
-    public void setProfilePictureUrl(String profilePictureUrl) {
-        this.profilePictureUrl = profilePictureUrl;
     }
 
     public String getProfileLocationUrl() {
@@ -75,12 +60,12 @@ public class UserProfile {
         this.lastUsed = lastUsed;
     }
 
-    public User getUser() {
-        return user;
+    public User getUserData() {
+        return userData;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserData(User user) {
+        this.userData = user;
     }
 
     public ProfileSetting getProfileSetting() {
@@ -93,15 +78,16 @@ public class UserProfile {
 
     @Column(name = "is_active", nullable = false)
     private boolean isActive;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-    
+    private User userData;
+
     @OneToOne(mappedBy = "userProfile", cascade = CascadeType.ALL)
+    @JoinColumn(name = "profile_setting_id", nullable = true)
     private ProfileSetting profileSetting;
-    
+
     @OneToMany(mappedBy = "userProfile", cascade = CascadeType.ALL)
-    private Set<NoteContent> noteContents;
-    
+    private List<NoteContent> noteContents;
+
 }

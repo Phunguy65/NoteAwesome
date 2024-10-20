@@ -1,4 +1,4 @@
-package com.note_awesome.models.entities;
+package com.note_awesome.core.entities;
 
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -10,12 +10,12 @@ import java.util.Date;
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public class AuditorEntity {
-    
+
     @CreatedDate
     @Temporal(TemporalType.DATE)
     @Column(name = "created_at", updatable = false)
     private Date createdAt;
-    
+
     @LastModifiedDate
     @Temporal(TemporalType.DATE)
     @Column(name = "updated_at")

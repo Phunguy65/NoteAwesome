@@ -40,3 +40,5 @@ build/
 
 ### Custom ###
 db/
+out/
+/scenicView.properties
