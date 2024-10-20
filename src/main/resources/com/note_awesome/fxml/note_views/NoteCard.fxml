@@ -11,89 +11,101 @@
 <?import javafx.scene.paint.Stop?>
 
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="noteEditor" stylesheets="@../../css/lightStyle.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <VBox alignment="CENTER_RIGHT" prefHeight="55.0" prefWidth="600.0" VBox.vgrow="NEVER">
-         <children>
-            <Button contentDisplay="GRAPHIC_ONLY" minWidth="42.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="42.0" styleClass="closeButton" stylesheets="@../../css/lightStyle.css" text="Button">
-               <graphic>
-                  <FontAwesomeIconView glyphName="PAPERCLIP" />
-               </graphic>
-            </Button>
-         </children>
-      </VBox>
-      <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
-         <children>
-            <Label />
-            <Label text="Label" />
-         </children>
-      </VBox>
-      <VBox alignment="CENTER" prefHeight="0.0" prefWidth="600.0" VBox.vgrow="SOMETIMES">
-         <children>
-            <HBox alignment="CENTER" prefHeight="44.0" prefWidth="136.0" spacing="10.0" VBox.vgrow="NEVER">
-               <children>
-                  <Button alignment="CENTER" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" styleClass="toolBarButton" stylesheets="@../../css/lightStyle.css" text="Button" HBox.hgrow="ALWAYS">
-                     <graphic>
-                        <MaterialIconView fill="TRANSPARENT" glyphName="ADD_ALERT" stroke="BLACK">
-                           <selectionFill>
-                              <LinearGradient endX="1.0" endY="1.0">
-                                 <stops>
-                                    <Stop>
-                                       <color>
-                                          <Color />
-                                       </color>
-                                    </Stop>
-                                    <Stop offset="1.0">
-                                       <color>
-                                          <Color red="1.0" green="1.0" blue="1.0" />
-                                       </color>
-                                    </Stop>
-                                 </stops>
-                              </LinearGradient>
-                           </selectionFill>
-                        </MaterialIconView>
-                     </graphic>
-                  </Button>
-                  <Button alignment="CENTER" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" styleClass="toolBarButton" stylesheets="@../../css/lightStyle.css" text="Button" HBox.hgrow="ALWAYS">
-                     <graphic>
-                        <MaterialIconView fill="TRANSPARENT" glyphName="PALETTE" stroke="BLACK" />
-                     </graphic>
-                  </Button>
-                  <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" styleClass="toolBarButton" stylesheets="@../../css/lightStyle.css" text="Button" HBox.hgrow="ALWAYS">
-                     <graphic>
-                        <MaterialIconView fill="TRANSPARENT" glyphName="IMAGE" stroke="BLACK" text="">
-                           <selectionFill>
-                              <LinearGradient endX="1.0" endY="1.0">
-                                 <stops>
-                                    <Stop>
-                                       <color>
-                                          <Color />
-                                       </color>
-                                    </Stop>
-                                    <Stop offset="1.0">
-                                       <color>
-                                          <Color red="1.0" green="1.0" blue="1.0" />
-                                       </color>
-                                    </Stop>
-                                 </stops>
-                              </LinearGradient>
-                           </selectionFill>
-                        </MaterialIconView>
-                     </graphic>
-                  </Button>
-                  <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" styleClass="toolBarButton" stylesheets="@../../css/lightStyle.css" text="Button" HBox.hgrow="ALWAYS">
-                     <graphic>
-                        <MaterialIconView fill="WHITE" glyphName="ARCHIVE" stroke="BLACK" />
-                     </graphic>
-                  </Button>
-                  <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" styleClass="toolBarButton" stylesheets="@../../css/lightStyle.css" text="Button" HBox.hgrow="ALWAYS">
-                     <graphic>
-                        <MaterialIconView glyphName="MORE_VERT" />
-                     </graphic>
-                  </Button>
-               </children>
-            </HBox>
-         </children>
-      </VBox>
-   </children>
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+      prefHeight="400.0" prefWidth="600.0" styleClass="note-editor" stylesheets="@../../css/LightStylesheet.css"
+      xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <VBox alignment="CENTER_RIGHT" prefHeight="55.0" prefWidth="600.0" VBox.vgrow="NEVER">
+            <children>
+                <Button contentDisplay="GRAPHIC_ONLY" minWidth="42.0" mnemonicParsing="false" prefHeight="42.0"
+                        prefWidth="42.0" styleClass="note-editor__close-button"
+                        stylesheets="@../../css/LightStylesheet.css"
+                        text="Button">
+                    <graphic>
+                        <FontAwesomeIconView glyphName="PAPERCLIP"/>
+                    </graphic>
+                </Button>
+            </children>
+        </VBox>
+        <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+            <children>
+                <Label/>
+                <Label text="Label"/>
+            </children>
+        </VBox>
+        <VBox alignment="CENTER" prefHeight="0.0" prefWidth="600.0" VBox.vgrow="SOMETIMES">
+            <children>
+                <HBox alignment="CENTER" prefHeight="44.0" prefWidth="136.0" spacing="10.0" VBox.vgrow="NEVER">
+                    <children>
+                        <Button alignment="CENTER" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false"
+                                styleClass="tool-bar-button" stylesheets="@../../css/LightStylesheet.css" text="Button"
+                                HBox.hgrow="ALWAYS">
+                            <graphic>
+                                <MaterialIconView fill="TRANSPARENT" glyphName="ADD_ALERT" stroke="BLACK">
+                                    <selectionFill>
+                                        <LinearGradient endX="1.0" endY="1.0">
+                                            <stops>
+                                                <Stop>
+                                                    <color>
+                                                        <Color/>
+                                                    </color>
+                                                </Stop>
+                                                <Stop offset="1.0">
+                                                    <color>
+                                                        <Color red="1.0" green="1.0" blue="1.0"/>
+                                                    </color>
+                                                </Stop>
+                                            </stops>
+                                        </LinearGradient>
+                                    </selectionFill>
+                                </MaterialIconView>
+                            </graphic>
+                        </Button>
+                        <Button alignment="CENTER" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false"
+                                styleClass="tool-bar-button" stylesheets="@../../css/LightStylesheet.css" text="Button"
+                                HBox.hgrow="ALWAYS">
+                            <graphic>
+                                <MaterialIconView fill="TRANSPARENT" glyphName="PALETTE" stroke="BLACK"/>
+                            </graphic>
+                        </Button>
+                        <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" styleClass="tool-bar-button"
+                                stylesheets="@../../css/LightStylesheet.css" text="Button" HBox.hgrow="ALWAYS">
+                            <graphic>
+                                <MaterialIconView fill="TRANSPARENT" glyphName="IMAGE" stroke="BLACK" text="">
+                                    <selectionFill>
+                                        <LinearGradient endX="1.0" endY="1.0">
+                                            <stops>
+                                                <Stop>
+                                                    <color>
+                                                        <Color/>
+                                                    </color>
+                                                </Stop>
+                                                <Stop offset="1.0">
+                                                    <color>
+                                                        <Color red="1.0" green="1.0" blue="1.0"/>
+                                                    </color>
+                                                </Stop>
+                                            </stops>
+                                        </LinearGradient>
+                                    </selectionFill>
+                                </MaterialIconView>
+                            </graphic>
+                        </Button>
+                        <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" styleClass="tool-bar-button"
+                                stylesheets="@../../css/LightStylesheet.css" text="Button" HBox.hgrow="ALWAYS">
+                            <graphic>
+                                <MaterialIconView fill="WHITE" glyphName="ARCHIVE" stroke="BLACK"/>
+                            </graphic>
+                        </Button>
+                        <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" styleClass="tool-bar-button"
+                                stylesheets="@../../css/LightStylesheet.css" text="Button" HBox.hgrow="ALWAYS">
+                            <graphic>
+                                <MaterialIconView glyphName="MORE_VERT"/>
+                            </graphic>
+                        </Button>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
 </VBox>

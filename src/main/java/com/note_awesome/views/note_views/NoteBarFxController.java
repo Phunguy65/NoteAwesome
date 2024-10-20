@@ -1,5 +1,6 @@
 package com.note_awesome.views.note_views;
 
+import com.note_awesome.NoteAwesomeEnv;
 import com.note_awesome.NoteAwesomeFX;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,7 +21,7 @@ public class NoteBarFxController extends HBox {
     public NoteBarFxController() {
         super();
         try {
-            FXMLLoader loader = new FXMLLoader(NoteAwesomeFX.class.getResource("fxml/note_views/NoteBar.fxml"));
+            FXMLLoader loader = new FXMLLoader(NoteAwesomeEnv.VIEW_COMPONENT_LOAD_PATHS.get(NoteAwesomeEnv.ViewComponent.NOTE_BAR));
             loader.setRoot(this);
             loader.setController(this);
             loader.load();
