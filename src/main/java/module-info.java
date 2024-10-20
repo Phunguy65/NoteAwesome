@@ -24,6 +24,8 @@ module com.note_awesome {
     requires javafx.web;
     requires javafx.swing;
     requires spring.security.crypto;
+    requires de.jensd.fx.glyphs.fontawesome;
+    requires de.jensd.fx.glyphs.materialicons;
 
     opens com.note_awesome to javafx.fxml, spring.core;
     exports com.note_awesome;
