@@ -1,12 +1,15 @@
 package com.note_awesome.views.note_views;
 
 import com.note_awesome.views.core_editors.NoteEditorFxController;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import de.jensd.fx.glyphs.materialicons.MaterialIconView;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.control.Label;
+import org.controlsfx.control.GridView;
 
 public class NoteViewFxController {
 
@@ -20,9 +23,42 @@ public class NoteViewFxController {
     private NoteBarFxController noteBarFxController;
 
     @FXML
-    private StackPane spEditorManager;
+    private StackPane editorManagerSp;
 
-    private BooleanProperty noteEditorOpened = new SimpleBooleanProperty(false);
+    private final BooleanProperty noteEditorOpened = new SimpleBooleanProperty(false);
+
+    @FXML
+    private StackPane boardManagerSp;
+
+    @FXML
+    private VBox emptyBoardManagerVb;
+
+    @FXML
+    private MaterialIconView emptyMessageIcon;
+
+    @FXML
+    private Label emptyMessageLb;
+
+    @FXML
+    private VBox noteBoardManagerVb;
+
+    @FXML
+    private VBox pinNoteBoardManagerVb;
+
+    @FXML
+    private Label pinMessageLb;
+
+    @FXML
+    private GridView<NoteCardFxController> pinNoteBoardGv;
+
+    @FXML
+    private VBox unpinNoteBoardManagerVb;
+
+    @FXML
+    private Label unpinMessageLb;
+
+    @FXML
+    private GridView<NoteCardFxController> unpinNoteBoardGv;
 
     public NoteViewFxController() {
 
@@ -31,13 +67,15 @@ public class NoteViewFxController {
     @FXML
     private void initialize() {
 
+        this.noteEditorFxController.managedProperty().bind(this.noteEditorFxController.visibleProperty());
         this.noteEditorFxController.visibleProperty().subscribe(e -> {
             if (e) {
-                if (!this.spEditorManager.getStyleClass().contains("opened")) {
-                    this.spEditorManager.getStyleClass().add("opened");
+                if (!this.editorManagerSp.getStyleClass().contains("opened")) {
+                    this.editorManagerSp.getStyleClass().add("opened");
                 }
+                this.noteEditorFxController.requestFocus();
             } else {
-                this.spEditorManager.getStyleClass().remove("opened");
+                this.editorManagerSp.getStyleClass().remove("opened");
             }
         });
 
@@ -56,7 +94,7 @@ public class NoteViewFxController {
             }
         });
 
-        this.spEditorManager.setOnMouseClicked(e -> {
+        this.editorManagerSp.setOnMouseClicked(e -> {
             e.consume();
         });
 

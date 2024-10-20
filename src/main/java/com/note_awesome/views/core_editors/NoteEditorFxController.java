@@ -1,5 +1,6 @@
 package com.note_awesome.views.core_editors;
 
+import com.note_awesome.NoteAwesomeEnv;
 import com.note_awesome.NoteAwesomeFX;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -45,12 +46,12 @@ public class NoteEditorFxController extends VBox {
     @FXML
     private Button pinNoteBtn;
 
-    private SuspendableNo updatingToolbar = new SuspendableNo();
+    private final SuspendableNo updatingToolbar = new SuspendableNo();
 
     public NoteEditorFxController() {
         super();
         try {
-            FXMLLoader loader = new FXMLLoader(NoteAwesomeFX.class.getResource("fxml/note_views/NoteEditor.fxml"));
+            FXMLLoader loader = new FXMLLoader(NoteAwesomeEnv.VIEW_COMPONENT_LOAD_PATHS.get(NoteAwesomeEnv.ViewComponent.NOTE_EDITOR));
             loader.setRoot(this);
             loader.setController(this);
             loader.load();
@@ -168,5 +169,11 @@ public class NoteEditorFxController extends VBox {
 
     private void toggleUnderline() {
         updateStyleInSelection(spans -> TextStyle.underline(!spans.styleStream().allMatch(style -> style.underline.orElse(Boolean.valueOf(false)))));
+    }
+
+    @Override
+    public void requestFocus() {
+        super.requestFocus();
+        this.area.requestFocus();
     }
 }

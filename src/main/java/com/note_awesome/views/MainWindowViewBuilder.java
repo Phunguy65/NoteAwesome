@@ -1,5 +1,6 @@
 package com.note_awesome.views;
 
+import com.note_awesome.NoteAwesomeEnv;
 import com.note_awesome.NoteAwesomeFX;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Region;
@@ -9,14 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class MainWindowViewBuilder implements Builder<Region> {
 
     private final Region noteView;
-    
+
     public MainWindowViewBuilder(Region noteView) {
         this.noteView = noteView;
     }
 
     @Override
     public Region build() {
-        var loader = new FXMLLoader(NoteAwesomeFX.class.getResource("fxml/MainWindow.fxml"));
+        var loader = new FXMLLoader(NoteAwesomeEnv.VIEW_COMPONENT_LOAD_PATHS.get(NoteAwesomeEnv.ViewComponent.MAIN_WINDOW));
         loader.setController(new MainWindowFxController(noteView));
         try {
             return loader.load();

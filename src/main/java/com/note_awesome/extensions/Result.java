@@ -1,40 +1,43 @@
 package com.note_awesome.extensions;
 
+import java.util.Optional;
 import java.util.function.Function;
 
-public class Result<TValue> {
-
+public class Result<TValue, TError> implements IResult<TValue, TError> {
     private final TValue value;
-    private final Error error;
-    private final boolean isSuccess;
+    private final TError error;
 
-    private Result(TValue value) {
+    private Result(TValue value, TError error) {
         this.value = value;
-        this.error = Error.none();
-        this.isSuccess = true;
-    }
-
-    private Result(Error error) {
-        this.value = null;
         this.error = error;
-        this.isSuccess = false;
     }
 
-
-    public static <TValue> Result<TValue> success(TValue value) {
-        return new Result<>(value);
+    public static <TValue, TError> Result<TValue, TError> success(TValue value) {
+        return new Result<>(value, null);
     }
 
-    public static <TValue> Result<TValue> failure(String message, String description) {
-        return new Result<>(new Error(message, description));
+    public static <TValue, TError> Result<TValue, TError> failure(TError error) {
+        return new Result<>(null, error);
     }
 
-    public static <TValue> Result<TValue> failure(Error error) {
-        return new Result<>(error);
+    @Override
+    public TValue getValue() {
+        return value;
     }
 
-    public <TResult> TResult Match(Function<TValue, TResult> onSuccess, Function<Error, TResult> onFailure) {
-        return isSuccess ? onSuccess.apply(value) : onFailure.apply(error);
+    @Override
+    public boolean isSuccess() {
+        return value != null;
     }
+
+    @Override
+    public TError getError() {
+        return error;
+    }
+    
+    @Override
+    public <TResult> TResult Match(Function<TValue, TResult> onSuccess, Function<TError, TResult> onFailure) {
+        return isSuccess() ? onSuccess.apply(value) : onFailure.apply(error);
+    }
+
 }
-
