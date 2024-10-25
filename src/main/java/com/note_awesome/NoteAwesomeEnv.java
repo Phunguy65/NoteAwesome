@@ -13,9 +13,12 @@
 
 package com.note_awesome;
 
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Path;
-import java.util.Map;
+import java.util.Objects;
 
 public class NoteAwesomeEnv {
 
@@ -23,59 +26,68 @@ public class NoteAwesomeEnv {
 
     public final static String DATABASE_NAME = "note_awesome";
 
-    public final static String ROOT_FOLDER = NoteAwesomeEnv.class.getResource("").getPath();
+    public final static String ROOT_FOLDER = Objects.requireNonNull(NoteAwesomeEnv.class.getResource("")).getPath();
 
     public final static String USER_DATA_FOLDER_PATH = ROOT_FOLDER + "user_data/";
-
 
     public final static String URL_DATABASE = ROOT_FOLDER + DATABASE_NAME;
 
     public static final String APP_VERSION = "v0.1";
 
     public enum ViewComponent {
-        MAIN_WINDOW("MainWindow.fxml"),
-        NOTE_VIEW("NoteView.fxml"),
-        NOTE_EDITOR("NoteEditor.fxml"),
-        NOTE_BAR("NoteBar.fxml"),
-        NOTE_CARD("NoteCard.fxml");
+        MAIN_WINDOW(ROOT_FOLDER + "fxml/MainWindow.fxml"),
+        NOTE_VIEW(ROOT_FOLDER + "fxml/note_views/NoteView.fxml"),
+        NOTE_EDITOR(ROOT_FOLDER + "fxml/note_views/NoteEditor.fxml"),
+        NOTE_BAR(ROOT_FOLDER + "fxml/note_views/NoteBar.fxml"),
+        NOTE_CARD(ROOT_FOLDER + "fxml/note_views/NoteCard.fxml");
 
-        private final String fxmlFileName;
+        private final String path;
 
-        ViewComponent(String fxmlFileName) {
-            this.fxmlFileName = fxmlFileName;
+        ViewComponent(String path) {
+            this.path = path;
         }
 
-        public String getFxmlFileName() {
-            return fxmlFileName;
+        public Path getPath() {
+            return Path.of(path);
+        }
+
+        public URL getURL() {
+            try {
+                return getPath().toUri().toURL();
+            } catch (MalformedURLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    public enum Resource {
+        CSS(ROOT_FOLDER + "css/NoteAwesome.css"),
+        ICONS(ROOT_FOLDER + "icons/"),
+        IMAGES(ROOT_FOLDER + "images/");
+
+        private final String path;
+
+        Resource(String path) {
+            this.path = path;
+        }
+
+        public URL getURL() {
+            try {
+                return new URL(path);
+            } catch (MalformedURLException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
-    public static final Map<Enum<ViewComponent>, URL> VIEW_COMPONENT_LOAD_PATHS = Map.of(
-            ViewComponent.MAIN_WINDOW, NoteAwesomeEnv.class.getResource(Folder.FXML.getFolderName() + ViewComponent.MAIN_WINDOW.getFxmlFileName()),
-            ViewComponent.NOTE_VIEW, NoteAwesomeEnv.class.getResource(Folder.NOTE_VIEWS.getFolderName() + ViewComponent.NOTE_VIEW.getFxmlFileName()),
-            ViewComponent.NOTE_EDITOR, NoteAwesomeEnv.class.getResource(Folder.NOTE_VIEWS.getFolderName() + ViewComponent.NOTE_EDITOR.getFxmlFileName()),
-            ViewComponent.NOTE_BAR, NoteAwesomeEnv.class.getResource(Folder.NOTE_VIEWS.getFolderName() + ViewComponent.NOTE_BAR.getFxmlFileName()),
-            ViewComponent.NOTE_CARD, NoteAwesomeEnv.class.getResource(Folder.NOTE_VIEWS.getFolderName() + ViewComponent.NOTE_CARD.getFxmlFileName())
-    );
-
-    public enum Folder {
-        FXML("fxml/"),
-        CSS("css/"),
-        IMAGES("images/"),
-
-
-        NOTE_VIEWS(FXML.getFolderName() + "note_views/");
-
-        private final String folderName;
-
-        Folder(String folderName) {
-            this.folderName = folderName;
-        }
-
-        public String getFolderName() {
-            return folderName;
-        }
+    public Path getRootFolder() {
+        return Path.of(ROOT_FOLDER);
     }
+
+    public Path getUserDataFolder() {
+        return Path.of(USER_DATA_FOLDER_PATH);
+    }
+
 
     private NoteAwesomeEnv() {
     }

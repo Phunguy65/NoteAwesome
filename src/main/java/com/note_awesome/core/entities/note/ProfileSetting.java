@@ -11,13 +11,13 @@ public class ProfileSetting extends AuditorEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "theme", nullable = false, unique = false, length = 50)
+    @Column(name = "theme", nullable = false, unique = true, length = 50)
     private String theme;
 
     public long getId() {
         return id;
     }
-    
+
     public String getTheme() {
         return theme;
     }

@@ -1,11 +1,16 @@
 package com.note_awesome.views.note_views;
 
+import com.note_awesome.models.NoteEditorViewModel;
+import com.note_awesome.models.NoteViewModel;
 import com.note_awesome.views.core_editors.NoteEditorFxController;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import de.jensd.fx.glyphs.materialicons.MaterialIconView;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
@@ -25,7 +30,6 @@ public class NoteViewFxController {
     @FXML
     private StackPane editorManagerSp;
 
-    private final BooleanProperty noteEditorOpened = new SimpleBooleanProperty(false);
 
     @FXML
     private StackPane boardManagerSp;
@@ -60,43 +64,50 @@ public class NoteViewFxController {
     @FXML
     private GridView<NoteCardFxController> unpinNoteBoardGv;
 
-    public NoteViewFxController() {
+    private EditorManagerSpHandler editorManagerSpHandler;
 
+    private final NoteViewModel noteViewModel;
+
+    public NoteViewFxController(NoteViewModel noteViewModel) {
+        this.noteViewModel = noteViewModel;
     }
 
     @FXML
     private void initialize() {
+        this.editorManagerSpHandler = new EditorManagerSpHandler();
+        this.noteBarFxController.getNoteTriggerTxtField().setOnMouseClicked(event -> editorManagerSpHandler.OpenEditor());
+        this.rootView.setOnMouseClicked(event -> editorManagerSpHandler.CloseEditor());
+//        this.editorManagerSp.setOnMouseClicked(Event::consume);
+        this.noteEditorFxController.setOnMouseClicked(Event::consume);
+    }
 
-        this.noteEditorFxController.managedProperty().bind(this.noteEditorFxController.visibleProperty());
-        this.noteEditorFxController.visibleProperty().subscribe(e -> {
-            if (e) {
-                if (!this.editorManagerSp.getStyleClass().contains("opened")) {
-                    this.editorManagerSp.getStyleClass().add("opened");
+    private class EditorManagerSpHandler {
+
+        private final BooleanProperty noteEditorOpened = new SimpleBooleanProperty(false);
+
+        {
+            noteEditorFxController.visibleProperty().bind(noteEditorOpened);
+            noteBarFxController.visibleProperty().bind(noteEditorOpened.not());
+            noteEditorFxController.managedProperty().bind(noteEditorFxController.visibleProperty());
+
+            noteEditorFxController.visibleProperty().subscribe(e -> {
+                if (e) {
+                    if (!editorManagerSp.getStyleClass().contains("opened")) {
+                        editorManagerSp.getStyleClass().add("opened");
+                    }
+                    noteEditorFxController.requestFocus();
+                } else {
+                    editorManagerSp.getStyleClass().remove("opened");
                 }
-                this.noteEditorFxController.requestFocus();
-            } else {
-                this.editorManagerSp.getStyleClass().remove("opened");
-            }
-        });
+            });
+        }
 
-        this.noteBarFxController.visibleProperty().bind(noteEditorOpened.not());
-        this.noteEditorFxController.visibleProperty().bind(noteEditorOpened);
+        public void OpenEditor() {
+            noteEditorOpened.set(true);
+        }
 
-        this.noteBarFxController.getNoteTriggerTxtField().setOnMouseClicked(e -> {
-            if (!noteEditorOpened.get()) {
-                noteEditorOpened.set(true);
-            }
-        });
-
-        this.rootView.setOnMouseClicked(e -> {
-            if (noteEditorOpened.get()) {
-                noteEditorOpened.set(false);
-            }
-        });
-
-        this.editorManagerSp.setOnMouseClicked(e -> {
-            e.consume();
-        });
-
+        public void CloseEditor() {
+            noteEditorOpened.set(false);
+        }
     }
 }

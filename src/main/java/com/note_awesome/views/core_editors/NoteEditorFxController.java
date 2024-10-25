@@ -51,7 +51,7 @@ public class NoteEditorFxController extends VBox {
     public NoteEditorFxController() {
         super();
         try {
-            FXMLLoader loader = new FXMLLoader(NoteAwesomeEnv.VIEW_COMPONENT_LOAD_PATHS.get(NoteAwesomeEnv.ViewComponent.NOTE_EDITOR));
+            FXMLLoader loader = new FXMLLoader(NoteAwesomeEnv.ViewComponent.NOTE_EDITOR.getURL());
             loader.setRoot(this);
             loader.setController(this);
             loader.load();

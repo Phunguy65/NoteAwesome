@@ -17,7 +17,7 @@ public class MainWindowViewBuilder implements Builder<Region> {
 
     @Override
     public Region build() {
-        var loader = new FXMLLoader(NoteAwesomeEnv.VIEW_COMPONENT_LOAD_PATHS.get(NoteAwesomeEnv.ViewComponent.MAIN_WINDOW));
+        var loader = new FXMLLoader(NoteAwesomeEnv.ViewComponent.MAIN_WINDOW.getURL());
         loader.setController(new MainWindowFxController(noteView));
         try {
             return loader.load();

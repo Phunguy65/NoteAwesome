@@ -1,7 +1,7 @@
-package com.note_awesome.services;
+package com.note_awesome.extensions;
 
 import java.io.IOException;
 
-public interface IInitializable {
+public interface IInitialize {
     void initialize() throws IOException;
 }
