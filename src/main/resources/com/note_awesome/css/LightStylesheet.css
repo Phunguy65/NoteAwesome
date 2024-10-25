@@ -1,0 +1,143 @@
+@import "Fonts.css";
+
+.root {
+    -fx-font-family: "SF Pro Display";
+    -fx-background-color: #ffffff;
+}
+
+/****************************************************/
+.burger-button {
+    -fx-background-color: transparent;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 0;
+    -fx-background-radius: 100;
+    -fx-pref-height: 40;
+    -fx-pref-width: 40;
+    -fx-font-family: "SF Pro Display";
+}
+
+.burger-button:hover {
+    -fx-background-color: #dcdcdc;
+    -fx-cursor: hand;
+}
+
+
+/****************************************************/
+.tool-bar-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-pref-height: 40;
+    -fx-pref-width: 40;
+    -fx-font-family: "SF Pro Display";
+}
+
+.tool-bar-button:hover {
+    -fx-background-color: #dcdcdc;
+    -fx-cursor: hand;
+}
+
+.tool-bar-button:pressed {
+    -fx-background-color: #dcdcdc;
+    -fx-cursor: hand;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.tool-bar-button.pressed {
+    -fx-background-color: #dcdcdc;
+    -fx-cursor: hand;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+/****************************************************/
+.note-editor {
+    -fx-background-color: #ffffff;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+.note-editor__close-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.note-editor__close-button:hover {
+    -fx-background-color: #dcdcdc;
+    -fx-cursor: hand;
+}
+
+
+/****************************************************/
+.text-area {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
+
+.text-area .content {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
+
+.text-area:pressed {
+    -fx-border-color: #ffffff;
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
+
+/****************************************************/
+.note-editor-shadow {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 10, 0, 0, 0);
+}
+
+.note-editor-shadow.opened {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 12, 0, 0, 0);
+}
+
+.note-container {
+    -fx-background-radius: 10 10 0 0;
+    -fx-border-radius: 10 10 0 0;
+}
+
+/****************************************************/
+.search-bar {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #b0b9c6;
+    -fx-border-width: 1;
+    -fx-border-color: #e0e6ed;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-font-size: 12;
+}
+
+.search-bar:hover {
+    -fx-border-color: #d9d9d9;
+}
+
+/****************************************************/
+.side-bar-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #d0c0ff;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 0;
+    -fx-background-radius: 15;
+    -fx-pref-height: 35;
+    -fx-font-size: 13;
+    -fx-font-family: "SF Pro Display";
+}
+
+.side-bar-button:hover {
+    -fx-background-color: #7b5cd6;
+    -fx-text-fill: #ffffff;
+    -fx-cursor: hand;
+}
+
+/****************************************************/

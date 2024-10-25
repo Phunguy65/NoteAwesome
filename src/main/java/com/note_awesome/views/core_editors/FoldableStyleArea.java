@@ -36,7 +36,7 @@ public class FoldableStyleArea extends GenericStyledArea<ParStyle, Either<String
         super(
                 ParStyle.EMPTY,
                 (paragraph, style) -> paragraph.setStyle(style.toCss()),
-                TextStyle.EMPTY.updateFontSize(12).updateFontFamily("Arial"),
+                TextStyle.EMPTY.updateFontSize(13).updateFontFamily("SF Pro Display"),
                 styledTextOps._or(linkedImageOps, (s1, s2) -> Optional.empty()),
                 seg -> createNode(seg, (textExt, style) -> textExt.setStyle(style.toCss()))
         );

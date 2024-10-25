@@ -1,43 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.note_awesome.views.core_editors.*?>
+<?import com.note_awesome.views.note_views.*?>
+<?import de.jensd.fx.glyphs.materialicons.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import org.controlsfx.control.*?>
 
-<?import com.note_awesome.views.note_views.NoteBarFxController?>
-<?import java.lang.Double?>
-<VBox prefHeight="343.0" prefWidth="549.0" xmlns="http://javafx.com/javafx/11.0.14-internal"
-      xmlns:fx="http://javafx.com/fxml/1" fx:id="rootView" alignment="TOP_CENTER">
+<VBox fx:id="rootView" alignment="TOP_CENTER" prefHeight="343.0" prefWidth="549.0"
+      xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <StackPane fx:id="spEditorManager" prefHeight="150.0" prefWidth="200.0" stylesheets="@../../css/lightStyle.css"
-                   VBox.vgrow="NEVER" alignment="TOP_CENTER" styleClass="note-editor-shadow">
-            <maxWidth>
-                <PopupControl fx:constant="USE_PREF_SIZE"/>
-            </maxWidth>
-            <maxHeight>
-                <PopupControl fx:constant="USE_PREF_SIZE"/>
-            </maxHeight>
-            <NoteBarFxController fx:id="noteBarFxController"
-                                 stylesheets="@../../css/lightStyle.css"
+        <StackPane fx:id="editorManagerSp" alignment="TOP_CENTER" styleClass="note-editor-shadow"
+                   stylesheets="@../../css/LightStylesheet.css">
+            <NoteBarFxController fx:id="noteBarFxController" stylesheets="@../../css/LightStylesheet.css"
                                  StackPane.alignment="CENTER"/>
             <NoteEditorFxController fx:id="noteEditorFxController" StackPane.alignment="CENTER"/>
         </StackPane>
-        <StackPane>
+        <StackPane fx:id="boardManagerSp" VBox.vgrow="ALWAYS">
             <children>
 
-                <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                      prefHeight="200.0" prefWidth="100.0" StackPane.alignment="CENTER">
+                <VBox fx:id="emptyBoardManagerVb" alignment="CENTER" maxHeight="1.7976931348623157E308"
+                      maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0"
+                      StackPane.alignment="CENTER">
                     <children>
-                        <ImageView VBox.vgrow="ALWAYS"/>
-                        <Label text="Label" VBox.vgrow="ALWAYS"/>
+                        <MaterialIconView fx:id="emptyMessageIcon" fill="#e5e5e5" glyphName="LIGHTBULB_OUTLINE"
+                                          size="128" VBox.vgrow="ALWAYS">
+                            <font>
+                                <Font size="64.0"/>
+                            </font>
+                        </MaterialIconView>
+                        <Label fx:id="emptyMessageLb" style="-fx-text-fill: #e5e5e5;"
+                               text="The notes you add will appear here" VBox.vgrow="ALWAYS">
+                            <font>
+                                <Font size="22"/>
+                            </font>
+                        </Label>
                     </children>
                 </VBox>
+                <VBox fx:id="noteBoardManagerVb" prefHeight="200.0" prefWidth="100.0" visible="false">
+                    <children>
+                        <VBox fx:id="pinNoteBoardManagerVb" prefHeight="200.0" prefWidth="100.0">
+                            <children>
+                                <Label fx:id="pinMessageLb" text="PINNED" textFill="#5f6368">
+                                    <font>
+                                        <Font size="11.0"/>
+                                    </font>
+                                    <VBox.margin>
+                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                                    </VBox.margin>
+                                </Label>
 
-                <GridView>
+                                <GridView fx:id="pinNoteBoardGv">
 
-                </GridView>
+                                </GridView>
+                            </children>
+                        </VBox>
+                        <VBox fx:id="unpinNoteBoardManagerVb" layoutX="10.0" layoutY="10.0" prefHeight="200.0"
+                              prefWidth="100.0">
+                            <children>
+                                <Label fx:id="unpinMessageLb" text="OTHERS" textFill="#5f6368">
+                                    <font>
+                                        <Font size="11.0"/>
+                                    </font>
+                                    <VBox.margin>
+                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                                    </VBox.margin>
+                                </Label>
+                                <GridView fx:id="unpinNoteBoardGv"/>
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
             </children>
         </StackPane>
     </children>

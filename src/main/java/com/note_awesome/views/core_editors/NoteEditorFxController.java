@@ -1,12 +1,16 @@
 package com.note_awesome.views.core_editors;
 
+import com.note_awesome.NoteAwesomeEnv;
 import com.note_awesome.NoteAwesomeFX;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.IndexRange;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import org.fxmisc.flowless.VirtualizedScrollPane;
 import org.fxmisc.richtext.GenericStyledArea;
 import org.fxmisc.richtext.model.Paragraph;
@@ -33,12 +37,21 @@ public class NoteEditorFxController extends VBox {
     @FXML
     private Button underlineBtn;
 
-    private SuspendableNo updatingToolbar = new SuspendableNo();
+    @FXML
+    private TextArea noteTitleTxtArea;
+
+    @FXML
+    private VBox noteVBox;
+
+    @FXML
+    private Button pinNoteBtn;
+
+    private final SuspendableNo updatingToolbar = new SuspendableNo();
 
     public NoteEditorFxController() {
         super();
         try {
-            FXMLLoader loader = new FXMLLoader(NoteAwesomeFX.class.getResource("fxml/note_views/NoteEditor.fxml"));
+            FXMLLoader loader = new FXMLLoader(NoteAwesomeEnv.ViewComponent.NOTE_EDITOR.getURL());
             loader.setRoot(this);
             loader.setController(this);
             loader.load();
@@ -52,8 +65,8 @@ public class NoteEditorFxController extends VBox {
         // Add the area to the root VBox
         VirtualizedScrollPane<GenericStyledArea<ParStyle, Either<String, LinkedImage>, TextStyle>> vsPane = new VirtualizedScrollPane<>(area);
         VBox.setVgrow(vsPane, javafx.scene.layout.Priority.ALWAYS);
-        VBox.setMargin(vsPane, new Insets(0, 10, 0, 10));
-        getChildren().add(1, vsPane);
+        VBox.setMargin(vsPane, new Insets(0, 9, 0, 9));
+        this.noteVBox.getChildren().add(1, vsPane);
         // assign event handlers
         boldBtn.setOnAction(e -> {
             toggleBold();
@@ -70,6 +83,8 @@ public class NoteEditorFxController extends VBox {
             area.requestFocus();
         });
 
+        area.setWrapText(true);
+        this.noteTitleTxtArea.setFont(Font.font("SF Pro Display", FontWeight.BOLD, 16));
 
         // Add listeners to area
         area.beingUpdatedProperty().addListener((obs, old, beingUpdated) -> {
@@ -154,5 +169,11 @@ public class NoteEditorFxController extends VBox {
 
     private void toggleUnderline() {
         updateStyleInSelection(spans -> TextStyle.underline(!spans.styleStream().allMatch(style -> style.underline.orElse(Boolean.valueOf(false)))));
+    }
+
+    @Override
+    public void requestFocus() {
+        super.requestFocus();
+        this.area.requestFocus();
     }
 }
