@@ -15,7 +15,12 @@ import org.springframework.context.annotation.ComponentScans;
 @ComponentScans({
         @ComponentScan(basePackages = "com.note_awesome.core.repositories.note"),
         @ComponentScan(basePackages = "com.note_awesome.views"),
-        @ComponentScan(basePackages = "com.note_awesome.services")
+        @ComponentScan(basePackages = "com.note_awesome.services"),
+        @ComponentScan(basePackages = "com.note_awesome.extensions"),
+        @ComponentScan(basePackages = "com.note_awesome.services.note_services"),
+        @ComponentScan(basePackages = "com.note_awesome.services.note_services.validators"),
+        @ComponentScan(basePackages = "com.note_awesome.services.user_services"),
+        @ComponentScan(basePackages = "com.note_awesome.services.user_services.validators"),
 })
 @EntityScan(basePackages = {"com.note_awesome.core.entities", "com.note_awesome.core.entities.note"})
 public class NoteAwesomeApplication extends Application {

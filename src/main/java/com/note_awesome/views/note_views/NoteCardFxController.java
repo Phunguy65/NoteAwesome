@@ -9,7 +9,7 @@ import java.io.IOException;
 public class NoteCardFxController extends VBox {
     public NoteCardFxController() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(NoteAwesomeEnv.VIEW_COMPONENT_LOAD_PATHS.get(NoteAwesomeEnv.ViewComponent.NOTE_BAR));
+            FXMLLoader fxmlLoader = new FXMLLoader(NoteAwesomeEnv.ViewComponent.NOTE_CARD.getURL());
             fxmlLoader.setRoot(this);
             fxmlLoader.setController(this);
             fxmlLoader.load();

@@ -21,7 +21,7 @@ public class NoteBarFxController extends HBox {
     public NoteBarFxController() {
         super();
         try {
-            FXMLLoader loader = new FXMLLoader(NoteAwesomeEnv.VIEW_COMPONENT_LOAD_PATHS.get(NoteAwesomeEnv.ViewComponent.NOTE_BAR));
+            FXMLLoader loader = new FXMLLoader(NoteAwesomeEnv.ViewComponent.NOTE_BAR.getURL());
             loader.setRoot(this);
             loader.setController(this);
             loader.load();

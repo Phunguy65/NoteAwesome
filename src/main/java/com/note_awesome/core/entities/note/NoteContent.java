@@ -20,22 +20,46 @@ public class NoteContent extends AuditorEntity {
     @Column(name = "text_content", nullable = false, unique = false, length = 1000)
     private String textContent;
 
-    @ElementCollection
-    @CollectionTable(name = "note_content_images", joinColumns = @JoinColumn(name = "note_content_id"))
-    @Column(name = "image_url", nullable = true, unique = false, length = 100)
-    private List<String> imageUrl;
 
     @Column(name = "title", nullable = true, unique = false, length = 200)
     private String title;
 
     @Column(name = "is_deleted", nullable = false, unique = false)
     @NotAudited
-    private boolean isDeleted;
+    private boolean isDeleted = false;
+
+    @Column(name = "is_pinned", nullable = false, unique = false)
+    @NotAudited
+    private boolean isPinned = false;
+
+    @Column(name = "url_location", nullable = false, unique = true)
+    private String urlLocation;
+
+
+    public String getUrlLocation() {
+        return urlLocation;
+    }
+
+    public void setUrlLocation(String urlLocation) {
+        this.urlLocation = urlLocation;
+    }
+
+    public NoteContent() {
+    }
+
+    public NoteContent(String title, String textContent, String urlLocation, List<NoteImage> images, NoteTag noteTag, UserProfile userProfile) {
+        this.textContent = textContent;
+        this.noteImages = images;
+        this.title = title;
+        this.urlLocation = urlLocation;
+        this.noteTag = noteTag;
+        this.userProfile = userProfile;
+    }
 
     public long getId() {
         return id;
     }
-    
+
     public String getTextContent() {
         return textContent;
     }
@@ -44,12 +68,12 @@ public class NoteContent extends AuditorEntity {
         this.textContent = textContent;
     }
 
-    public List<String> getImageUrl() {
-        return imageUrl;
+    public List<NoteImage> getNoteImages() {
+        return noteImages;
     }
 
-    public void setImageUrl(List<String> imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setNoteImages(List<NoteImage> noteImages) {
+        this.noteImages = noteImages;
     }
 
     public String getTitle() {
@@ -94,5 +118,8 @@ public class NoteContent extends AuditorEntity {
     @JoinColumn(name = "user_profile_id", nullable = false)
     @NotAudited
     private UserProfile userProfile;
+
+    @OneToMany(mappedBy = "noteContent", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<NoteImage> noteImages;
 
 }
