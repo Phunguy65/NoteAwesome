@@ -75,9 +75,11 @@ public class NoteViewFxController {
     @FXML
     private void initialize() {
         this.editorManagerSpHandler = new EditorManagerSpHandler();
+
         this.noteBarFxController.getNoteTriggerTxtField().setOnMouseClicked(event -> editorManagerSpHandler.OpenEditor());
         this.rootView.setOnMouseClicked(event -> editorManagerSpHandler.CloseEditor());
-//        this.editorManagerSp.setOnMouseClicked(Event::consume);
+        
+
         this.noteEditorFxController.setOnMouseClicked(Event::consume);
     }
 

@@ -78,7 +78,7 @@ public class CreateNoteContentService implements ICreateNoteContentService {
 
     private Result<Path, Error> createNoteLocation(NoteContent noteContent) {
 
-        var userProfileLocation = noteContent.getUserProfile().getProfileLocationUrl();
+        var userProfileLocation = noteContent.getUserProfile().getProfileLocation();
 
         Path noteLocation;
         int count = 0;

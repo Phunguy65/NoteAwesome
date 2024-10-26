@@ -8,6 +8,9 @@ import com.note_awesome.models.SessionViewModel;
 import com.note_awesome.services.authentication_services.IAuthenticationService;
 import com.note_awesome.services.user_profile_services.IUserProfileBaseService;
 import com.note_awesome.services.user_services.IUserService;
+import javafx.beans.property.LongProperty;
+import javafx.beans.property.SimpleLongProperty;
+import javafx.collections.FXCollections;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,7 +54,9 @@ public class FakeAppService implements IAppBaseService {
         generateTestData(TEST_USER, TEST_USER_PROFILE);
         var currentUser = this.authenticationService.login(TEST_USER.getUsername(), "test");
         this.currentSession.setCurrentUserId(currentUser.getValue().getId());
-        //this.currentSession.setCurrentUsrProfId(TEST_USER_PROFILE.getId());
+        var longIds = this.userProfileService.getUsrProfQueryServices().getUserProfiles(currentUser.getValue().getId()).getValue().stream().map(SimpleLongProperty::new).toList();
+        this.currentSession.getUsrProfIds().addAll(FXCollections.observableArrayList(longIds));
+        this.currentSession.setCurrentUsrProfId(longIds.get(0).get());
         isInitialized = true;
 
         this.applicationContext.publishEvent(new StageReadyEvent(new Stage()));
@@ -64,7 +69,7 @@ public class FakeAppService implements IAppBaseService {
 
         TEST_USER_PROFILE.setProfileName("test_profile");
         TEST_USER_PROFILE.setProfileSetting(null);
-        TEST_USER_PROFILE.setProfileLocationUrl(TEST_USER.getUserLocation());
+        TEST_USER_PROFILE.setProfileLocation(TEST_USER.getUserLocation());
 
         var can_create_new_user = this.userService.getCreateUserService().create(TEST_USER);
         if (!can_create_new_user.isSuccess()) {
@@ -72,7 +77,7 @@ public class FakeAppService implements IAppBaseService {
             return;
         }
 
-        var can_create_new_profile = this.userProfileService.getCreateUsrProfService().create(TEST_USER_PROFILE.getProfileName(), TEST_USER_PROFILE.getProfileLocationUrl(), can_create_new_user.getValue().getId());
+        var can_create_new_profile = this.userProfileService.getCreateUsrProfService().create(TEST_USER_PROFILE.getProfileName(), TEST_USER_PROFILE.getProfileLocation(), can_create_new_user.getValue().getId());
         if (!can_create_new_profile.isSuccess()) {
             logger.error("Error creating test user profile");
             return;

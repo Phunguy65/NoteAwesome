@@ -17,8 +17,8 @@ public class UserProfile {
     @Column(name = "profile_name", nullable = false, unique = true, length = 50)
     private String profileName;
 
-    @Column(name = "profile_location_url", nullable = true, unique = false, length = 255)
-    private String profileLocationUrl;
+    @Column(name = "profile_location", nullable = true, unique = false, length = 255)
+    private String profileLocation;
 
     @Column(name = "last_used", nullable = false)
     @CreationTimestamp
@@ -27,30 +27,30 @@ public class UserProfile {
     public UserProfile() {
     }
 
-    public UserProfile(String profileName, String profileLocationUrl, Date lastUsed, User userData, ProfileSetting profileSetting, List<NoteContent> noteContents) {
+    public UserProfile(String profileName, String profileLocation, Date lastUsed, User user, ProfileSetting profileSetting, List<NoteContent> noteContents) {
         this.profileName = profileName;
-        this.profileLocationUrl = profileLocationUrl;
+        this.profileLocation = profileLocation;
         this.lastUsed = lastUsed;
-        this.userData = userData;
+        this.user = user;
         this.profileSetting = profileSetting;
         this.noteContents = noteContents;
     }
 
-    public UserProfile(String profileName, String profileLocationUrl, Date lastUsed, User userData, ProfileSetting profileSetting) {
+    public UserProfile(String profileName, String profileLocation, Date lastUsed, User user, ProfileSetting profileSetting) {
         this.profileName = profileName;
-        this.profileLocationUrl = profileLocationUrl;
+        this.profileLocation = profileLocation;
         this.lastUsed = lastUsed;
-        this.userData = userData;
+        this.user = user;
         this.profileSetting = profileSetting;
     }
 
-    public UserProfile(String profileName, String profileLocationUrl, Date lastUsed, User userData) {
+    public UserProfile(String profileName, String profileLocation, Date lastUsed, User user) {
         this.profileName = profileName;
-        this.profileLocationUrl = profileLocationUrl;
+        this.profileLocation = profileLocation;
         this.lastUsed = lastUsed;
-        this.userData = userData;
+        this.user = user;
     }
-    
+
 
     public long getId() {
         return id;
@@ -64,12 +64,12 @@ public class UserProfile {
         this.profileName = profileName;
     }
 
-    public String getProfileLocationUrl() {
-        return profileLocationUrl;
+    public String getProfileLocation() {
+        return profileLocation;
     }
 
-    public void setProfileLocationUrl(String profileLocationUrl) {
-        this.profileLocationUrl = profileLocationUrl;
+    public void setProfileLocation(String profileLocationUrl) {
+        this.profileLocation = profileLocationUrl;
     }
 
     public Date getLastUsed() {
@@ -80,12 +80,12 @@ public class UserProfile {
         this.lastUsed = lastUsed;
     }
 
-    public User getUserData() {
-        return userData;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserData(User user) {
-        this.userData = user;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public ProfileSetting getProfileSetting() {
@@ -98,7 +98,7 @@ public class UserProfile {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    private User userData;
+    private User user;
 
     @OneToOne(mappedBy = "userProfile", cascade = CascadeType.ALL)
     @JoinColumn(name = "profile_setting_id", nullable = true)

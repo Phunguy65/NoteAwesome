@@ -62,12 +62,12 @@ public class NoteEditorFxController extends VBox {
 
     @FXML
     private void initialize() {
-        // Add the area to the root VBox
+
         VirtualizedScrollPane<GenericStyledArea<ParStyle, Either<String, LinkedImage>, TextStyle>> vsPane = new VirtualizedScrollPane<>(area);
         VBox.setVgrow(vsPane, javafx.scene.layout.Priority.ALWAYS);
         VBox.setMargin(vsPane, new Insets(0, 9, 0, 9));
         this.noteVBox.getChildren().add(1, vsPane);
-        // assign event handlers
+
         boldBtn.setOnAction(e -> {
             toggleBold();
             area.requestFocus();
@@ -86,7 +86,6 @@ public class NoteEditorFxController extends VBox {
         area.setWrapText(true);
         this.noteTitleTxtArea.setFont(Font.font("SF Pro Display", FontWeight.BOLD, 16));
 
-        // Add listeners to area
         area.beingUpdatedProperty().addListener((obs, old, beingUpdated) -> {
             if (!beingUpdated) {
                 boolean bold, italic, underline;
@@ -95,17 +94,17 @@ public class NoteEditorFxController extends VBox {
 
                 if (selection.getLength() != 0) {
                     StyleSpans<TextStyle> styles = area.getStyleSpans(selection);
-                    bold = styles.styleStream().allMatch(style -> style.bold.orElse(Boolean.valueOf(false)));
-                    italic = styles.styleStream().allMatch(style -> style.italic.orElse(Boolean.valueOf(false)));
-                    underline = styles.styleStream().allMatch(style -> style.underline.orElse(Boolean.valueOf(false)));
+                    bold = styles.styleStream().allMatch(style -> style.bold.orElse(Boolean.FALSE));
+                    italic = styles.styleStream().allMatch(style -> style.italic.orElse(Boolean.FALSE));
+                    underline = styles.styleStream().allMatch(style -> style.underline.orElse(Boolean.FALSE));
                 } else {
                     int paragraph = area.getCurrentParagraph();
                     int column = area.getCaretColumn();
                     TextStyle style = area.getStyleAtPosition(paragraph, column);
 
-                    bold = style.bold.orElse(Boolean.valueOf(false));
-                    italic = style.italic.orElse(Boolean.valueOf(false));
-                    underline = style.underline.orElse(Boolean.valueOf(false));
+                    bold = style.bold.orElse(Boolean.FALSE);
+                    italic = style.italic.orElse(Boolean.FALSE);
+                    underline = style.underline.orElse(Boolean.FALSE);
                 }
 
                 updatingToolbar.suspendWhile(() -> {
@@ -160,20 +159,24 @@ public class NoteEditorFxController extends VBox {
 
 
     private void toggleBold() {
-        updateStyleInSelection(spans -> TextStyle.bold(!spans.styleStream().allMatch(style -> style.bold.orElse(Boolean.valueOf(false)))));
+        updateStyleInSelection(spans -> TextStyle.bold(!spans.styleStream().allMatch(style -> style.bold.orElse(Boolean.FALSE))));
     }
 
     private void toggleItalic() {
-        updateStyleInSelection(spans -> TextStyle.italic(!spans.styleStream().allMatch(style -> style.italic.orElse(Boolean.valueOf(false)))));
+        updateStyleInSelection(spans -> TextStyle.italic(!spans.styleStream().allMatch(style -> style.italic.orElse(Boolean.FALSE))));
     }
 
     private void toggleUnderline() {
-        updateStyleInSelection(spans -> TextStyle.underline(!spans.styleStream().allMatch(style -> style.underline.orElse(Boolean.valueOf(false)))));
+        updateStyleInSelection(spans -> TextStyle.underline(!spans.styleStream().allMatch(style -> style.underline.orElse(Boolean.FALSE))));
     }
 
     @Override
     public void requestFocus() {
         super.requestFocus();
         this.area.requestFocus();
+    }
+
+    public GenericStyledArea<ParStyle, Either<String, LinkedImage>, TextStyle> getArea() {
+        return area;
     }
 }
