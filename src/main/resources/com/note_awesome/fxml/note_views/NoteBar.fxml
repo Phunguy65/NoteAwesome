@@ -11,7 +11,7 @@
 <?import javafx.scene.control.TextField?>
 <fx:root type="HBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
          minWidth="-Infinity" prefHeight="61.0" prefWidth="583.0" styleClass="note-editor"
-         stylesheets="@../../css/LightStylesheet.css" xmlns="http://javafx.com/javafx/22"
+         stylesheets="@../../css/LightStylesheet.css" xmlns="http://javafx.com/javafx/23"
          xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <TextField prefHeight="27.0" prefWidth="554.0" styleClass="text-area"

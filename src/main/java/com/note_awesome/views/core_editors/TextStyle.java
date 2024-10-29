@@ -28,7 +28,7 @@ import java.util.Optional;
 /**
  * Holds information about the style of a text fragment.
  */
-class TextStyle {
+public class TextStyle {
 
     public static final TextStyle EMPTY = new TextStyle();
 

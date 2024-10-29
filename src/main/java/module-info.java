@@ -28,11 +28,12 @@ module com.note_awesome {
     exports com.note_awesome;
     requires transitive javafx.web;
     requires transitive javafx.swing;
-    opens com.note_awesome.views to javafx.fxml;
     exports com.note_awesome.views;
     requires org.scenicview.scenicview;
     requires org.apache.logging.log4j;
     requires org.slf4j;
+    requires org.yaml.snakeyaml;
+    requires org.apache.commons.lang3;
 
 
     opens com.note_awesome.core.repositories.note to spring.core, spring.context, spring.beans;
@@ -54,7 +55,6 @@ module com.note_awesome {
     opens com.note_awesome.views.core_editors to javafx.fxml;
 
     exports com.note_awesome.views.note_views;
-    opens com.note_awesome.views.note_views to javafx.fxml;
 
     exports com.note_awesome.services.note_services;
     opens com.note_awesome.services.note_services to spring.core, spring.context, spring.beans;
@@ -86,5 +86,7 @@ module com.note_awesome {
     opens com.note_awesome.services.authentication_services.validators to spring.beans, spring.context, spring.core;
     exports com.note_awesome.services.authentication_services;
     opens com.note_awesome.services.authentication_services to spring.beans, spring.context, spring.core;
+    opens com.note_awesome.views to javafx.fxml, spring.beans, spring.context, spring.core;
+    opens com.note_awesome.views.note_views to javafx.fxml, spring.beans, spring.context, spring.core;
 
 }

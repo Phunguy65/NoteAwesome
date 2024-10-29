@@ -6,6 +6,7 @@ import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Entity
@@ -20,7 +21,6 @@ public class NoteContent extends AuditorEntity {
     @Column(name = "text_content", nullable = false, unique = false, length = 1000)
     private String textContent;
 
-
     @Column(name = "title", nullable = true, unique = false, length = 200)
     private String title;
 
@@ -28,30 +28,61 @@ public class NoteContent extends AuditorEntity {
     @NotAudited
     private boolean isDeleted = false;
 
+    public boolean isPinned() {
+        return isPinned;
+    }
+
+    public void setPinned(boolean pinned) {
+        isPinned = pinned;
+    }
+
     @Column(name = "is_pinned", nullable = false, unique = false)
     @NotAudited
     private boolean isPinned = false;
 
-    @Column(name = "url_location", nullable = false, unique = true)
-    private String urlLocation;
+    @Column(name = "note_location", nullable = false, unique = true)
+    private String noteLocation = "";
 
-
-    public String getUrlLocation() {
-        return urlLocation;
+    public NoteContent(String textContent, String title, boolean isDeleted, boolean isPinned, String noteLocation, byte[] rawContent, NoteTag noteTag, UserProfile userProfile, List<NoteImage> noteImages) {
+        this.textContent = textContent;
+        this.title = title;
+        this.isDeleted = isDeleted;
+        this.isPinned = isPinned;
+        this.noteLocation = noteLocation;
+        this.rawContent = rawContent;
+        this.noteTag = noteTag;
+        this.userProfile = userProfile;
+        this.noteImages = noteImages;
     }
 
-    public void setUrlLocation(String urlLocation) {
-        this.urlLocation = urlLocation;
+    public byte[] getRawContent() {
+        return rawContent;
+    }
+
+    public void setRawContent(byte[] rawContent) {
+        this.rawContent = rawContent;
+    }
+
+    @Column(name = "raw_content", nullable = false, unique = false, length = 100000)
+    @Lob
+    private byte[] rawContent;
+
+    public String getNoteLocation() {
+        return noteLocation;
+    }
+
+    public void setNoteLocation(String urlLocation) {
+        this.noteLocation = urlLocation;
     }
 
     public NoteContent() {
     }
 
-    public NoteContent(String title, String textContent, String urlLocation, List<NoteImage> images, NoteTag noteTag, UserProfile userProfile) {
+    public NoteContent(String title, String textContent, String noteLocation, List<NoteImage> images, NoteTag noteTag, UserProfile userProfile) {
         this.textContent = textContent;
         this.noteImages = images;
         this.title = title;
-        this.urlLocation = urlLocation;
+        this.noteLocation = noteLocation;
         this.noteTag = noteTag;
         this.userProfile = userProfile;
     }
@@ -122,4 +153,19 @@ public class NoteContent extends AuditorEntity {
     @OneToMany(mappedBy = "noteContent", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<NoteImage> noteImages;
 
+    @Override
+    public String toString() {
+        return "NoteContent{" +
+                "id=" + id +
+                ", textContent='" + textContent + '\'' +
+                ", title='" + title + '\'' +
+                ", isDeleted=" + isDeleted +
+                ", isPinned=" + isPinned +
+                ", noteLocation='" + noteLocation + '\'' +
+                ", rawContent=" + Arrays.toString(rawContent) +
+                ", noteTag=" + noteTag +
+                ", userProfile=" + userProfile +
+                ", noteImages=" + noteImages +
+                '}';
+    }
 }

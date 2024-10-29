@@ -13,7 +13,7 @@ public class NoteImage extends AuditorEntity {
     private long id;
 
     @Column(name = "image_url", nullable = false, unique = true, length = 255)
-    private String urlLocation;
+    private String imageLocation;
 
     @Column(name = "is_used", nullable = false, unique = false)
     private boolean is_used = false;
@@ -25,18 +25,18 @@ public class NoteImage extends AuditorEntity {
     public NoteImage() {
     }
 
-    public NoteImage(String urlLocation, boolean is_used, NoteContent noteContent) {
-        this.urlLocation = urlLocation;
+    public NoteImage(String imageLocation, boolean is_used, NoteContent noteContent) {
+        this.imageLocation = imageLocation;
         this.is_used = is_used;
         this.noteContent = noteContent;
     }
 
-    public String getUrlLocation() {
-        return urlLocation;
+    public String getImageLocation() {
+        return imageLocation;
     }
 
-    public void setUrlLocation(String urlLocation) {
-        this.urlLocation = urlLocation;
+    public void setImageLocation(String urlLocation) {
+        this.imageLocation = urlLocation;
     }
 
     public boolean isUsed() {

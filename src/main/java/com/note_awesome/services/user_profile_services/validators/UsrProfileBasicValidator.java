@@ -57,10 +57,10 @@ public class UsrProfileBasicValidator implements IUsrProfileBasicValidator {
     }
 
     private boolean urlLocationIsEmpty(UserProfile userProfile) {
-        return userProfile.getProfileLocationUrl() == null || !Files.exists(Paths.get(userProfile.getProfileLocationUrl()));
+        return userProfile.getProfileLocation() == null || !Files.exists(Paths.get(userProfile.getProfileLocation()));
     }
 
     private boolean urlLocationTooLong(UserProfile userProfile) {
-        return userProfile.getProfileLocationUrl().length() > MAX_URL_LOCATION_LENGTH;
+        return userProfile.getProfileLocation().length() > MAX_URL_LOCATION_LENGTH;
     }
 }

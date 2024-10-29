@@ -9,8 +9,9 @@
 <?import javafx.scene.text.*?>
 <?import org.controlsfx.control.*?>
 
-<VBox fx:id="rootView" alignment="TOP_CENTER" prefHeight="343.0" prefWidth="549.0"
-      xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="rootView" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+      prefHeight="343.0" prefWidth="549.0" xmlns="http://javafx.com/javafx/11.0.14-internal"
+      xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <StackPane fx:id="editorManagerSp" alignment="TOP_CENTER" styleClass="note-editor-shadow"
                    stylesheets="@../../css/LightStylesheet.css">
@@ -18,11 +19,12 @@
                                  StackPane.alignment="CENTER"/>
             <NoteEditorFxController fx:id="noteEditorFxController" StackPane.alignment="CENTER"/>
         </StackPane>
-        <StackPane fx:id="boardManagerSp" VBox.vgrow="ALWAYS">
+        <StackPane fx:id="boardManagerSp" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                   VBox.vgrow="ALWAYS">
             <children>
 
                 <VBox fx:id="emptyBoardManagerVb" alignment="CENTER" maxHeight="1.7976931348623157E308"
-                      maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0"
+                      maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity"
                       StackPane.alignment="CENTER">
                     <children>
                         <MaterialIconView fx:id="emptyMessageIcon" fill="#e5e5e5" glyphName="LIGHTBULB_OUTLINE"
@@ -31,17 +33,20 @@
                                 <Font size="64.0"/>
                             </font>
                         </MaterialIconView>
-                        <Label fx:id="emptyMessageLb" style="-fx-text-fill: #e5e5e5;"
-                               text="The notes you add will appear here" VBox.vgrow="ALWAYS">
+                        <Label fx:id="emptyMessageLb" alignment="CENTER" contentDisplay="CENTER"
+                               style="-fx-text-fill: #e5e5e5;" text="The notes you add will appear here"
+                               textAlignment="CENTER" VBox.vgrow="ALWAYS">
                             <font>
                                 <Font size="22"/>
                             </font>
                         </Label>
                     </children>
                 </VBox>
-                <VBox fx:id="noteBoardManagerVb" prefHeight="200.0" prefWidth="100.0" visible="false">
+                <VBox fx:id="noteBoardManagerVb" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                      visible="false">
                     <children>
-                        <VBox fx:id="pinNoteBoardManagerVb" prefHeight="200.0" prefWidth="100.0">
+                        <VBox fx:id="pinNoteBoardManagerVb" maxHeight="1.7976931348623157E308"
+                              maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                             <children>
                                 <Label fx:id="pinMessageLb" text="PINNED" textFill="#5f6368">
                                     <font>
@@ -52,15 +57,17 @@
                                     </VBox.margin>
                                 </Label>
 
-                                <GridView fx:id="pinNoteBoardGv">
+                                <GridView fx:id="pinNoteBoardGv" cellHeight="130.0" cellWidth="240.0"
+                                          maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                                          VBox.vgrow="ALWAYS">
 
                                 </GridView>
                             </children>
                         </VBox>
-                        <VBox fx:id="unpinNoteBoardManagerVb" layoutX="10.0" layoutY="10.0" prefHeight="200.0"
-                              prefWidth="100.0">
+                        <VBox fx:id="unpinNoteBoardManagerVb" layoutX="10.0" layoutY="10.0"
+                              maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                             <children>
-                                <Label fx:id="unpinMessageLb" text="OTHERS" textFill="#5f6368">
+                                <Label fx:id="unpinMessageLb" alignment="CENTER" text="OTHERS" textFill="#5f6368">
                                     <font>
                                         <Font size="11.0"/>
                                     </font>
@@ -68,7 +75,9 @@
                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
                                     </VBox.margin>
                                 </Label>
-                                <GridView fx:id="unpinNoteBoardGv"/>
+                                <GridView fx:id="unpinNoteBoardGv" cellHeight="130.0" cellWidth="240.0"
+                                          maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                                          VBox.vgrow="ALWAYS"/>
                             </children>
                         </VBox>
                     </children>
