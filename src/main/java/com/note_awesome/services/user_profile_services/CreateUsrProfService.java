@@ -42,7 +42,7 @@ public class CreateUsrProfService implements ICreateUsrProfService {
     }
 
     private Result<Path, Error> createUsrProfLocation(UserProfile userProfile) {
-        var root = userProfile.getProfileLocationUrl();
+        var root = userProfile.getProfileLocation();
         var uniqueName = generateUniqueName(Optional.of(10));
         var desPath = Path.of(root, uniqueName);
 
@@ -85,10 +85,10 @@ public class CreateUsrProfService implements ICreateUsrProfService {
         }
 
         UserProfile newUserProfile = new UserProfile();
-        newUserProfile.setProfileLocationUrl(location.getValue().toString());
+        newUserProfile.setProfileLocation(location.getValue().toString());
         newUserProfile.setProfileName(userProfile.getProfileName());
         newUserProfile.setLastUsed(userProfile.getLastUsed());
-        newUserProfile.setUserData(userProfile.getUserData());
+        newUserProfile.setUser(userProfile.getUser());
 
         return Result.success(newUserProfile);
 
@@ -106,8 +106,8 @@ public class CreateUsrProfService implements ICreateUsrProfService {
         var user = userRepository.getReferenceById(userId);
         var newUserProfile = new UserProfile();
         newUserProfile.setProfileName(profileName);
-        newUserProfile.setProfileLocationUrl(profileLocationUrl);
-        newUserProfile.setUserData(user);
+        newUserProfile.setProfileLocation(profileLocationUrl);
+        newUserProfile.setUser(user);
         return create(newUserProfile);
     }
 
@@ -117,8 +117,8 @@ public class CreateUsrProfService implements ICreateUsrProfService {
         var user = userRepository.getReferenceById(userId);
         var newUserProfile = new UserProfile();
         newUserProfile.setProfileName(profileName);
-        newUserProfile.setProfileLocationUrl(profileLocationUrl);
-        newUserProfile.setUserData(user);
+        newUserProfile.setProfileLocation(profileLocationUrl);
+        newUserProfile.setUser(user);
         return create(newUserProfile);
     }
 

@@ -17,7 +17,22 @@ public class NoteViewController {
     public NoteViewController(NoteViewInteractor noteViewInteractor, NoteViewModel noteViewModel) {
         this.noteViewInteractor = noteViewInteractor;
         this.noteViewModel = noteViewModel;
-        this.noteViewBuilder = new NoteViewBuilder(this.noteViewModel);
+        this.noteViewBuilder = new NoteViewBuilder(this.noteViewModel, this::createNote, this::pinNoteEditor);
+    }
+
+    private void createNote(Runnable postCreateNote) {
+        noteViewInteractor.createNote();
+        noteViewInteractor.updateNoteBoard();
+        postCreateNote.run();
+    }
+
+    private void pinNoteEditor() {
+        noteViewInteractor.pinNoteEditor();
+        updateNoteBoard();
+    }
+
+    private void updateNoteBoard() {
+        noteViewInteractor.updateNoteBoard();
     }
 
     public Region getView() {

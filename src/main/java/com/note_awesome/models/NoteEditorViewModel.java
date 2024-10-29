@@ -12,18 +12,42 @@ public class NoteEditorViewModel {
 
     private LongProperty id;
     private StringProperty title;
+    private ObservableList<Byte> rawContent;
 
-    
-    public String getContent() {
-        return content.get();
+    public boolean isPinned() {
+        return pinned.get();
     }
 
-    public StringProperty contentProperty() {
-        return content;
+    public BooleanProperty pinnedProperty() {
+        return pinned;
     }
 
-    public void setContent(String content) {
-        this.content.set(content);
+    public void setPinned(boolean pinned) {
+        this.pinned.set(pinned);
+    }
+
+    private BooleanProperty pinned;
+
+    public String getDescription() {
+        return description.get();
+    }
+
+    public StringProperty descriptionProperty() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description.set(description);
+    }
+
+    private StringProperty description;
+
+    public ObservableList<String> getImages() {
+        return images;
+    }
+
+    public void setImages(ObservableList<String> images) {
+        this.images = images;
     }
 
     public long getId() {
@@ -50,29 +74,54 @@ public class NoteEditorViewModel {
         this.title.set(title);
     }
 
-    public ObservableList<String> getImages() {
-        return images;
+    public ObservableList<Byte> getRawContent() {
+        return rawContent;
     }
 
-    public void setImages(ObservableList<String> images) {
-        this.images = images;
+    public void setRawContent(ObservableList<Byte> rawContent) {
+        this.rawContent = rawContent;
     }
 
-    private StringProperty content;
+    public void setCanSave(boolean canSave) {
+        this.canSave.set(canSave);
+    }
+
     private ObservableList<String> images;
+
+    public boolean isCanSave() {
+        return canSave.get();
+    }
+
+    public BooleanProperty canSaveProperty() {
+        return canSave;
+    }
+
+    private BooleanProperty canSave;
 
     public NoteEditorViewModel() {
         id = new SimpleLongProperty();
-        title = new SimpleStringProperty();
-        content = new SimpleStringProperty();
+        title = new SimpleStringProperty("");
+        description = new SimpleStringProperty("");
+        rawContent = FXCollections.observableArrayList();
         images = FXCollections.observableArrayList();
+        canSave = new SimpleBooleanProperty(false);
+        pinned = new SimpleBooleanProperty(false);
     }
 
-    public NoteEditorViewModel(int id, String title, String content, List<String> images) {
+    public NoteEditorViewModel(int id, String title, List<Byte> rawContent, List<String> images) {
         this.id = new SimpleLongProperty(id);
         this.title = new SimpleStringProperty(title);
-        this.content = new SimpleStringProperty(content);
+        this.rawContent = FXCollections.observableArrayList(rawContent);
         this.images = FXCollections.observableArrayList(images);
+        this.canSave = new SimpleBooleanProperty(false);
+    }
+
+    public void refresh() {
+        this.id = new SimpleLongProperty();
+        this.title = new SimpleStringProperty();
+        this.rawContent = FXCollections.observableArrayList();
+        this.images = FXCollections.observableArrayList();
+        this.canSave = new SimpleBooleanProperty(false);
     }
 
 }

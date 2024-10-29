@@ -68,7 +68,7 @@ public class User extends AuditorEntity {
         this.profiles = profiles;
     }
 
-    @OneToMany(mappedBy = "userData", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<UserProfile> profiles;
 
 }
