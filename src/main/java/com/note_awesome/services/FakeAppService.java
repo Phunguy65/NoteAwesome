@@ -19,6 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.nio.file.Files;
 
 // for demo purposes
 @Component
@@ -50,16 +51,25 @@ public class FakeAppService implements IAppBaseService {
         if (isInitialized) {
             return;
         }
-
+        generateDefaultLocation();
         generateTestData(TEST_USER, TEST_USER_PROFILE);
+
+        initializeSession();
+        isInitialized = true;
+
+        this.applicationContext.publishEvent(new StageReadyEvent(new Stage()));
+    }
+
+    private void initializeSession() {
         var currentUser = this.authenticationService.login(TEST_USER.getUsername(), "test");
         this.currentSession.setCurrentUserId(currentUser.getValue().getId());
         var longIds = this.userProfileService.getUsrProfQueryServices().getUserProfiles(currentUser.getValue().getId()).getValue().stream().map(SimpleLongProperty::new).toList();
         this.currentSession.getUsrProfIds().addAll(FXCollections.observableArrayList(longIds));
         this.currentSession.setCurrentUsrProfId(longIds.get(0).get());
-        isInitialized = true;
+    }
 
-        this.applicationContext.publishEvent(new StageReadyEvent(new Stage()));
+    private void generateDefaultLocation() throws IOException {
+        Files.createDirectories(NoteAwesomeEnv.getUserDataFolder());
     }
 
     private void generateTestData(User user, UserProfile userProfile) {
@@ -73,7 +83,7 @@ public class FakeAppService implements IAppBaseService {
 
         var can_create_new_user = this.userService.getCreateUserService().create(TEST_USER);
         if (!can_create_new_user.isSuccess()) {
-            logger.error("Error creating test user");
+            logger.error("Error creating test user{}", can_create_new_user.getError().Description());
             return;
         }
 
@@ -82,8 +92,6 @@ public class FakeAppService implements IAppBaseService {
             logger.error("Error creating test user profile");
             return;
         }
-
-
     }
 
     @Override

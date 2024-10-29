@@ -45,6 +45,13 @@ public class NoteCardViewModel {
         this.content.set(content);
     }
 
+    public NoteCardViewModel(LongProperty id, StringProperty title, StringProperty content, ObservableList<String> images) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.images = images;
+    }
+
     public ObservableList<String> getImages() {
         return images;
     }

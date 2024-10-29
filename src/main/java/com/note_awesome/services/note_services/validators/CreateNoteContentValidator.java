@@ -41,7 +41,7 @@ public class CreateNoteContentValidator extends NoteContentAbstractValidator {
             return Result.failure(CreateNoteContentError.USER_PROFILE_NOT_FOUND);
         }
         if (!validateImages(noteContent)) {
-            return Result.failure(CreateNoteContentError.IMAGES_NOT_FOUND(noteContent.getNoteImages().get(0).getUrlLocation()));
+            return Result.failure(CreateNoteContentError.IMAGES_NOT_FOUND(noteContent.getNoteImages().get(0).getImageLocation()));
         }
         return Result.success(noteContent);
     }
@@ -55,7 +55,7 @@ public class CreateNoteContentValidator extends NoteContentAbstractValidator {
     private boolean validateImages(NoteContent noteContent) {
         if (noteContent.getNoteImages() != null) {
             for (var noteImage : noteContent.getNoteImages()) {
-                if (!Files.exists(Paths.get(noteImage.getUrlLocation()))) {
+                if (!Files.exists(Paths.get(noteImage.getImageLocation()))) {
                     return false;
                 }
             }

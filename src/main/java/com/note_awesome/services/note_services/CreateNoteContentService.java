@@ -18,8 +18,10 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 @Component
@@ -38,15 +40,24 @@ public class CreateNoteContentService implements ICreateNoteContentService {
     }
 
     private String generateUniqueName() {
-        return UUID.randomUUID().toString();
+        var maxLength = 10;
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        StringBuilder uniqueProfileName = new StringBuilder();
+        Random random = new Random();
+
+        for (int i = 0; i < maxLength; i++) {
+            uniqueProfileName.append(chars.charAt(random.nextInt(chars.length())));
+        }
+
+        return uniqueProfileName.toString();
     }
 
     private Result<ArrayList<NoteImage>, Error> copyImagesToNoteLocation(List<NoteImage> imageUrls, Path noteLocation) {
         var copiedImageUrls = new ArrayList<NoteImage>();
         for (var imageUrl : imageUrls) {
             try {
-                var srcFile = new File(imageUrl.getUrlLocation());
-                var ext = FilenameUtils.getExtension(imageUrl.getUrlLocation());
+                var srcFile = new File(imageUrl.getImageLocation());
+                var ext = FilenameUtils.getExtension(imageUrl.getImageLocation());
                 var destFile = new File(FilenameUtils.concat(noteLocation.toString(), generateUniqueName() + "." + ext));
                 int count = 0;
 
@@ -65,7 +76,7 @@ public class CreateNoteContentService implements ICreateNoteContentService {
             } catch (IOException e) {
                 for (var copiedImageUrl : copiedImageUrls) {
                     try {
-                        Files.deleteIfExists(Path.of(copiedImageUrl.getUrlLocation()));
+                        Files.deleteIfExists(Path.of(copiedImageUrl.getImageLocation()));
                     } catch (IOException ex) {
                         return Result.failure(new Error("Error copying image to note location", "Error copying image to note location"));
                     }
@@ -111,7 +122,7 @@ public class CreateNoteContentService implements ICreateNoteContentService {
         }
     }
 
-    private Result<NoteContent, Error> createNoteContent(NoteContent noteContent) {
+    private Result<NoteContent, Error> procedure(NoteContent noteContent) {
         var validationResult = this.createNoteContentValidator.validate(noteContent);
         if (!validationResult.isSuccess()) {
             return validationResult;
@@ -125,22 +136,29 @@ public class CreateNoteContentService implements ICreateNoteContentService {
             return Result.failure(copiedImagesResult.getError());
         }
 
-        noteContent.setUrlLocation(noteLocationResult.getValue().toString());
-        noteContent.setNoteImages(copiedImagesResult.getValue());
-        return Result.success(noteContent);
+        var newNoteContent = new NoteContent();
+        newNoteContent.setTextContent(noteContent.getTextContent());
+        newNoteContent.setTitle(noteContent.getTitle());
+        newNoteContent.setNoteImages(copiedImagesResult.getValue());
+        newNoteContent.setNoteLocation(noteLocationResult.getValue().toString());
+        newNoteContent.setNoteTag(noteContent.getNoteTag());
+        newNoteContent.setUserProfile(noteContent.getUserProfile());
+        newNoteContent.setRawContent(noteContent.getRawContent());
+        newNoteContent.setPinned(noteContent.isPinned());
+        return Result.success(newNoteContent);
     }
 
 
     @Override
     @Transactional
     public Result<NoteContent, Error> create(NoteContent noteContent) {
-        return createNoteContent(noteContent).Match(this::save, Result::failure);
+        return procedure(noteContent).Match(this::save, Result::failure);
     }
 
     @Override
     @Transactional
     public Result<NoteContent, Error> create(NoteContent noteContent, long userProfileId) {
-        var userProfile = this.userProfileRepository.getReferenceById(userProfileId);
+        var userProfile = this.userProfileRepository.findById(userProfileId).orElse(null);
         noteContent.setUserProfile(userProfile);
         return create(noteContent);
     }

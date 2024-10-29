@@ -80,11 +80,11 @@ public class NoteAwesomeEnv {
         }
     }
 
-    public Path getRootFolder() {
+    public static Path getRootFolder() {
         return Path.of(ROOT_FOLDER);
     }
 
-    public Path getUserDataFolder() {
+    public static Path getUserDataFolder() {
         return Path.of(USER_DATA_FOLDER_PATH);
     }
 
