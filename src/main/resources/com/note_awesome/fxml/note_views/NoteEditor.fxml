@@ -20,16 +20,22 @@
     <children>
         <VBox fx:id="noteVBox" alignment="TOP_CENTER" styleClass="note-container" stylesheets="@../../css/LightStylesheet.css" VBox.vgrow="ALWAYS">
             <children>
-                <HBox fx:id="titleHBox" alignment="CENTER" prefHeight="21.0" prefWidth="600.0">
+                <HBox fx:id="titleHBox" alignment="CENTER" prefHeight="21.0" prefWidth="600.0" style="-fx-background-color: transparent;" styleClass="note-container" stylesheets="@../../css/LightStylesheet.css">
                     <children>
-                        <TextArea fx:id="noteTitleTxtArea" prefHeight="66.0" prefWidth="560.0" promptText="Title here..." styleClass="text-area" stylesheets="@../../css/LightStylesheet.css" wrapText="true" HBox.hgrow="ALWAYS">
-                        </TextArea>
+                        <TextArea id="note-editor__title" fx:id="noteTitleTxtArea" prefHeight="66.0" prefWidth="560.0" promptText="Title here..." style="-fx-fill: transparent;" stylesheets="@../../css/LightStylesheet.css" wrapText="true" HBox.hgrow="ALWAYS">
+                     <styleClass>
+                        <String fx:value="text-area" />
+                        <String fx:value="note-editor__title" />
+                     </styleClass></TextArea>
                         <Button fx:id="pinNoteBtn" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="33.0" prefWidth="37.0" styleClass="burger-button" stylesheets="@../../css/LightStylesheet.css" text="Button" HBox.hgrow="SOMETIMES">
                             <graphic>
                                 <FontAwesomeIconView glyphName="PAPERCLIP" />
                             </graphic>
                         </Button>
                     </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
                 </HBox>
             </children>
             <padding>
@@ -71,7 +77,7 @@
                                     <graphic>
                                         <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" spacing="10.0">
                                             <children>
-                                                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-border-color: #e0e0e0; -fx-border-width: 1; -fx-border-radius: 50;" styleClass="choose-background-btn" stylesheets="@../../css/LightStylesheet.css" HBox.hgrow="ALWAYS">
+                                                <Button id="noneBgColorBtn" fx:id="noneBgColorBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-border-color: #e0e0e0; -fx-border-width: 1; -fx-border-radius: 50;" styleClass="choose-background-btn" stylesheets="@../../css/LightStylesheet.css" HBox.hgrow="ALWAYS">
                                                     <padding>
                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                     </padding>
@@ -82,7 +88,7 @@
                                                         <MaterialIconView fill="TRANSPARENT" glyphName="FORMAT_COLOR_RESET" selectionFill="#ffffff00" stroke="BLACK" />
                                                     </graphic>
                                                 </Button>
-                                                <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-color: #faafa8;" styleClass="choose-background-btn" stylesheets="@../../css/LightStylesheet.css" HBox.hgrow="ALWAYS">
+                                                <Button fx:id="coralRedBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-color: #faafa8;" styleClass="choose-background-btn" stylesheets="@../../css/LightStylesheet.css" HBox.hgrow="ALWAYS">
                                                     <padding>
                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                     </padding>
@@ -90,7 +96,7 @@
                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                     </HBox.margin>
                                                 </Button>
-                                                <Button layoutX="20.0" layoutY="20.0" mnemonicParsing="false" style="-fx-background-color: #f39f76;" styleClass="choose-background-btn" stylesheets="@../../css/LightStylesheet.css" HBox.hgrow="ALWAYS">
+                                                <Button fx:id="peachOrangeBtn" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" style="-fx-background-color: #f39f76;" styleClass="choose-background-btn" stylesheets="@../../css/LightStylesheet.css" HBox.hgrow="ALWAYS">
                                                     <padding>
                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                     </padding>
@@ -98,7 +104,7 @@
                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                     </HBox.margin>
                                                 </Button>
-                                                <Button layoutX="20.0" layoutY="20.0" mnemonicParsing="false" style="-fx-background-color: #fff8b8;" styleClass="choose-background-btn" stylesheets="@../../css/LightStylesheet.css" HBox.hgrow="ALWAYS">
+                                                <Button fx:id="sandBrownBtn" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" style="-fx-background-color: #fff8b8;" styleClass="choose-background-btn" stylesheets="@../../css/LightStylesheet.css" HBox.hgrow="ALWAYS">
                                                     <padding>
                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                     </padding>
@@ -106,7 +112,7 @@
                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                     </HBox.margin>
                                                 </Button>
-                                                <Button layoutX="30.0" layoutY="30.0" mnemonicParsing="false" style="-fx-background-color: #e2f6d3;" styleClass="choose-background-btn" stylesheets="@../../css/LightStylesheet.css" HBox.hgrow="ALWAYS">
+                                                <Button fx:id="mintGreenBtn" layoutX="30.0" layoutY="30.0" mnemonicParsing="false" style="-fx-background-color: #e2f6d3;" styleClass="choose-background-btn" stylesheets="@../../css/LightStylesheet.css" HBox.hgrow="ALWAYS">
                                                     <padding>
                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                     </padding>
@@ -114,7 +120,7 @@
                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                     </HBox.margin>
                                                 </Button>
-                                                <Button layoutX="40.0" layoutY="40.0" mnemonicParsing="false" style="-fx-background-color: #b4ddd3;" styleClass="choose-background-btn" stylesheets="@../../css/LightStylesheet.css" HBox.hgrow="ALWAYS">
+                                                <Button fx:id="grayGreenBtn" layoutX="40.0" layoutY="40.0" mnemonicParsing="false" style="-fx-background-color: #b4ddd3;" styleClass="choose-background-btn" stylesheets="@../../css/LightStylesheet.css" HBox.hgrow="ALWAYS">
                                                     <padding>
                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                     </padding>
@@ -122,7 +128,7 @@
                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                     </HBox.margin>
                                                 </Button>
-                                                <Button layoutX="50.0" layoutY="50.0" mnemonicParsing="false" style="-fx-background-color: #d4e4ed;" styleClass="choose-background-btn" stylesheets="@../../css/LightStylesheet.css" HBox.hgrow="ALWAYS">
+                                                <Button fx:id="smokeGrayBtn" layoutX="50.0" layoutY="50.0" mnemonicParsing="false" style="-fx-background-color: #d4e4ed;" styleClass="choose-background-btn" stylesheets="@../../css/LightStylesheet.css" HBox.hgrow="ALWAYS">
                                                     <padding>
                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                     </padding>
@@ -130,7 +136,7 @@
                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                     </HBox.margin>
                                                 </Button>
-                                                <Button layoutX="20.0" layoutY="20.0" mnemonicParsing="false" style="-fx-background-color: #aeccdc;" styleClass="choose-background-btn" stylesheets="@../../css/LightStylesheet.css" HBox.hgrow="ALWAYS">
+                                                <Button fx:id="darkBlueBtn" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" style="-fx-background-color: #aeccdc;" styleClass="choose-background-btn" stylesheets="@../../css/LightStylesheet.css" HBox.hgrow="ALWAYS">
                                                     <padding>
                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                     </padding>
@@ -138,7 +144,7 @@
                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                     </HBox.margin>
                                                 </Button>
-                                                <Button layoutX="30.0" layoutY="30.0" mnemonicParsing="false" style="-fx-background-color: #d3bfdb;" styleClass="choose-background-btn" stylesheets="@../../css/LightStylesheet.css" HBox.hgrow="ALWAYS">
+                                                <Button fx:id="purpleSunsetBtn" layoutX="30.0" layoutY="30.0" mnemonicParsing="false" style="-fx-background-color: #d3bfdb;" styleClass="choose-background-btn" stylesheets="@../../css/LightStylesheet.css" HBox.hgrow="ALWAYS">
                                                     <padding>
                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                     </padding>
@@ -146,7 +152,7 @@
                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                     </HBox.margin>
                                                 </Button>
-                                                <Button layoutX="30.0" layoutY="30.0" mnemonicParsing="false" style="-fx-background-color: #f6e2dd;" styleClass="choose-background-btn" stylesheets="@../../css/LightStylesheet.css" HBox.hgrow="ALWAYS">
+                                                <Button fx:id="peachBtn" layoutX="30.0" layoutY="30.0" mnemonicParsing="false" style="-fx-background-color: #f6e2dd;" styleClass="choose-background-btn" stylesheets="@../../css/LightStylesheet.css" HBox.hgrow="ALWAYS">
                                                     <padding>
                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                     </padding>
@@ -154,7 +160,7 @@
                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                     </HBox.margin>
                                                 </Button>
-                                                <Button layoutX="40.0" layoutY="40.0" mnemonicParsing="false" style="-fx-background-color: #e9e3d4;" styleClass="choose-background-btn" stylesheets="@../../css/LightStylesheet.css" HBox.hgrow="ALWAYS">
+                                                <Button fx:id="clayBrownBtn" layoutX="40.0" layoutY="40.0" mnemonicParsing="false" style="-fx-background-color: #e9e3d4;" styleClass="choose-background-btn" stylesheets="@../../css/LightStylesheet.css" HBox.hgrow="ALWAYS">
                                                     <padding>
                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                     </padding>
@@ -162,7 +168,7 @@
                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                     </HBox.margin>
                                                 </Button>
-                                                <Button layoutX="50.0" layoutY="50.0" mnemonicParsing="false" style="-fx-background-color: #efeff1;" styleClass="choose-background-btn" stylesheets="@../../css/LightStylesheet.css">
+                                                <Button fx:id="chelGrayBtn" layoutX="50.0" layoutY="50.0" mnemonicParsing="false" style="-fx-background-color: #efeff1;" styleClass="choose-background-btn" stylesheets="@../../css/LightStylesheet.css">
                                                     <padding>
                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                     </padding>
@@ -191,7 +197,7 @@
                                                         <MaterialIconView fill="TRANSPARENT" glyphName="BROKEN_IMAGE" selectionFill="#ffffff00" stroke="BLACK" />
                                                     </graphic>
                                                 </Button>
-                                                <Button id="food-light-thumb-btn" contentDisplay="GRAPHIC_ONLY" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" styleClass="choose-background-image-btn" stylesheets="@../../css/LightStylesheet.css" HBox.hgrow="ALWAYS">
+                                                <Button id="food-light-thumb-btn" fx:id="groceryImgBtn" contentDisplay="GRAPHIC_ONLY" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" styleClass="choose-background-image-btn" stylesheets="@../../css/LightStylesheet.css" HBox.hgrow="ALWAYS">
                                                     <padding>
                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                     </padding>
@@ -199,7 +205,7 @@
                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                     </HBox.margin>
                                                 </Button>
-                                                <Button id="grocery-light-thumb-btn" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="choose-background-image-btn" stylesheets="@../../css/LightStylesheet.css" HBox.hgrow="ALWAYS">
+                                                <Button id="grocery-light-thumb-btn" fx:id="foodImgBtn" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="choose-background-image-btn" stylesheets="@../../css/LightStylesheet.css" HBox.hgrow="ALWAYS">
                                                     <padding>
                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                     </padding>
@@ -207,7 +213,7 @@
                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                     </HBox.margin>
                                                 </Button>
-                                                <Button id="music-light-thumb-btn" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" styleClass="choose-background-image-btn" stylesheets="@../../css/LightStylesheet.css" HBox.hgrow="ALWAYS">
+                                                <Button id="music-light-thumb-btn" fx:id="musicImgBtn" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" styleClass="choose-background-image-btn" stylesheets="@../../css/LightStylesheet.css" HBox.hgrow="ALWAYS">
                                                     <padding>
                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                     </padding>
@@ -215,7 +221,7 @@
                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                     </HBox.margin>
                                                 </Button>
-                                                <Button id="recipe-light-thumb-btn" layoutX="30.0" layoutY="30.0" mnemonicParsing="false" styleClass="choose-background-image-btn" stylesheets="@../../css/LightStylesheet.css" HBox.hgrow="ALWAYS">
+                                                <Button id="recipe-light-thumb-btn" fx:id="recipeImgBtn" layoutX="30.0" layoutY="30.0" mnemonicParsing="false" styleClass="choose-background-image-btn" stylesheets="@../../css/LightStylesheet.css" HBox.hgrow="ALWAYS">
                                                     <padding>
                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                     </padding>
@@ -223,7 +229,7 @@
                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                     </HBox.margin>
                                                 </Button>
-                                                <Button id="notes-light-thumb-btn" layoutX="40.0" layoutY="40.0" mnemonicParsing="false" styleClass="choose-background-image-btn" stylesheets="@../../css/LightStylesheet.css" HBox.hgrow="ALWAYS">
+                                                <Button id="notes-light-thumb-btn" fx:id="notesImgBtn" layoutX="40.0" layoutY="40.0" mnemonicParsing="false" styleClass="choose-background-image-btn" stylesheets="@../../css/LightStylesheet.css" HBox.hgrow="ALWAYS">
                                                     <padding>
                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                     </padding>
@@ -231,7 +237,7 @@
                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                     </HBox.margin>
                                                 </Button>
-                                                <Button id="places-light-thumb-btn" layoutX="50.0" layoutY="50.0" mnemonicParsing="false" styleClass="choose-background-image-btn" stylesheets="@../../css/LightStylesheet.css" HBox.hgrow="ALWAYS">
+                                                <Button id="places-light-thumb-btn" fx:id="placesImgBtn" layoutX="50.0" layoutY="50.0" mnemonicParsing="false" styleClass="choose-background-image-btn" stylesheets="@../../css/LightStylesheet.css" HBox.hgrow="ALWAYS">
                                                     <padding>
                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                     </padding>
@@ -239,7 +245,7 @@
                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                     </HBox.margin>
                                                 </Button>
-                                                <Button id="travel-light-thumb-btn" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" styleClass="choose-background-image-btn" stylesheets="@../../css/LightStylesheet.css" HBox.hgrow="ALWAYS">
+                                                <Button id="travel-light-thumb-btn" fx:id="travelImgBtn" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" styleClass="choose-background-image-btn" stylesheets="@../../css/LightStylesheet.css" HBox.hgrow="ALWAYS">
                                                     <padding>
                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                     </padding>
@@ -247,7 +253,7 @@
                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                     </HBox.margin>
                                                 </Button>
-                                                <Button id="video-light-thumb-btn" layoutX="30.0" layoutY="30.0" mnemonicParsing="false" styleClass="choose-background-image-btn" stylesheets="@../../css/LightStylesheet.css" HBox.hgrow="ALWAYS">
+                                                <Button id="video-light-thumb-btn" fx:id="videoImgBtn" layoutX="30.0" layoutY="30.0" mnemonicParsing="false" styleClass="choose-background-image-btn" stylesheets="@../../css/LightStylesheet.css" HBox.hgrow="ALWAYS">
                                                     <padding>
                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                     </padding>
@@ -255,7 +261,7 @@
                                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                                     </HBox.margin>
                                                 </Button>
-                                                <Button id="celebration-light-thumb-btn" layoutX="30.0" layoutY="30.0" mnemonicParsing="false" styleClass="choose-background-image-btn" stylesheets="@../../css/LightStylesheet.css" HBox.hgrow="ALWAYS">
+                                                <Button id="celebration-light-thumb-btn" fx:id="celebrationImgBtn" layoutX="30.0" layoutY="30.0" mnemonicParsing="false" styleClass="choose-background-image-btn" stylesheets="@../../css/LightStylesheet.css" HBox.hgrow="ALWAYS">
                                                     <padding>
                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                     </padding>
@@ -301,7 +307,7 @@
                         </Button>
                         <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" styleClass="tool-bar-button" stylesheets="@../../css/LightStylesheet.css" text="Button">
                             <graphic>
-                                <MaterialIconView fill="WHITE" glyphName="ARCHIVE" stroke="BLACK" />
+                                <MaterialIconView fill="#ffffff00" glyphName="ARCHIVE" stroke="BLACK" />
                             </graphic>
                         </Button>
                         <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" styleClass="tool-bar-button" stylesheets="@../../css/LightStylesheet.css" text="Button">

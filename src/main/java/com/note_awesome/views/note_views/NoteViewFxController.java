@@ -5,16 +5,15 @@ import com.note_awesome.models.NoteEditorViewModel;
 import com.note_awesome.models.NoteViewModel;
 import com.note_awesome.views.core_editors.NoteEditorFxController;
 import de.jensd.fx.glyphs.materialicons.MaterialIconView;
-import javafx.beans.Observable;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.binding.Bindings;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.DialogPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
-import javafx.util.Callback;
-import org.controlsfx.control.GridCell;
 import org.controlsfx.control.GridView;
 
 import java.util.function.Consumer;
@@ -67,8 +66,6 @@ public class NoteViewFxController {
     @FXML
     private GridView<NoteCardViewModel> unpinNoteBoardGv;
 
-    private EditorManagerSpHandler editorManagerSpHandler;
-
     private final NoteViewModel noteViewModel;
 
     private final NoteEditorViewModel noteEditorViewModel;
@@ -77,26 +74,42 @@ public class NoteViewFxController {
 
     private final Runnable pinNoteEditor;
 
-    public NoteViewFxController(NoteViewModel noteViewModel, Consumer<Runnable> createNote, Runnable pinNoteEditor) {
+    private final Runnable openNoteEditor;
+
+    private final Consumer<Runnable> closeNoteEditor;
+
+    private final NoteEditorFxController updateNoteEditor = new NoteEditorFxController();
+
+    public NoteViewFxController(NoteViewModel noteViewModel, Consumer<Runnable> createNote, Runnable pinNoteEditor, Runnable openNoteEditor, Consumer<Runnable> closeNoteEditor) {
         this.noteViewModel = noteViewModel;
         this.noteEditorViewModel = this.noteViewModel.getNoteEditorViewModel();
         this.createNote = createNote;
         this.pinNoteEditor = pinNoteEditor;
+        this.openNoteEditor = openNoteEditor;
+        this.closeNoteEditor = closeNoteEditor;
     }
 
     @FXML
     private void initialize() {
 
-        this.editorManagerSpHandler = new EditorManagerSpHandler();
-
         this.emptyBoardManagerVb.visibleProperty().bind(this.noteViewModel.showAllNotesProperty());
         this.noteBoardManagerVb.visibleProperty().bind(this.noteViewModel.showAllNotesProperty().not());
-        this.noteBarFxController.getNoteTriggerTxtField().setOnMouseClicked(event -> editorManagerSpHandler.OpenEditor());
-        this.rootView.setOnMouseClicked(event -> editorManagerSpHandler.CloseEditor());
+
+        this.noteBarFxController.getNoteTriggerTxtField().setOnMouseClicked(event -> openNoteEditor.run());
+        this.rootView.setOnMouseClicked(event -> {
+            if (this.noteViewModel.showNoteEditorProperty().get()) {
+                closeNoteEditor.accept(this::pushNote);
+            }
+        });
 
         this.noteEditorFxController.getPinNoteBtn().setOnAction(event -> {
             pinNoteEditor.run();
         });
+        this.noteEditorFxController.visibleProperty().bind(this.noteViewModel.showNoteEditorProperty());
+        this.noteEditorFxController.managedProperty().bind(this.noteViewModel.showNoteEditorProperty());
+        this.noteEditorFxController.visibleProperty().subscribe(this::showNoteEditor);
+        this.noteBarFxController.visibleProperty().bind(this.noteViewModel.showNoteEditorProperty().not());
+        this.noteEditorFxController.getCloseEditorBtn().setOnAction(event -> closeNoteEditor.accept(this::pushNote));
 
         this.noteEditorViewModel.pinnedProperty().subscribe(e -> {
             if (e) {
@@ -108,14 +121,15 @@ public class NoteViewFxController {
             }
         });
 
-        this.noteEditorFxController.getCloseEditorBtn().setOnAction(event -> {
-            editorManagerSpHandler.CloseEditor();
-        });
 
         this.pinNoteBoardGv.setItems(this.noteViewModel.getPinnedNotes());
         this.unpinNoteBoardGv.setItems(this.noteViewModel.getUnpinnedNotes());
-        this.pinNoteBoardGv.setCellFactory(param -> new NoteCardCell());
-        this.unpinNoteBoardGv.setCellFactory(param -> new NoteCardCell());
+        this.pinNoteBoardGv.setCellFactory(param -> new NoteCardCell(
+                this::openUpdateNoteDialog
+        ));
+        this.unpinNoteBoardGv.setCellFactory(param -> new NoteCardCell(
+                this::openUpdateNoteDialog
+        ));
 
         this.noteEditorFxController.getArea().textProperty().subscribe(e -> {
             if (e != null) {
@@ -123,7 +137,17 @@ public class NoteViewFxController {
             }
         });
 
+        this.pinNoteBoardManagerVb.visibleProperty().bind(this.noteViewModel.showPinNotesProperty());
+        this.pinNoteBoardManagerVb.managedProperty().bind(this.noteViewModel.showPinNotesProperty());
+
+        this.unpinNoteBoardManagerVb.managedProperty().bind(this.noteViewModel.showUnpinnedNotesProperty());
+        this.unpinNoteBoardManagerVb.visibleProperty().bind(this.noteViewModel.showUnpinnedNotesProperty());
+
+
         this.noteEditorFxController.getNoteTitleTxtArea().textProperty().bindBidirectional(this.noteEditorViewModel.titleProperty());
+
+        this.updateNoteEditor.getCloseEditorBtn().setVisible(false);
+        this.updateNoteEditor.getCloseEditorBtn().setManaged(false);
 
         this.noteEditorFxController.setOnMouseClicked(Event::consume);
     }
@@ -134,40 +158,36 @@ public class NoteViewFxController {
 
     }
 
+    private void openUpdateNoteDialog() {
+        Dialog<?> dialog = new Dialog<>();
+        dialog.getDialogPane().setContent(updateNoteEditor);
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.CLOSE);
+        dialog.setOnCloseRequest(event -> {
+            closeUpdateNoteDialog(dialog);
+        });
+        dialog.showAndWait();
+    }
 
-    private class EditorManagerSpHandler {
+    private void closeUpdateNoteDialog(Dialog<?> dialog) {
+        updateNoteEditor.getArea().clear();
+        updateNoteEditor.getNoteTitleTxtArea().setText("");
+        dialog.close();
+    }
 
-        private final BooleanProperty noteEditorOpened = new SimpleBooleanProperty(false);
 
-        {
-            noteEditorFxController.visibleProperty().bind(noteEditorOpened);
-            noteBarFxController.visibleProperty().bind(noteEditorOpened.not());
-            noteEditorFxController.managedProperty().bind(noteEditorFxController.visibleProperty());
-
-            noteEditorFxController.visibleProperty().subscribe(e -> {
-                if (e) {
-                    if (!editorManagerSp.getStyleClass().contains("opened")) {
-                        editorManagerSp.getStyleClass().add("opened");
-                    }
-                    noteEditorFxController.requestFocus();
-                } else {
-                    editorManagerSp.getStyleClass().remove("opened");
-                }
-            });
+    private void showNoteEditor(boolean show) {
+        if (show) {
+            if (!editorManagerSp.getStyleClass().contains("opened")) {
+                editorManagerSp.getStyleClass().add("opened");
+            }
+            noteEditorFxController.requestFocus();
+        } else {
+            editorManagerSp.getStyleClass().remove("opened");
         }
+    }
 
-        public void OpenEditor() {
-            noteEditorOpened.set(true);
-        }
-
-        public void CloseEditor() {
-            noteEditorOpened.set(false);
-            noteEditorViewModel.getRawContent().addAll(noteEditorFxController.getByteContent());
-            createNote.accept(NoteViewFxController.this::refreshNoteEditor);
-        }
-
-        public BooleanProperty noteEditorOpenedProperty() {
-            return noteEditorOpened;
-        }
+    private void pushNote() {
+        noteEditorViewModel.getRawContent().addAll(noteEditorFxController.getByteContent());
+        createNote.accept(this::refreshNoteEditor);
     }
 }

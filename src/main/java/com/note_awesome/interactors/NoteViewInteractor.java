@@ -123,4 +123,12 @@ public class NoteViewInteractor implements IInitialize {
     public void pinNoteEditor() {
         this.noteEditorViewModel.pinnedProperty().set(!this.noteEditorViewModel.isPinned());
     }
+
+    public void openNoteEditor() {
+        this.noteViewModel.showNoteEditorProperty().set(true);
+    }
+
+    public void closeNoteEditor() {
+        this.noteViewModel.showNoteEditorProperty().set(false);
+    }
 }

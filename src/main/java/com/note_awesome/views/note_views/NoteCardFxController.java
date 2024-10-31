@@ -67,5 +67,6 @@ public class NoteCardFxController extends VBox {
 
     @FXML
     private void initialize() {
+        
     }
 }

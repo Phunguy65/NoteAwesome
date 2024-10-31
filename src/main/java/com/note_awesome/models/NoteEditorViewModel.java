@@ -14,6 +14,16 @@ public class NoteEditorViewModel {
     private StringProperty title;
     private ObservableList<Byte> rawContent;
 
+    public NoteBackgroundColor getBackgroundColor() {
+        return backgroundColor;
+    }
+
+    public void setBackgroundColor(NoteBackgroundColor backgroundColor) {
+        this.backgroundColor = backgroundColor;
+    }
+
+    private NoteBackgroundColor backgroundColor;
+
     public boolean isPinned() {
         return pinned.get();
     }
@@ -106,6 +116,8 @@ public class NoteEditorViewModel {
         images = FXCollections.observableArrayList();
         canSave = new SimpleBooleanProperty(false);
         pinned = new SimpleBooleanProperty(false);
+
+        backgroundColor = NoteBackgroundColor.NONE;
     }
 
     public NoteEditorViewModel(int id, String title, List<Byte> rawContent, List<String> images) {

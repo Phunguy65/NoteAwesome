@@ -1,10 +1,10 @@
 package com.note_awesome.models;
 
-import javafx.beans.binding.Binding;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ObservableBooleanValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.springframework.stereotype.Component;
@@ -19,17 +19,32 @@ public class NoteViewModel {
 
     BooleanProperty showNoteEditor;
 
+
+    public BooleanBinding showUnpinnedNotesProperty() {
+        return Bindings.createBooleanBinding(() -> !this.unpinnedNotes.isEmpty(), this.unpinnedNotes);
+    }
+
+
+    public BooleanBinding showPinNotesProperty() {
+        return Bindings.createBooleanBinding(() -> !this.pinnedNotes.isEmpty(), this.pinnedNotes);
+    }
+
+
+    BooleanProperty showAllNotes;
+
     public NoteViewModel() {
         noteEditorViewModel = new NoteEditorViewModel();
         pinnedNotes = FXCollections.observableArrayList();
         unpinnedNotes = FXCollections.observableArrayList();
         showNoteEditor = new SimpleBooleanProperty(false);
+        showAllNotes = new SimpleBooleanProperty(false);
     }
 
     public NoteViewModel(NoteEditorViewModel noteEditorViewModel, ObservableList<NoteCardViewModel> pinnedNotes, ObservableList<NoteCardViewModel> unpinnedNotes) {
         this.noteEditorViewModel = noteEditorViewModel;
         this.pinnedNotes = pinnedNotes;
         this.unpinnedNotes = unpinnedNotes;
+        showNoteEditor = new SimpleBooleanProperty(false);
     }
 
     public NoteEditorViewModel getNoteEditorViewModel() {
@@ -63,5 +78,6 @@ public class NoteViewModel {
     public BooleanProperty showNoteEditorProperty() {
         return showNoteEditor;
     }
+
 
 }
