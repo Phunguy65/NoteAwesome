@@ -14,9 +14,13 @@ import java.util.List;
 @Audited
 @EntityListeners(AuditingEntityListener.class)
 public class NoteContent extends AuditorEntity {
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(name = "text_content", nullable = false, unique = false, length = 1000)
     private String textContent;
@@ -26,28 +30,28 @@ public class NoteContent extends AuditorEntity {
 
     @Column(name = "is_deleted", nullable = false, unique = false)
     @NotAudited
-    private boolean isDeleted = false;
+    private boolean deleted = false;
 
-    public boolean isPinned() {
-        return isPinned;
+    public boolean pinned() {
+        return pinned;
     }
 
     public void setPinned(boolean pinned) {
-        isPinned = pinned;
+        this.pinned = pinned;
     }
 
     @Column(name = "is_pinned", nullable = false, unique = false)
     @NotAudited
-    private boolean isPinned = false;
+    private boolean pinned = false;
 
     @Column(name = "note_location", nullable = false, unique = true)
     private String noteLocation = "";
 
-    public NoteContent(String textContent, String title, boolean isDeleted, boolean isPinned, String noteLocation, byte[] rawContent, NoteTag noteTag, UserProfile userProfile, List<NoteImage> noteImages) {
+    public NoteContent(String textContent, String title, boolean deleted, boolean pinned, String noteLocation, byte[] rawContent, NoteTag noteTag, UserProfile userProfile, List<NoteImage> noteImages) {
         this.textContent = textContent;
         this.title = title;
-        this.isDeleted = isDeleted;
-        this.isPinned = isPinned;
+        this.deleted = deleted;
+        this.pinned = pinned;
         this.noteLocation = noteLocation;
         this.rawContent = rawContent;
         this.noteTag = noteTag;
@@ -132,11 +136,11 @@ public class NoteContent extends AuditorEntity {
     }
 
     public boolean isDeleted() {
-        return isDeleted;
+        return deleted;
     }
 
     public void setDeleted(boolean deleted) {
-        isDeleted = deleted;
+        this.deleted = deleted;
     }
 
 
@@ -145,7 +149,7 @@ public class NoteContent extends AuditorEntity {
     @NotAudited
     private NoteTag noteTag;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_profile_id", nullable = false)
     @NotAudited
     private UserProfile userProfile;
@@ -159,8 +163,8 @@ public class NoteContent extends AuditorEntity {
                 "id=" + id +
                 ", textContent='" + textContent + '\'' +
                 ", title='" + title + '\'' +
-                ", isDeleted=" + isDeleted +
-                ", isPinned=" + isPinned +
+                ", isDeleted=" + deleted +
+                ", isPinned=" + pinned +
                 ", noteLocation='" + noteLocation + '\'' +
                 ", rawContent=" + Arrays.toString(rawContent) +
                 ", noteTag=" + noteTag +

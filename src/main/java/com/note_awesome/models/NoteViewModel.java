@@ -4,7 +4,6 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ObservableBooleanValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.springframework.stereotype.Component;
@@ -12,7 +11,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class NoteViewModel {
 
-    NoteEditorViewModel noteEditorViewModel;
+    NoteEditorViewModel createNoteEditorVm;
+
+    public NoteEditorViewModel getUpdateNoteEditorVm() {
+        return updateNoteEditorVm;
+    }
+
+    public void setUpdateNoteEditorVm(NoteEditorViewModel updateNoteEditorVm) {
+        this.updateNoteEditorVm = updateNoteEditorVm;
+    }
+
+    NoteEditorViewModel updateNoteEditorVm;
 
     ObservableList<NoteCardViewModel> pinnedNotes;
     ObservableList<NoteCardViewModel> unpinnedNotes;
@@ -33,26 +42,21 @@ public class NoteViewModel {
     BooleanProperty showAllNotes;
 
     public NoteViewModel() {
-        noteEditorViewModel = new NoteEditorViewModel();
+        createNoteEditorVm = new NoteEditorViewModel();
+        updateNoteEditorVm = new NoteEditorViewModel();
         pinnedNotes = FXCollections.observableArrayList();
         unpinnedNotes = FXCollections.observableArrayList();
         showNoteEditor = new SimpleBooleanProperty(false);
         showAllNotes = new SimpleBooleanProperty(false);
     }
+    
 
-    public NoteViewModel(NoteEditorViewModel noteEditorViewModel, ObservableList<NoteCardViewModel> pinnedNotes, ObservableList<NoteCardViewModel> unpinnedNotes) {
-        this.noteEditorViewModel = noteEditorViewModel;
-        this.pinnedNotes = pinnedNotes;
-        this.unpinnedNotes = unpinnedNotes;
-        showNoteEditor = new SimpleBooleanProperty(false);
+    public NoteEditorViewModel getCreateNoteEditorVm() {
+        return createNoteEditorVm;
     }
 
-    public NoteEditorViewModel getNoteEditorViewModel() {
-        return noteEditorViewModel;
-    }
-
-    public void setNoteEditorViewModel(NoteEditorViewModel noteEditorViewModel) {
-        this.noteEditorViewModel = noteEditorViewModel;
+    public void setCreateNoteEditorVm(NoteEditorViewModel createNoteEditorVm) {
+        this.createNoteEditorVm = createNoteEditorVm;
     }
 
     public ObservableList<NoteCardViewModel> getPinnedNotes() {

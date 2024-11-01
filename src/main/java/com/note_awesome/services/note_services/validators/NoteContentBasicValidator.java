@@ -5,17 +5,14 @@ import com.note_awesome.extensions.Result;
 import com.note_awesome.extensions.Error;
 import org.springframework.stereotype.Component;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-
 @Component
 public class NoteContentBasicValidator implements INoteContentBasicValidator {
     private final int MAX_LENGTH_TEXT_CONTENT = 255;
     private final int MAX_LENGTH_URL_LOCATION = 255;
 
     public static class NoteContentValidationError {
-        public final static Error NOTE_CONTENT_IS_EMPTY = new Error("Note content is empty", "Note content is empty");
-        public final static Error NOTE_CONTENT_TEXT_CONTENT_EMPTY = new Error("Note content text content is empty", "Note content text content is empty");
+        public final static Error NOTE_CONTENT_IS_NULL = new Error("Note content is empty", "Note content is empty");
+        public final static Error TEXT_CONTENT_IS_NULL = new Error("Note content text content is empty", "Note content text content is empty");
         public final static Error NOTE_CONTENT_TEXT_CONTENT_TOO_LONG = new Error("Note content text content is too long", "Note content text content is too long");
 
         public static Error URL_LOCATION_NOT_FOUND(String imageUrl) {
@@ -29,10 +26,10 @@ public class NoteContentBasicValidator implements INoteContentBasicValidator {
     @Override
     public Result<NoteContent, Error> validate(NoteContent noteContent) {
         if (noteContentIsNull(noteContent)) {
-            return Result.failure(NoteContentValidationError.NOTE_CONTENT_IS_EMPTY);
+            return Result.failure(NoteContentValidationError.NOTE_CONTENT_IS_NULL);
         }
         if (textContentIsNull(noteContent)) {
-            return Result.failure(NoteContentValidationError.NOTE_CONTENT_TEXT_CONTENT_EMPTY);
+            return Result.failure(NoteContentValidationError.TEXT_CONTENT_IS_NULL);
         }
         if (textContentIsTooLong(noteContent)) {
             return Result.failure(NoteContentValidationError.TITLE_TOO_LONG);

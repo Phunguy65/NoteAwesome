@@ -113,18 +113,12 @@
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 12, 0, 0, 0);
 }
 
-/*.note-editor__title {*/
-/*    -fx-background-color: transparent;*/
-/*    -fx-border-width: 0;*/
-/*    -fx-border-radius: 0;*/
-/*    -fx-background-radius: 0;*/
-/*}*/
-
-.note-editor__title {
+.note-editor__title .content {
     -fx-background-color: transparent;
     -fx-border-width: 0;
     -fx-border-radius: 0;
     -fx-background-radius: 0;
+    -fx-padding: 0;
 }
 
 .note-editor__title:hover {

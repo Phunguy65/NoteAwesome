@@ -9,7 +9,7 @@ public class ProfileSetting extends AuditorEntity {
     @Id
     @Column(name = "profile_setting_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(name = "theme", nullable = false, unique = true, length = 50)
     private String theme;

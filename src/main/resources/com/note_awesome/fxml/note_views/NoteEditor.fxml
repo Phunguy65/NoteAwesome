@@ -22,11 +22,7 @@
             <children>
                 <HBox fx:id="titleHBox" alignment="CENTER" prefHeight="21.0" prefWidth="600.0" style="-fx-background-color: transparent;" styleClass="note-container" stylesheets="@../../css/LightStylesheet.css">
                     <children>
-                        <TextArea id="note-editor__title" fx:id="noteTitleTxtArea" prefHeight="66.0" prefWidth="560.0" promptText="Title here..." style="-fx-fill: transparent;" stylesheets="@../../css/LightStylesheet.css" wrapText="true" HBox.hgrow="ALWAYS">
-                     <styleClass>
-                        <String fx:value="text-area" />
-                        <String fx:value="note-editor__title" />
-                     </styleClass></TextArea>
+                        <TextArea id="note-editor__title" fx:id="noteTitleTxtArea" prefHeight="66.0" prefWidth="560.0" promptText="Title here..." styleClass="note-editor__title" stylesheets="@../../css/LightStylesheet.css" wrapText="true" HBox.hgrow="ALWAYS" />
                         <Button fx:id="pinNoteBtn" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="33.0" prefWidth="37.0" styleClass="burger-button" stylesheets="@../../css/LightStylesheet.css" text="Button" HBox.hgrow="SOMETIMES">
                             <graphic>
                                 <FontAwesomeIconView glyphName="PAPERCLIP" />

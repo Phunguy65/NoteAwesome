@@ -2,23 +2,40 @@ package com.note_awesome.views.note_views;
 
 import com.note_awesome.models.NoteCardViewModel;
 import javafx.animation.FadeTransition;
+import javafx.beans.property.LongProperty;
+import javafx.event.Event;
+import javafx.event.EventType;
+import javafx.scene.control.ContentDisplay;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import org.controlsfx.control.GridCell;
 
+import java.util.Optional;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
+
+
 public class NoteCardCell extends GridCell<NoteCardViewModel> {
 
-    public NoteCardFxController getNoteCardFxController() {
-        return noteCardFxController;
-    }
+    /**
+     * work around for CAN MEMORY LEAK
+     */
 
-    private Runnable openNoteEditor;
+    private Long noteId;
+
+    private Boolean pinned;
+
+    private Consumer<Long> openNoteEditor;
+
+    private BiConsumer<Long, Boolean> switchNoteBoard;
 
     private final NoteCardFxController noteCardFxController = new NoteCardFxController();
 
-    public NoteCardCell(Runnable openNoteEditor) {
+    public NoteCardCell(Consumer<Long> openNoteEditor, BiConsumer<Long, Boolean> switchNoteBoard) {
         super();
 
         this.openNoteEditor = openNoteEditor;
+        this.switchNoteBoard = switchNoteBoard;
         initialize();
     }
 
@@ -55,19 +72,22 @@ public class NoteCardCell extends GridCell<NoteCardViewModel> {
         this.noteCardFxController.getNoteTitleTxtArea().setMouseTransparent(true);
         this.noteCardFxController.getNoteDescriptionTxtArea().setMouseTransparent(true);
 
-        this.noteCardFxController.getRootVb().setOnMouseEntered(event -> {
+        this.setOnMouseEntered(event -> {
             this.noteCardFxController.getToolBarVbox().setVisible(true);
             this.noteCardFxController.getPinNoteBtn().setVisible(true);
+            event.consume();
         });
 
-        this.noteCardFxController.getRootVb().setOnMouseExited(event -> {
+        this.setOnMouseExited(event -> {
             this.noteCardFxController.getToolBarVbox().setVisible(false);
             this.noteCardFxController.getPinNoteBtn().setVisible(false);
+            event.consume();
         });
 
         this.noteCardFxController.setOnMouseClicked(event -> {
-            openNoteEditor.run();
+            openNoteEditor.accept(noteId);
         });
+
 
         this.noteCardFxController.getNoteDescriptionTxtArea().setWrapText(true);
         this.noteCardFxController.getNoteDescriptionTxtArea().setEditable(false);
@@ -75,17 +95,39 @@ public class NoteCardCell extends GridCell<NoteCardViewModel> {
         this.noteCardFxController.getNoteTitleTxtArea().setEditable(false);
     }
 
+    private void flush() {
+        this.noteCardFxController.getNoteTitleTxtArea().setText("");
+        this.noteCardFxController.getNoteDescriptionTxtArea().setText("");
+        this.noteCardFxController.setOnMouseClicked(Event::consume);
+        this.noteId = null;
+        this.pinned = null;
+    }
+
     @Override
     protected void updateItem(NoteCardViewModel item, boolean empty) {
         super.updateItem(item, empty);
         if (item == null || empty) {
+            setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
             setGraphic(null);
+            flush();
         } else {
+
             this.noteCardFxController.getNoteTitleTxtArea().setText(item.getTitle());
             this.noteCardFxController.getNoteDescriptionTxtArea().setText(item.getContent());
-            this.noteCardFxController.getRootVb().setOnMouseClicked(event -> {
-                openNoteEditor.run();
+            this.noteCardFxController.setOnMouseClicked(event -> {
+                openNoteEditor.accept(item.getId());
             });
+
+            this.pinned = item.isPinned();
+            this.noteId = item.getId();
+
+            if (item.isPinned()) {
+                if (!this.noteCardFxController.getPinNoteBtn().getStyleClass().contains("pinned")) {
+                    this.noteCardFxController.getPinNoteBtn().getStyleClass().add("pinned");
+                }
+            } else {
+                this.noteCardFxController.getPinNoteBtn().getStyleClass().remove("pinned");
+            }
             setGraphic(noteCardFxController);
         }
     }
