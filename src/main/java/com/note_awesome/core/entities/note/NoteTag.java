@@ -11,7 +11,7 @@ import java.util.Set;
 public class NoteTag extends AuditorEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(name = "tag_name", nullable = false, unique = true, length = 50)
     private String tagName;
@@ -19,7 +19,7 @@ public class NoteTag extends AuditorEntity {
     public long getId() {
         return id;
     }
-    
+
     public String getTagName() {
         return tagName;
     }

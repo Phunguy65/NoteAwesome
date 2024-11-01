@@ -84,26 +84,24 @@
 
 /****************************************************/
 .text-area {
-    -fx-background-color: #ffffff;
-    -fx-border-color: #ffffff;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
     -fx-border-width: 0;
     -fx-border-radius: 0;
     -fx-background-radius: 0;
 }
 
-.text-area .content {
-    -fx-background-color: #ffffff;
-    -fx-border-color: #ffffff;
-    -fx-border-width: 0;
-    -fx-border-radius: 0;
-    -fx-background-radius: 0;
+.text-area .scroll-pane {
+    -fx-background-color: transparent;
 }
 
-.text-area:pressed {
-    -fx-border-color: #ffffff;
-    -fx-border-width: 0;
-    -fx-border-radius: 0;
-    -fx-background-radius: 0;
+.text-area .scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+
+.text-area .scroll-pane .content {
+    -fx-background-color: transparent;
 }
 
 /****************************************************/
@@ -113,6 +111,35 @@
 
 .note-editor-shadow.opened {
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 12, 0, 0, 0);
+}
+
+.note-editor__title .content {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-padding: 0;
+}
+
+.note-editor__title:hover {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
+
+.note-editor__title:pressed {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
+
+.note-editor__title:focused {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
 }
 
 .note-container {

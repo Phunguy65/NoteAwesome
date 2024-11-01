@@ -1,13 +1,17 @@
 package com.note_awesome.views.core_editors;
 
 import com.note_awesome.NoteAwesomeEnv;
+import com.note_awesome.models.NoteBackgroundColor;
+import com.note_awesome.models.NoteBackgroundImage;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.geometry.Side;
 import javafx.scene.control.Button;
 import javafx.scene.control.IndexRange;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.VBox;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import org.apache.commons.lang3.ArrayUtils;
@@ -19,6 +23,7 @@ import org.reactfx.util.Either;
 
 import java.io.*;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Function;
 
 public class NoteEditorFxController extends VBox {
@@ -59,6 +64,149 @@ public class NoteEditorFxController extends VBox {
     @FXML
     private Button closeEditorBtn;
 
+    @FXML
+    private Button coralRedBtn;
+
+    @FXML
+    private Button peachOrangeBtn;
+
+    @FXML
+    private Button sandBrownBtn;
+
+    @FXML
+    private Button mintGreenBtn;
+
+    @FXML
+    private Button grayGreenBtn;
+
+    @FXML
+    private Button smokeGrayBtn;
+
+    @FXML
+    private Button darkBlueBtn;
+
+    public Button getCelebrationImgBtn() {
+        return celebrationImgBtn;
+    }
+
+    public Button getVideoImgBtn() {
+        return videoImgBtn;
+    }
+
+    public Button getTravelImgBtn() {
+        return travelImgBtn;
+    }
+
+    public Button getPlacesImgBtn() {
+        return placesImgBtn;
+    }
+
+    public Button getNotesImgBtn() {
+        return notesImgBtn;
+    }
+
+    public Button getRecipeImgBtn() {
+        return recipeImgBtn;
+    }
+
+    public Button getMusicImgBtn() {
+        return musicImgBtn;
+    }
+
+    public Button getGroceryImgBtn() {
+        return groceryImgBtn;
+    }
+
+    public Button getFoodImgBtn() {
+        return foodImgBtn;
+    }
+
+    @FXML
+    private Button purpleSunsetBtn;
+
+    @FXML
+    private Button noneBgColorBtn;
+
+    @FXML
+    private Button groceryImgBtn;
+
+    @FXML
+    private Button foodImgBtn;
+
+    @FXML
+    private Button musicImgBtn;
+
+    @FXML
+    private Button recipeImgBtn;
+
+    @FXML
+    private Button notesImgBtn;
+
+    @FXML
+    private Button placesImgBtn;
+
+    @FXML
+    private Button travelImgBtn;
+
+    @FXML
+    private Button videoImgBtn;
+
+    @FXML
+    private Button celebrationImgBtn;
+
+    public Button getCoralRedBtn() {
+        return coralRedBtn;
+    }
+
+    public Button getPeachOrangeBtn() {
+        return peachOrangeBtn;
+    }
+
+    public Button getSandBrownBtn() {
+        return sandBrownBtn;
+    }
+
+    public Button getChelGrayBtn() {
+        return chelGrayBtn;
+    }
+
+    public Button getClayBrownBtn() {
+        return clayBrownBtn;
+    }
+
+    public Button getPeachBtn() {
+        return peachBtn;
+    }
+
+    public Button getDarkBlueBtn() {
+        return darkBlueBtn;
+    }
+
+    public Button getSmokeGrayBtn() {
+        return smokeGrayBtn;
+    }
+
+    public Button getGrayGreenBtn() {
+        return grayGreenBtn;
+    }
+
+    public Button getMintGreenBtn() {
+        return mintGreenBtn;
+    }
+
+    public Button getPurpleSunsetBtn() {
+        return purpleSunsetBtn;
+    }
+
+    @FXML
+    private Button peachBtn;
+
+    @FXML
+    private Button clayBrownBtn;
+
+    @FXML
+    private Button chelGrayBtn;
+
     private final SuspendableNo updatingToolbar = new SuspendableNo();
 
     public NoteEditorFxController() {
@@ -78,11 +226,11 @@ public class NoteEditorFxController extends VBox {
     private void initialize() {
 
         VirtualizedScrollPane<GenericStyledArea<ParStyle, Either<String, LinkedImage>, TextStyle>> vsPane = new VirtualizedScrollPane<>(area);
+        vsPane.setStyle("-fx-background-color: transparent;");
         VBox.setVgrow(vsPane, javafx.scene.layout.Priority.ALWAYS);
-        VBox.setMargin(vsPane, new Insets(0, 9, 0, 9));
         this.noteVBox.getChildren().add(1, vsPane);
-
         area.setWrapText(true);
+        area.setStyle("-fx-background-color: transparent;");
         area.setStyleCodecs(ParStyle.CODEC, Codec.styledSegmentCodec(Codec.eitherCodec(Codec.STRING_CODEC, LinkedImage.codec()), TextStyle.CODEC));
         this.noteTitleTxtArea.setFont(Font.font("SF Pro Display", FontWeight.BOLD, 16));
         area.clear();
@@ -152,6 +300,106 @@ public class NoteEditorFxController extends VBox {
             }
         });
 
+        this.coralRedBtn.setOnAction(event -> {
+            changeBackgroundColor(NoteBackgroundColor.CORAL_RED);
+        });
+
+        this.peachOrangeBtn.setOnAction(event -> {
+            changeBackgroundColor(NoteBackgroundColor.PEACH_ORANGE);
+        });
+
+        this.sandBrownBtn.setOnAction(event -> {
+            changeBackgroundColor(NoteBackgroundColor.SAND_BROWN);
+        });
+
+        this.mintGreenBtn.setOnAction(event -> {
+            changeBackgroundColor(NoteBackgroundColor.MINT_GREEN);
+        });
+
+        this.grayGreenBtn.setOnAction(event -> {
+            changeBackgroundColor(NoteBackgroundColor.GRAY_GREEN);
+        });
+
+        this.smokeGrayBtn.setOnAction(event -> {
+            changeBackgroundColor(NoteBackgroundColor.SMOKE_GRAY);
+        });
+
+        this.darkBlueBtn.setOnAction(event -> {
+            changeBackgroundColor(NoteBackgroundColor.DARK_BLUE);
+        });
+
+        this.purpleSunsetBtn.setOnAction(event -> {
+            changeBackgroundColor(NoteBackgroundColor.PURPLE_SUNSET);
+        });
+
+        this.peachBtn.setOnAction(event -> {
+            changeBackgroundColor(NoteBackgroundColor.PEACH);
+        });
+
+        this.clayBrownBtn.setOnAction(event -> {
+            changeBackgroundColor(NoteBackgroundColor.CLAY_BROWN);
+        });
+
+        this.chelGrayBtn.setOnAction(event -> {
+            changeBackgroundColor(NoteBackgroundColor.CHEL_GRAY);
+        });
+
+        this.noneBgColorBtn.setOnAction(event -> {
+            changeBackgroundColor(NoteBackgroundColor.NONE);
+        });
+
+        this.groceryImgBtn.setOnAction(event -> {
+            changeBackgroundImage(NoteBackgroundImage.GROCERY_LIGHT_IMAGE);
+        });
+
+        this.foodImgBtn.setOnAction(event -> {
+            changeBackgroundImage(NoteBackgroundImage.FOOD_LIGHT_IMAGE);
+        });
+
+        this.musicImgBtn.setOnAction(event -> {
+            changeBackgroundImage(NoteBackgroundImage.MUSIC_LIGHT_IMAGE);
+        });
+
+        this.recipeImgBtn.setOnAction(event -> {
+            changeBackgroundImage(NoteBackgroundImage.RECIPE_LIGHT_IMAGE);
+        });
+
+        this.notesImgBtn.setOnAction(event -> {
+            changeBackgroundImage(NoteBackgroundImage.NOTES_LIGHT_IMAGE);
+        });
+
+        this.placesImgBtn.setOnAction(event -> {
+            changeBackgroundImage(NoteBackgroundImage.PLACES_LIGHT_IMAGE);
+        });
+
+        this.travelImgBtn.setOnAction(event -> {
+            changeBackgroundImage(NoteBackgroundImage.TRAVEL_LIGHT_IMAGE);
+        });
+
+        this.videoImgBtn.setOnAction(event -> {
+            changeBackgroundImage(NoteBackgroundImage.VIDEO_LIGHT_IMAGE);
+        });
+
+        this.celebrationImgBtn.setOnAction(event -> {
+            changeBackgroundImage(NoteBackgroundImage.CELEBRATION_LIGHT_IMAGE);
+        });
+    }
+
+
+    private void changeBackgroundColor(NoteBackgroundColor color) {
+        this.setStyle("-fx-background-color: " + color.getHexCode() + ";"
+                + "-fx-border-color: #000000;"
+                + "-fx-border-width: 0px;"
+                + "-fx-border-radius: 50;");
+    }
+
+    private void changeBackgroundImage(NoteBackgroundImage img) {
+        Image image = new Image(img.getImageUrl().toExternalForm());
+        BackgroundSize backgroundSize = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, false, true);
+        BackgroundPosition backgroundPosition = new BackgroundPosition(Side.RIGHT, .005, true, Side.BOTTOM, .005, true);
+        BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, backgroundPosition, backgroundSize);
+        Background background = new Background(backgroundImage);
+        this.noteVBox.setBackground(background);
     }
 
     private void updateStyleInSelection(Function<StyleSpans<TextStyle>, TextStyle> mixinGetter) {

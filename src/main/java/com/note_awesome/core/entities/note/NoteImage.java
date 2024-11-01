@@ -10,13 +10,13 @@ import org.hibernate.envers.Audited;
 public class NoteImage extends AuditorEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(name = "image_url", nullable = false, unique = true, length = 255)
     private String imageLocation;
 
     @Column(name = "is_used", nullable = false, unique = false)
-    private boolean is_used = false;
+    private boolean using = false;
 
     @ManyToOne
     @JoinColumn(name = "note_content_id", nullable = false)
@@ -25,9 +25,9 @@ public class NoteImage extends AuditorEntity {
     public NoteImage() {
     }
 
-    public NoteImage(String imageLocation, boolean is_used, NoteContent noteContent) {
+    public NoteImage(String imageLocation, boolean using, NoteContent noteContent) {
         this.imageLocation = imageLocation;
-        this.is_used = is_used;
+        this.using = using;
         this.noteContent = noteContent;
     }
 
@@ -39,16 +39,30 @@ public class NoteImage extends AuditorEntity {
         this.imageLocation = urlLocation;
     }
 
-    public boolean isUsed() {
-        return is_used;
+    @Override
+    public String toString() {
+        return "NoteImage{" +
+                "id=" + id +
+                ", imageLocation='" + imageLocation + '\'' +
+                ", using=" + using +
+                ", noteContent=" + noteContent +
+                '}';
     }
 
-    public void setUsed(boolean is_used) {
-        this.is_used = is_used;
+    public boolean isUsed() {
+        return using;
+    }
+
+    public void setUsed(boolean using) {
+        this.using = using;
     }
 
     public long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public NoteContent getNoteContent() {
