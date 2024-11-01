@@ -9,6 +9,20 @@ import java.util.List;
 public class NoteCardViewModel {
     private LongProperty id;
 
+    public boolean isPinned() {
+        return pinned.get();
+    }
+
+    public BooleanProperty pinnedProperty() {
+        return pinned;
+    }
+
+    public void setPinned(boolean pinned) {
+        this.pinned.set(pinned);
+    }
+
+    private BooleanProperty pinned;
+
     public String getTitle() {
         return title.get();
     }
@@ -42,14 +56,16 @@ public class NoteCardViewModel {
     }
 
     public void setContent(String content) {
-        this.content.set(content);
+        var newContent = content.length() > 100 ? content.substring(0, 100) + "..." : content;
+        this.content.set(newContent);
     }
 
-    public NoteCardViewModel(LongProperty id, StringProperty title, StringProperty content, ObservableList<String> images) {
+    public NoteCardViewModel(LongProperty id, StringProperty title, StringProperty content, ObservableList<String> images, BooleanProperty pinned) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.images = images;
+        this.pinned = pinned;
     }
 
     public ObservableList<String> getImages() {
@@ -69,5 +85,6 @@ public class NoteCardViewModel {
         title = new SimpleStringProperty();
         content = new SimpleStringProperty();
         images = FXCollections.observableArrayList();
+        pinned = new SimpleBooleanProperty();
     }
 }

@@ -1,6 +1,5 @@
 package com.note_awesome.models;
 
-import javafx.beans.binding.Binding;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
@@ -12,32 +11,52 @@ import org.springframework.stereotype.Component;
 @Component
 public class NoteViewModel {
 
-    NoteEditorViewModel noteEditorViewModel;
+    NoteEditorViewModel createNoteEditorVm;
+
+    public NoteEditorViewModel getUpdateNoteEditorVm() {
+        return updateNoteEditorVm;
+    }
+
+    public void setUpdateNoteEditorVm(NoteEditorViewModel updateNoteEditorVm) {
+        this.updateNoteEditorVm = updateNoteEditorVm;
+    }
+
+    NoteEditorViewModel updateNoteEditorVm;
 
     ObservableList<NoteCardViewModel> pinnedNotes;
     ObservableList<NoteCardViewModel> unpinnedNotes;
 
     BooleanProperty showNoteEditor;
 
+
+    public BooleanBinding showUnpinnedNotesProperty() {
+        return Bindings.createBooleanBinding(() -> !this.unpinnedNotes.isEmpty(), this.unpinnedNotes);
+    }
+
+
+    public BooleanBinding showPinNotesProperty() {
+        return Bindings.createBooleanBinding(() -> !this.pinnedNotes.isEmpty(), this.pinnedNotes);
+    }
+
+
+    BooleanProperty showAllNotes;
+
     public NoteViewModel() {
-        noteEditorViewModel = new NoteEditorViewModel();
+        createNoteEditorVm = new NoteEditorViewModel();
+        updateNoteEditorVm = new NoteEditorViewModel();
         pinnedNotes = FXCollections.observableArrayList();
         unpinnedNotes = FXCollections.observableArrayList();
         showNoteEditor = new SimpleBooleanProperty(false);
+        showAllNotes = new SimpleBooleanProperty(false);
+    }
+    
+
+    public NoteEditorViewModel getCreateNoteEditorVm() {
+        return createNoteEditorVm;
     }
 
-    public NoteViewModel(NoteEditorViewModel noteEditorViewModel, ObservableList<NoteCardViewModel> pinnedNotes, ObservableList<NoteCardViewModel> unpinnedNotes) {
-        this.noteEditorViewModel = noteEditorViewModel;
-        this.pinnedNotes = pinnedNotes;
-        this.unpinnedNotes = unpinnedNotes;
-    }
-
-    public NoteEditorViewModel getNoteEditorViewModel() {
-        return noteEditorViewModel;
-    }
-
-    public void setNoteEditorViewModel(NoteEditorViewModel noteEditorViewModel) {
-        this.noteEditorViewModel = noteEditorViewModel;
+    public void setCreateNoteEditorVm(NoteEditorViewModel createNoteEditorVm) {
+        this.createNoteEditorVm = createNoteEditorVm;
     }
 
     public ObservableList<NoteCardViewModel> getPinnedNotes() {
@@ -63,5 +82,6 @@ public class NoteViewModel {
     public BooleanProperty showNoteEditorProperty() {
         return showNoteEditor;
     }
+
 
 }

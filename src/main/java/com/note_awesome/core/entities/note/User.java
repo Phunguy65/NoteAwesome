@@ -11,7 +11,7 @@ public class User extends AuditorEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private long id;
+    private Long id;
 
     @Column(name = "user_name", nullable = false, unique = true, length = 50)
     private String username;

@@ -18,11 +18,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
 
 @Component
 public class CreateNoteContentService implements ICreateNoteContentService {
@@ -144,7 +142,7 @@ public class CreateNoteContentService implements ICreateNoteContentService {
         newNoteContent.setNoteTag(noteContent.getNoteTag());
         newNoteContent.setUserProfile(noteContent.getUserProfile());
         newNoteContent.setRawContent(noteContent.getRawContent());
-        newNoteContent.setPinned(noteContent.isPinned());
+        newNoteContent.setPinned(noteContent.pinned());
         return Result.success(newNoteContent);
     }
 
