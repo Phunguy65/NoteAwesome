@@ -5,13 +5,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class NoteContentService implements INoteContentBaseService {
     private final ICreateNoteContentService createNoteContentService;
-    private final INoteContentUpdateService noteContentUpdateService;
+    private final INoteContentUpdateService updateNoteContentService;
     private final INoteContentQueryService noteContentQueryService;
+    private final INoteContentDeleteService noteContentDeleteService;
 
-    public NoteContentService(ICreateNoteContentService createNoteContentService, INoteContentUpdateService noteContentUpdateService, INoteContentQueryService noteContentQueryService) {
+    public NoteContentService(ICreateNoteContentService createNoteContentService, INoteContentUpdateService noteContentUpdateService, INoteContentQueryService noteContentQueryService, INoteContentDeleteService noteContentDeleteService) {
         this.createNoteContentService = createNoteContentService;
-        this.noteContentUpdateService = noteContentUpdateService;
+        this.updateNoteContentService = noteContentUpdateService;
         this.noteContentQueryService = noteContentQueryService;
+        this.noteContentDeleteService = noteContentDeleteService;
     }
 
     @Override
@@ -20,12 +22,18 @@ public class NoteContentService implements INoteContentBaseService {
     }
 
     @Override
-    public INoteContentUpdateService getNoteContentUpdateService() {
-        return noteContentUpdateService;
+    public INoteContentUpdateService getUpdateNoteContentService() {
+        return updateNoteContentService;
     }
 
     @Override
     public INoteContentQueryService getNoteContentQueryService() {
         return noteContentQueryService;
     }
+
+    @Override
+    public INoteContentDeleteService getDeleteNoteContentService() {
+        return noteContentDeleteService;
+    }
+
 }

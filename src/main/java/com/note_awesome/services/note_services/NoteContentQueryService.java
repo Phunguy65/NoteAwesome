@@ -7,6 +7,8 @@ import com.note_awesome.extensions.Error;
 import com.note_awesome.extensions.Result;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class NoteContentQueryService implements INoteContentQueryService {
     private final INoteContentRepository noteContentRepository;
@@ -27,5 +29,12 @@ public class NoteContentQueryService implements INoteContentQueryService {
             noteContent.get().setNoteImages(noteImages);
         }
         return Result.success(noteContent.get());
+    }
+
+    @Override
+    public Result<List<NoteContent>, Error> getDefaultNoteContents(Long userProfileId) {
+        var noteContents = this.noteContentRepository.findDefaultNoteContentByUsrProfId(userProfileId);
+
+        return Result.success(noteContents);
     }
 }

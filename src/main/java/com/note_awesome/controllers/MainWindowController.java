@@ -1,6 +1,7 @@
 package com.note_awesome.controllers;
 
 import com.note_awesome.models.SessionViewModel;
+import com.note_awesome.models.ViewStateViewModel;
 import com.note_awesome.views.MainWindowViewBuilder;
 import javafx.scene.layout.Region;
 import org.slf4j.Logger;
@@ -14,10 +15,12 @@ public class MainWindowController {
     private final MainWindowViewBuilder mainWindowViewBuilder;
     private final SessionViewModel currentSession;
     private final Logger logger = LoggerFactory.getLogger(MainWindowController.class);
+    private final ViewStateViewModel viewStateViewModel;
 
     @Autowired
-    public MainWindowController(NoteViewController noteViewController, SessionViewModel currentSession) {
+    public MainWindowController(NoteViewController noteViewController, SessionViewModel currentSession, ViewStateViewModel viewStateViewModel) {
         this.mainWindowViewBuilder = new MainWindowViewBuilder(noteViewController.getView());
+        this.viewStateViewModel = viewStateViewModel;
         this.currentSession = currentSession;
 
     }
@@ -25,6 +28,7 @@ public class MainWindowController {
 
     public Region getView() {
         this.logger.info(currentSession.getCurrentUserId() + " " + currentSession.getCurrentUsrProfId());
+        this.viewStateViewModel.showNoteViewProperty().set(true);
         return mainWindowViewBuilder.build();
     }
 }
