@@ -85,9 +85,10 @@ public class NoteViewFxController {
 
     private final BiConsumer<Long, Boolean> switchNoteBoard;
 
+    private final BiConsumer<Long, Boolean> deleteNote;
     private final NoteEditorFxController updateNoteEditor = new NoteEditorFxController();
 
-    public NoteViewFxController(NoteViewModel noteVm, Consumer<Runnable> createNote, Consumer<Runnable> updateNote, Consumer<Runnable> closeNoteEditor, Function<Long, Boolean> showUpdateNoteEditor, BiConsumer<Long, Boolean> switchNoteBoard) {
+    public NoteViewFxController(NoteViewModel noteVm, Consumer<Runnable> createNote, Consumer<Runnable> updateNote, Consumer<Runnable> closeNoteEditor, Function<Long, Boolean> showUpdateNoteEditor, BiConsumer<Long, Boolean> switchNoteBoard, BiConsumer<Long, Boolean> deleteNote) {
         this.noteVm = noteVm;
         this.createNoteEditorVm = this.noteVm.getCreateNoteEditorVm();
         this.updateNoteEditorVm = this.noteVm.getUpdateNoteEditorVm();
@@ -96,6 +97,7 @@ public class NoteViewFxController {
         this.closeNoteEditor = closeNoteEditor;
         this.showUpdateNoteEditor = showUpdateNoteEditor;
         this.switchNoteBoard = switchNoteBoard;
+        this.deleteNote = deleteNote;
     }
 
     @FXML
@@ -150,10 +152,10 @@ public class NoteViewFxController {
         this.pinNoteBoardGv.setItems(this.noteVm.getPinnedNotes());
         this.unpinNoteBoardGv.setItems(this.noteVm.getUnpinnedNotes());
         this.pinNoteBoardGv.setCellFactory(param -> new NoteCardCell(
-                this::openUpdateNoteDialog, this::switchNoteBoard
+                this::openUpdateNoteDialog, this::switchNoteBoard, this::removeNoteCard
         ));
         this.unpinNoteBoardGv.setCellFactory(param -> new NoteCardCell(
-                this::openUpdateNoteDialog, this::switchNoteBoard
+                this::openUpdateNoteDialog, this::switchNoteBoard, this::removeNoteCard
         ));
 
         this.noteEditorFxController.getArea().textProperty().subscribe(e -> {
@@ -195,6 +197,8 @@ public class NoteViewFxController {
             dialog.getDialogPane().setContent(this.updateNoteEditor);
             dialog.getDialogPane().getButtonTypes().addAll(ButtonType.CLOSE);
             dialog.setOnCloseRequest(event -> {
+                this.updateNoteEditorVm.getRawContent().clear();
+                this.updateNoteEditorVm.getRawContent().addAll(this.updateNoteEditor.getByteContent());
                 this.updateNote.accept(this::refreshUpdateNoteEditor);
             });
             dialog.showAndWait();
@@ -209,6 +213,9 @@ public class NoteViewFxController {
         this.switchNoteBoard.accept(noteId, newVal);
     }
 
+    private void removeNoteCard(Long noteId, Boolean pinned) {
+        this.deleteNote.accept(noteId, pinned);
+    }
 
     private void showNoteEditor(boolean show) {
         if (show) {

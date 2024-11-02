@@ -5,6 +5,8 @@ import com.note_awesome.models.NoteCardViewModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
 
@@ -47,6 +49,19 @@ public class NoteCardFxController extends VBox {
     @FXML
     private Button pinNoteBtn;
 
+    @FXML
+    private MenuButton moreFeatMnBtn;
+
+    @FXML
+    private MenuItem deleteNoteMnItm;
+
+    public MenuItem getDeleteNoteMnItm() {
+        return deleteNoteMnItm;
+    }
+
+    public MenuButton getMoreFeatMnBtn() {
+        return moreFeatMnBtn;
+    }
 
     public NoteCardFxController() {
         try {
@@ -67,6 +82,6 @@ public class NoteCardFxController extends VBox {
 
     @FXML
     private void initialize() {
-        
+
     }
 }
