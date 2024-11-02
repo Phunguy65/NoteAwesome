@@ -11,8 +11,6 @@ import com.note_awesome.models.NoteEditorViewModel;
 import com.note_awesome.models.NoteViewModel;
 import com.note_awesome.services.note_services.INoteContentBaseService;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.SimpleLongProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
@@ -132,7 +130,7 @@ public class NoteViewInteractor implements IInitialize {
         noteCardViewModel.setTitle(noteContent.getTitle());
         noteCardViewModel.setContent(noteContent.getTextContent());
 //        noteCardViewModel.setImages(FXCollections.observableArrayList(noteContent.getNoteImages().stream().map(NoteImage::getImageLocation).toList()));
-//        noteCardViewModel.pinnedProperty().set(noteContent.pinned());
+        noteCardViewModel.pinnedProperty().set(noteContent.pinned());
 
         logger.info("Note content mapped to note card view model: {}", noteCardViewModel);
         return noteCardViewModel;
@@ -183,8 +181,10 @@ public class NoteViewInteractor implements IInitialize {
 
     public void updateNote() {
         var updatedNote = mapNoteEditorVmToNoteContent(this.updateNoteEditorVm);
+
         updatedNote.setId(this.updateNoteEditorVm.getId());
-        this.noteContentBaseService.getNoteContentUpdateService().update(updatedNote.getId(), updatedNote.getTitle(), updatedNote.getTextContent(), updatedNote.pinned(), updatedNote.getRawContent()).Match((updatedNoteContent) -> {
+
+        this.noteContentBaseService.getUpdateNoteContentService().update(updatedNote.getId(), updatedNote.getTitle(), updatedNote.getTextContent(), updatedNote.pinned(), updatedNote.getRawContent()).Match((updatedNoteContent) -> {
             this.noteContent = Optional.of(updatedNoteContent);
             return Result.success(updatedNoteContent);
         }, error -> {
@@ -203,7 +203,7 @@ public class NoteViewInteractor implements IInitialize {
             return;
         }
 
-        var updateNote = this.noteContentBaseService.getNoteContentUpdateService().update(noteId, newVal);
+        var updateNote = this.noteContentBaseService.getUpdateNoteContentService().update(noteId, newVal);
 
         if (updateNote.isSuccess()) {
             this.noteVm.getPinnedNotes().removeIf(noteCardViewModel -> noteCardViewModel.getId() == noteId);
@@ -215,6 +215,56 @@ public class NoteViewInteractor implements IInitialize {
             }
         } else {
             this.logger.error("Error occurred while updating note: {}", updateNote.getError());
+        }
+    }
+
+    public void refreshNoteBoard() {
+        this.noteVm.getPinnedNotes().clear();
+        this.noteVm.getUnpinnedNotes().clear();
+
+        var noteContents = this.noteContentBaseService.getNoteContentQueryService().getDefaultNoteContents(this.sessionViewModel.getCurrentUsrProfId().get());
+
+        if (noteContents.isSuccess()) {
+            noteContents.getValue().forEach(noteContent -> {
+                if (noteContent.pinned()) {
+                    updatePinnedNoteCard(noteContent);
+                } else {
+                    updateUnpinnedNoteCard(noteContent);
+                }
+            });
+        } else {
+            this.logger.error("Error occurred while getting default note contents: {}", noteContents.getError());
+        }
+    }
+
+
+    public void deletePinnedNote(Long noteId) {
+        if (noteId == null) {
+            this.logger.error("Note id is null");
+            return;
+        }
+
+        var deleteNote = this.noteContentBaseService.getDeleteNoteContentService().markAsDeleted(noteId);
+
+        if (deleteNote.isSuccess()) {
+            this.noteVm.getPinnedNotes().removeIf(noteCardViewModel -> noteCardViewModel.getId() == noteId);
+        } else {
+            this.logger.error("Error occurred while deleting note: {}", deleteNote.getError());
+        }
+    }
+
+    public void deleteUnpinnedNote(Long noteId) {
+        if (noteId == null) {
+            this.logger.error("Note id is null");
+            return;
+        }
+
+        var deleteNote = this.noteContentBaseService.getDeleteNoteContentService().markAsDeleted(noteId);
+
+        if (deleteNote.isSuccess()) {
+            this.noteVm.getUnpinnedNotes().removeIf(noteCardViewModel -> noteCardViewModel.getId() == noteId);
+        } else {
+            this.logger.error("Error occurred while deleting note: {}", deleteNote.getError());
         }
     }
 }
