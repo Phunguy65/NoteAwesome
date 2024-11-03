@@ -231,10 +231,7 @@ Watch the changes in the '**[CHANGELOG.md](CHANGELOG.md)**' file.
 ## :pencil2: Authors
 
 * [@Phunguy65](https://github/Phunguy65) - Nguyễn Ngọc Phú
-* [@Anroyi](https://github/Anroyi) - Trần Hùng
-* [@hnihTyoB](https://github/hnihTyoB) - Nguyễn Chí Thịnh
-* [@tungbeoiotptithcm](https://github.com/tungbeoiotptithcm) - Nguyễn Thanh Tùng
-* [@WhizKid](https://github.com/tuannguyen1229) - Nguyễn Như Tuấn
+* Đinh Hoàng Trọng Khôi
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
