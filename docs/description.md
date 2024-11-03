@@ -8,8 +8,8 @@
         * [2.1. Công nghệ sử dụng](#21-công-nghệ-sử-dụng)
         * [2.2. Giải pháp](#22-giải-pháp)
             * [2.2.1. Thiết kế cấu trúc ứng dụng](#221-thiết-kế-cấu-trúc-ứng-dụng)
-                * [a. Mô hình MVC-I Layered Architecture](#a-mô-hình-mvc-i-layered-architecture-)
-                * [b. Cấu trúc thư mục](#b-cấu-trúc-thư-mục)
+                * [a. Mô hình MVC-I Layered Architecture](#a-mô-hình-mvc-i-layered-architecture)
+                * [b. Cấu trúc dự án](#b-cấu-trúc-dự-án)
             * [2.2.2. Thiết kế cơ sở dữ liệu](#222-thiết-kế-cơ-sở-dữ-liệu)
             * [2.2.3. Lưu đồ giải thuật](#223-lưu-đồ-giải-thuật)
             * [2.2.4 Chức năng ứng dụng](#224-chức-năng-ứng-dụng)
@@ -67,7 +67,20 @@
     <figcaption>Model-View-Controller-Interactor</figcaption>
 </figure>
 
-##### b. Cấu trúc thư mục
+- Áp dụng kỹ thuật **Dependency Injection** của **Spring Framework**:
+    - **Dependency Injection** là một kỹ thuật lập trình mà một đối tượng nhận các phụ thuộc của nó từ bên ngoài.
+    - **Spring Framework** hỗ trợ **Dependency Injection** thông qua **Spring IoC Container**.
+    - **Spring IoC Container** quản lý các **Bean** và **Dependency Injection** giữa các **Bean**.
+    - Mỗi **Bean** được đánh dấu bởi các **Annotation** như **@Component**, **@Repository**.
+
+    <figure align="center">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Dependency_inversion.png">
+        <figcaption>Spring Dependency Injection</figcaption>
+    </figure>
+
+    - Khi một **Bean** được yêu cầu, các class phụ thuộc các sẽ được Inject thông qua **Constructor**.
+
+##### b. Cấu trúc dự án
 
 - Nhìn tổng quan cấu trúc thư mục của ứng dụng:
 
@@ -101,6 +114,7 @@
         - Giao tiếp giữa các tần **View** và **Controller**.
         - Lưu trữ dữ liệu từ người dùng nhập vào, và dữ liệu từ **Controller** trả về.
         - Sử dụng cơ chế **Binding** và **Observer** để cập nhật dữ liệu giữa **View** và **Controller**.
+        - Được đánh dấu bởi **@Component**.
         - Quy tắc đặt tên: **Tên Class** + **ViewModel**.
         ```bash
               tree src/main/java/com/note_awesome/models
@@ -190,10 +204,9 @@
                 - **views**:
                     - Đây là thành phần chính của tầng **View**.
                     - Vì ứng dụng này sử dụng JavaFX, nên mỗi file **FXML** tương ứng với một một controller riêng,
-                      là thành phần xử lý logic của **View**. Quy tắc đặt tên: **Tên View** + hậu tố **FxController
-                      **.
-                    - Ngoài ra xuất hiện thêm thành phần **Builder**, mục đích nhằm tách biệt việc xây dựng **View**
-                      và **Controller**. Quy tắc đặt tên: **Tên View** + hậu tố **Builder**.
+                      là thành phần xử lý logic của **View**. Quy tắc đặt tên: **Tên View** + hậu tố **FxController**.
+                    - Ngoài ra xuất hiện thêm thành phần **Builder**, mục đích nhằm tách biệt việc xây dựng **View** và **Controller**. Quy tắc đặt tên: **Tên View** + hậu tố **Builder**.
+                    - Các class trong đây không quản lý bởi **Spring IoC Container** mà do quá trình khởi tạo chủ động từ các class **Controller**.
                     ```bash
                     tree src/main/java/com/note_awesome/views/
                     src/main/java/com/note_awesome/views/
@@ -218,7 +231,7 @@
                     ```
     - **Controller**:
         - Tầng Controller chứa các class đảm nhiệm việc điều khiển luồng dữ liệu giữa **Model** và **Interactor**.
-        - Tầng **Controller** biết về tầng **Model**, **Interactor**, giao tiếp với **View** thông qua các **Function**
+        - Tầng **Controller** biết về tầng **Model**, **Interactor**, giao tiếp với **View** thông qua các **Function Interface**
           và **Event**.
         - Quy tắc đặt tên: **Tên Class** + **Controller**.
       ```bash
@@ -229,8 +242,7 @@
         └── NoteViewController.java
       ```
     - **Interactor**:
-        - Tầng này giống như tên gọi, thực hiện các tác vụ gọi xuống tầng **Service**, phản hồi dữ liệu về tầng *
-          *Controller** khi được yêu cầu.
+        - Tầng này giống như tên gọi, thực hiện các tác vụ gọi xuống tầng **Service**, phản hồi dữ liệu về tầng **Controller** khi được yêu cầu.
         - Interactor biế về tầng **Service** thông qua trừu tượng, tức các *interface*, biết về *domain* và *model*.
         - Quy tắc đặt tên: **Tên Class** + **Interactor**.
       ```bash
@@ -302,41 +314,63 @@
                 └── UserBasicValidator.java
       ```
 
-    - **core**:
-        - Đây là nơi chứa các:
-            - **Entity**
-            - **Repository**
-            - **Configuration**
-        - Đây là nơi định nghĩa cấu trúc cơ sở dữ liệu, đồng thời cung cấp các phương thức để tương tác với cơ
-          sở dữ
-          liệu.
-        - Sử dụng **Spring Data JPA** để tương tác với cơ sở dữ liệu.
-        - Các **Entity** là các **POJO** (Plain Old Java Object) đại diện cho các bảng trong cơ sở dữ liệu.
-            - Các **Repository** là các interface đại diện cho các bảng trong cơ sở dữ liệu, đồng thời cung cấp
-              các
-              phương thức để tương tác với cơ sở dữ liệu.
-      ```bash
-        tree src/main/java/com/note_awesome/core/
-        src/main/java/com/note_awesome/core/
-        ├── entities
-        │ ├── AuditorEntity.java
-        │ └── note
-        │     ├── NoteContent.java
-        │     ├── NoteImage.java
-        │     ├── NoteTag.java
-        │     ├── ProfileSetting.java
-        │     ├── User.java
-        │     └── UserProfile.java
-        └── repositories
-          └── note
-            ├── INoteContentRepository.java
-            ├── INoteImageRepository.java
-            ├── INoteTagRepository.java
-            ├── IProfileSettingRepository.java
-            ├── IUserProfileRepository.java
-            ├── IUserRepository.java
-            └── NoteJpaConfig.java
-      ```
+        - **core**:
+            - Đây là nơi chứa các:
+                - **Entity**:
+                    - Đây là các **POJO** (Plain Old Java Object) đại diện cho các bảng trong cơ sở dữ liệu, được đánh dấu bởi **@Entity**.
+                      //TODO: Add mermaid diagram
+                    - Entity **User**:
+                    ```mermaid
+                  classDiagram
+                    direction BT
+                    class AuditorEntity {
+                    - Date createdAt
+                      - Date updatedAt
+                        }
+                        class User {
+                      - Long id
+                      - String password
+                      - List~UserProfile~ profiles
+                      - String username
+                      - String userLocation
+                        }
+                  
+                    User  -->  AuditorEntity
+                    ``` 
+                    - Entity **UserProfile**:
+                    ```mermaid
+                - **Repository**
+                - **Configuration**
+            - Đây là nơi định nghĩa cấu trúc cơ sở dữ liệu, đồng thời cung cấp các phương thức để tương tác với cơ
+              sở dữ
+              liệu.
+            - Sử dụng **Spring Data JPA** để tương tác với cơ sở dữ liệu.
+            - Các **Entity** là các **POJO** (Plain Old Java Object) đại diện cho các bảng trong cơ sở dữ liệu.
+                - Các **Repository** là các interface đại diện cho các bảng trong cơ sở dữ liệu, đồng thời cung cấp
+                  các
+                  phương thức để tương tác với cơ sở dữ liệu.
+          ```bash
+            tree src/main/java/com/note_awesome/core/
+            src/main/java/com/note_awesome/core/
+            ├── entities
+            │ ├── AuditorEntity.java
+            │ └── note
+            │     ├── NoteContent.java
+            │     ├── NoteImage.java
+            │     ├── NoteTag.java
+            │     ├── ProfileSetting.java
+            │     ├── User.java
+            │     └── UserProfile.java
+            └── repositories
+              └── note
+                ├── INoteContentRepository.java
+                ├── INoteImageRepository.java
+                ├── INoteTagRepository.java
+                ├── IProfileSettingRepository.java
+                ├── IUserProfileRepository.java
+                ├── IUserRepository.java
+                └── NoteJpaConfig.java
+          ```
     - **extensions**:
         - Đây là nơi chứa các class hỗ trợ cho việc viết code.
       ```bash
