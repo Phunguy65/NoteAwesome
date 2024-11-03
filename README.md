@@ -26,16 +26,16 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/Phunguy65/StudentManagementApp">
+  <a href="https://github.com/Phunguy65/NoteAwesome">
     <img src="docs/assets/noteawesome_icon.png" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">StudentManagementApp</h3>
+<h3 align="center">NoteAwesome</h3>
 
   <p align="center">
     Ứng dụng ghi chú đa nền tảng
     <br />
-    <a href="https://github.com/Phunguy65/StudentManagementApp/docs"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/Phunguy65/NoteAwesome/docs"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="https://github.com/Phunguy65/NoteAwesome/releases/tag/v1.0.0">Download App</a>
