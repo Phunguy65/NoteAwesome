@@ -18,6 +18,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Objects;
 
 public class NoteAwesomeEnv {
@@ -26,7 +27,15 @@ public class NoteAwesomeEnv {
 
     public final static String DATABASE_NAME = "note_awesome";
 
-    public final static String ROOT_FOLDER = Objects.requireNonNull(NoteAwesomeEnv.class.getResource("")).getPath();
+    public final static String ROOT_FOLDER;
+
+    static {
+        try {
+            ROOT_FOLDER = Paths.get(Objects.requireNonNull(NoteAwesomeEnv.class.getResource("")).toURI()).toString();
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public final static String USER_DATA_FOLDER_PATH = ROOT_FOLDER + "user_data/";
 
@@ -35,11 +44,11 @@ public class NoteAwesomeEnv {
     public static final String APP_VERSION = "v0.1";
 
     public enum ViewComponent {
-        MAIN_WINDOW(ROOT_FOLDER + "fxml/MainWindow.fxml"),
-        NOTE_VIEW(ROOT_FOLDER + "fxml/note_views/NoteView.fxml"),
-        NOTE_EDITOR(ROOT_FOLDER + "fxml/note_views/NoteEditor.fxml"),
-        NOTE_BAR(ROOT_FOLDER + "fxml/note_views/NoteBar.fxml"),
-        NOTE_CARD(ROOT_FOLDER + "fxml/note_views/NoteCard.fxml");
+        MAIN_WINDOW(ROOT_FOLDER + "/fxml/MainWindow.fxml"),
+        NOTE_VIEW(ROOT_FOLDER + "/fxml/note_views/NoteView.fxml"),
+        NOTE_EDITOR(ROOT_FOLDER + "/fxml/note_views/NoteEditor.fxml"),
+        NOTE_BAR(ROOT_FOLDER + "/fxml/note_views/NoteBar.fxml"),
+        NOTE_CARD(ROOT_FOLDER + "/fxml/note_views/NoteCard.fxml");
 
         private final String path;
 

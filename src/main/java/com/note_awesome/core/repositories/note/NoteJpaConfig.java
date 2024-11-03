@@ -45,7 +45,7 @@ public class NoteJpaConfig {
         properties.put("hibernate.show_sql", "true");
         properties.put("hibernate.format_sql", "true");
         properties.put("hibernate.use_sql_comments", "true");
-
+        properties.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
         return properties;
     }
 
