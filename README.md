@@ -35,7 +35,7 @@
   <p align="center">
     Ứng dụng ghi chú đa nền tảng
     <br />
-    <a href="https://github.com/Phunguy65/NoteAwesome/docs"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/Phunguy65/NoteAwesome/tree/main/docs"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="https://github.com/Phunguy65/NoteAwesome/releases/tag/v1.0.0">Download App</a>

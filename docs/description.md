@@ -1,27 +1,25 @@
 # Mô tả dự án
 
 <!-- TOC -->
-
 * [Mô tả dự án](#mô-tả-dự-án)
-    * [1. Bài toán](#1-bài-toán)
-    * [2. Giải pháp](#2-giải-pháp)
-        * [2.1. Công nghệ sử dụng](#21-công-nghệ-sử-dụng)
-        * [2.2. Giải pháp](#22-giải-pháp)
-            * [2.2.1. Thiết kế cấu trúc ứng dụng](#221-thiết-kế-cấu-trúc-ứng-dụng)
-                * [a. Mô hình MVC-I Layered Architecture](#a-mô-hình-mvc-i-layered-architecture)
-                * [b. Cấu trúc dự án](#b-cấu-trúc-dự-án)
-            * [2.2.2. Thiết kế cơ sở dữ liệu](#222-thiết-kế-cơ-sở-dữ-liệu)
-            * [2.2.3. Lưu đồ giải thuật](#223-lưu-đồ-giải-thuật)
-            * [2.2.4 Chức năng ứng dụng](#224-chức-năng-ứng-dụng)
-                * [a. Chức năng tài khoản](#a-chức-năng-tài-khoản)
-                * [b. Tải ghi chú từ cơ sở dữ liệu](#b-tải-ghi-chú-từ-cơ-sở-dữ-liệu)
-                * [b. Chức năng ghi chú](#b-chức-năng-ghi-chú)
-                    * [i. Tạo ghi chú](#i-tạo-ghi-chú)
-                    * [ii. Sửa ghi chú](#ii-sửa-ghi-chú)
-                    * [iii. Xóa ghi chú](#iii-xóa-ghi-chú)
-                    * [iv. Một số chức năng nhỏ khác](#iv-một-số-chức-năng-nhỏ-khác)
-    * [3. Tổng Kết](#3-tổng-kết)
-
+  * [1. Bài toán](#1-bài-toán)
+  * [2. Giải pháp](#2-giải-pháp)
+    * [2.1. Công nghệ sử dụng](#21-công-nghệ-sử-dụng)
+    * [2.2. Giải pháp](#22-giải-pháp)
+      * [2.2.1. Thiết kế cấu trúc ứng dụng](#221-thiết-kế-cấu-trúc-ứng-dụng)
+        * [a. Mô hình MVC-I Layered Architecture](#a-mô-hình-mvc-i-layered-architecture)
+        * [b. Cấu trúc dự án](#b-cấu-trúc-dự-án)
+      * [2.2.2. Thiết kế cơ sở dữ liệu](#222-thiết-kế-cơ-sở-dữ-liệu)
+      * [2.2.3. Lưu đồ giải thuật](#223-lưu-đồ-giải-thuật)
+      * [2.2.4 Chức năng ứng dụng](#224-chức-năng-ứng-dụng)
+        * [a. Chức năng tài khoản](#a-chức-năng-tài-khoản)
+        * [b. Tải ghi chú từ cơ sở dữ liệu](#b-tải-ghi-chú-từ-cơ-sở-dữ-liệu)
+        * [b. Chức năng ghi chú](#b-chức-năng-ghi-chú)
+          * [i. Tạo ghi chú](#i-tạo-ghi-chú)
+          * [ii. Sửa ghi chú](#ii-sửa-ghi-chú)
+          * [iii. Xóa ghi chú](#iii-xóa-ghi-chú)
+          * [iv. Một số chức năng nhỏ khác](#iv-một-số-chức-năng-nhỏ-khác)
+  * [3. Tổng Kết](#3-tổng-kết)
 <!-- TOC -->
 
 ## 1. Bài toán
@@ -318,37 +316,16 @@
             - Đây là nơi chứa các:
                 - **Entity**:
                     - Đây là các **POJO** (Plain Old Java Object) đại diện cho các bảng trong cơ sở dữ liệu, được đánh dấu bởi **@Entity**.
-                      //TODO: Add mermaid diagram
-                    - Entity **User**:
-                    ```mermaid
-                  classDiagram
-                    direction BT
-                    class AuditorEntity {
-                    - Date createdAt
-                      - Date updatedAt
-                        }
-                        class User {
-                      - Long id
-                      - String password
-                      - List~UserProfile~ profiles
-                      - String username
-                      - String userLocation
-                        }
-                  
-                    User  -->  AuditorEntity
-                    ``` 
-                    - Entity **UserProfile**:
-                    ```mermaid
-                - **Repository**
+                - **Repository**:
+                    - Đây là các interface đại diện cho các bảng trong cơ sở dữ liệu, đồng thời cung cấp các phương thức để tương tác với cơ sở dữ liệu.
+                    - Mỗi mô interface **Repository** tương ứng với một **Entity**.
+                    - Được đánh dấu bởi **@Repository**.
+                    - Quy tắc đặt tên: **Tên Entity** + **Repository**.
                 - **Configuration**
-            - Đây là nơi định nghĩa cấu trúc cơ sở dữ liệu, đồng thời cung cấp các phương thức để tương tác với cơ
-              sở dữ
-              liệu.
+            - Đây là nơi định nghĩa cấu trúc cơ sở dữ liệu, đồng thời cung cấp các phương thức để tương tác với cơ sở dữ liệu.
             - Sử dụng **Spring Data JPA** để tương tác với cơ sở dữ liệu.
             - Các **Entity** là các **POJO** (Plain Old Java Object) đại diện cho các bảng trong cơ sở dữ liệu.
-                - Các **Repository** là các interface đại diện cho các bảng trong cơ sở dữ liệu, đồng thời cung cấp
-                  các
-                  phương thức để tương tác với cơ sở dữ liệu.
+                - Các **Repository** là các interface đại diện cho các bảng trong cơ sở dữ liệu, đồng thời cung cấp các phương thức để tương tác với cơ sở dữ liệu.
           ```bash
             tree src/main/java/com/note_awesome/core/
             src/main/java/com/note_awesome/core/
@@ -372,7 +349,7 @@
                 └── NoteJpaConfig.java
           ```
     - **extensions**:
-        - Đây là nơi chứa các class hỗ trợ cho việc viết code.
+        - Đây là nơi chứa các class, interface hỗ trợ cho việc viết code.
       ```bash
         tree src/main/java/com/note_awesome/extensions/
         src/main/java/com/note_awesome/extensions/
@@ -547,8 +524,7 @@ classDiagram
 
 - Hiện thực:
     - Nhóm chưa hoàn thiện chức năng này.
-    - Tuy nhiên, nhóm đã tạo ra một class [**FakeAppService
-      **](../src/main/java/com/note_awesome/services/FakeAppService.java) để mô phỏng chức năng này.
+    - Tuy nhiên, nhóm đã tạo ra một class [**FakeAppService**](../src/main/java/com/note_awesome/services/FakeAppService.java) để mô phỏng chức năng này.
   ```java
       private void generateTestData(User user, UserProfile userProfile) {
         TEST_USER.setUsername("test");
@@ -828,13 +804,79 @@ classDiagram
 
 ###### iv. Một số chức năng nhỏ khác
 
-    - **Ghim ghi chú**
-    - **Trang trí cho một ghi chú**:
-        - Bao gồm việc **bôi đậm**, **in nghiêng**, **gạch chân**.
-        - Thêm một số background khi gõ nội dung ghi chú (tuy nhiên chưa lưu trạng thái của background vào cơ sở dữ liệu).
+- **Ghim ghi chú**
+- **Trang trí cho một ghi chú**:
+    - Bao gồm việc **bôi đậm**, **in nghiêng**, **gạch chân**.
+    - Thêm một số background khi gõ nội dung ghi chú (tuy nhiên chưa lưu trạng thái của background vào cơ sở dữ liệu).
 
 ## 3. Tổng Kết
 
+- Bảng tóm tắt công việc:
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-style:solid;border-width:0px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;
+  padding:10px 5px;word-break:normal;}
+.tg th{border-style:solid;border-width:0px;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-c3ow{border-color:inherit;text-align:center;vertical-align:top}
+.tg .tg-7btt{border-color:inherit;font-weight:bold;text-align:center;vertical-align:top}
+</style>
+<table class="tg"><thead>
+  <tr>
+    <th class="tg-c3ow"></th>
+    <th class="tg-c3ow" colspan="5">Nhóm giao diện</th>
+    <th class="tg-c3ow" colspan="5">Nhóm chức năng</th>
+    <th class="tg-c3ow"></th>
+    <th class="tg-c3ow"></th>
+  </tr></thead>
+<tbody>
+  <tr>
+    <td class="tg-7btt"></td>
+    <td class="tg-7btt">Main Window</td>
+    <td class="tg-7btt">Note View</td>
+    <td class="tg-7btt">Note Editor</td>
+    <td class="tg-7btt">Note Card</td>
+    <td class="tg-7btt">Effect</td>
+    <td class="tg-7btt">Tạo ghi chú</td>
+    <td class="tg-7btt">Cập nhật ghi chú</td>
+    <td class="tg-7btt">Xóa ghi chú</td>
+    <td class="tg-7btt">Ghim ghi chú</td>
+    <td class="tg-7btt">Tải lại ghi chú</td>
+    <td class="tg-7btt">Thiết kế cấu trúc dự án</td>
+    <td class="tg-7btt">Thiết kế cơ sở dữ liệu</td>
+  </tr>
+  <tr>
+    <td class="tg-c3ow">Nguyễn Ngọc Phú</td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow">v</td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow">v</td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow">v</td>
+    <td class="tg-c3ow">v</td>
+    <td class="tg-c3ow">v</td>
+    <td class="tg-c3ow">v</td>
+  </tr>
+  <tr>
+    <td class="tg-c3ow">Đinh Hoàng Trọng Khôi</td>
+    <td class="tg-c3ow">v</td>
+    <td class="tg-c3ow">v</td>
+    <td class="tg-c3ow">v</td>
+    <td class="tg-c3ow">v</td>
+    <td class="tg-c3ow">v</td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow">v </td>
+    <td class="tg-c3ow">v</td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+  </tr>
+</tbody></table>
+
 - Mặc dù nhóm đã cố gắng hoàn thiện ứng dụng, tuy nhiên vẫn còn một số chức năng chưa được hoàn thiện.
 - Trong thời gian có hạn, với sự nỗ lực của hai thành viên, nhóm đã hoàn thiện được một số chức năng cơ bản của ứng dụng.
-- Nhóm đã học được rất nhiều từ việc xây dựng ứng dụng này, từ việc thiết kế cơ sở dữ liệu, thiết kế giao diện, viết code, kiểm thử, ...
