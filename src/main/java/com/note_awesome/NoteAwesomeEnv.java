@@ -25,7 +25,7 @@ public class NoteAwesomeEnv {
 
     public final static String APP_NAME = "Note Awesome";
 
-    public final static String DATABASE_NAME = "note_awesome";
+    public final static String DATABASE_NAME = "/note_awesome";
 
     public final static String ROOT_FOLDER;
 
@@ -37,7 +37,7 @@ public class NoteAwesomeEnv {
         }
     }
 
-    public final static String USER_DATA_FOLDER_PATH = ROOT_FOLDER + "user_data/";
+    public final static String USER_DATA_FOLDER_PATH = ROOT_FOLDER + "/user_data/";
 
     public final static String URL_DATABASE = ROOT_FOLDER + DATABASE_NAME;
 

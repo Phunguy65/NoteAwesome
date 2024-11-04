@@ -25,7 +25,7 @@ public class StageInitializer implements ApplicationListener<StageReadyEvent> {
             stage.setScene(scene);
             stage.centerOnScreen();
             stage.show();
-            ScenicView.show(scene);
+//            ScenicView.show(scene);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

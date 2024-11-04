@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ac0ac134-0996-4b33-b197-a0dda3c06974" name="Changes" comment="" />
+    <list default="true" id="ac0ac134-0996-4b33-b197-a0dda3c06974" name="Changes" comment="fix: hot fix app not run on Windows&#10;&#10;- this issue cause path config on Windows.&#10;&#10;Author: PNguyen">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/note_awesome/NoteAwesomeEnv.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/note_awesome/NoteAwesomeEnv.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/note_awesome/StageInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/note_awesome/StageInitializer.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -43,15 +48,21 @@
     "Maven.NoteAwesome [compile].executor": "Run",
     "Maven.NoteAwesome [org.springframework.boot:spring-boot-maven-plugin:3.3.4:run].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.NoteAwesomeFX.executor": "Run",
     "git-widget-placeholder": "hotfix/Windows",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/PNguyen/Workspace/MyProject/NoteAwesome",
+    "last_opened_file_path": "C:/Users/PNguyen/Workspace/MyProject/NoteAwesome/target/classes/com/note_awesome/note_awesome.mv.db",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "preferences.pluginManager"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "h2"
+    ]
   }
 }]]></component>
   <component name="RunManager">
@@ -87,8 +98,18 @@
       <workItem from="1730501549250" duration="376000" />
       <workItem from="1730664437319" duration="471000" />
       <workItem from="1730667012302" duration="473000" />
-      <workItem from="1730672492385" duration="1302000" />
+      <workItem from="1730672492385" duration="1577000" />
+      <workItem from="1730683478147" duration="2704000" />
     </task>
+    <task id="LOCAL-00001" summary="fix: hot fix app not run on Windows&#10;&#10;- this issue cause path config on Windows.&#10;&#10;Author: PNguyen">
+      <option name="closed" value="true" />
+      <created>1730674087308</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1730674087309</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -116,24 +137,18 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fix: hot fix app not run on Windows&#10;&#10;Author: PNguyen" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: hot fix app not run on Windows&#10;&#10;Author: PNguyen" />
+    <MESSAGE value="fix: hot fix app not run on Windows&#10;&#10;- this issue cause path config on Windows.&#10;&#10;Author: PNguyen" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: hot fix app not run on Windows&#10;&#10;- this issue cause path config on Windows.&#10;&#10;Author: PNguyen" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/note_awesome/NoteAwesomeEnv.java</url>
-          <line>30</line>
-          <option name="timeStamp" value="2" />
+          <url>file://$PROJECT_DIR$/src/main/java/com/note_awesome/services/FakeAppService.java</url>
+          <line>77</line>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
-  </component>
-  <component name="com.github.lppedd.cc.CommitBuilderDialog">
-    <type>fix</type>
-    <subject>hot fix app not run on Windows</subject>
-    <footers>
-      <entry type="Author" value="PNguyen" />
-    </footers>
   </component>
 </project>
