@@ -835,6 +835,73 @@ classDiagram
 
 ## 3. Tổng Kết
 
+- Bảng tóm tắt công việc:
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-style:solid;border-width:0px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;
+  padding:10px 5px;word-break:normal;}
+.tg th{border-style:solid;border-width:0px;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-c3ow{border-color:inherit;text-align:center;vertical-align:top}
+.tg .tg-7btt{border-color:inherit;font-weight:bold;text-align:center;vertical-align:top}
+</style>
+<table class="tg"><thead>
+  <tr>
+    <th class="tg-c3ow"></th>
+    <th class="tg-c3ow" colspan="5">Nhóm giao diện</th>
+    <th class="tg-c3ow" colspan="5">Nhóm chức năng</th>
+    <th class="tg-c3ow"></th>
+    <th class="tg-c3ow"></th>
+  </tr></thead>
+<tbody>
+  <tr>
+    <td class="tg-7btt"></td>
+    <td class="tg-7btt">Main Window</td>
+    <td class="tg-7btt">Note View</td>
+    <td class="tg-7btt">Note Editor</td>
+    <td class="tg-7btt">Note Card</td>
+    <td class="tg-7btt">Effect</td>
+    <td class="tg-7btt">Tạo ghi chú</td>
+    <td class="tg-7btt">Cập nhật ghi chú</td>
+    <td class="tg-7btt">Xóa ghi chú</td>
+    <td class="tg-7btt">Ghim ghi chú</td>
+    <td class="tg-7btt">Tải lại ghi chú</td>
+    <td class="tg-7btt">Thiết kế cấu trúc dự án</td>
+    <td class="tg-7btt">Thiết kế cơ sở dữ liệu</td>
+  </tr>
+  <tr>
+    <td class="tg-c3ow">Nguyễn Ngọc Phú</td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow">v</td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow">v</td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow">v</td>
+    <td class="tg-c3ow">v</td>
+    <td class="tg-c3ow">v</td>
+    <td class="tg-c3ow">v</td>
+  </tr>
+  <tr>
+    <td class="tg-c3ow">Đinh Hoàng Trọng Khôi</td>
+    <td class="tg-c3ow">v</td>
+    <td class="tg-c3ow">v</td>
+    <td class="tg-c3ow">v</td>
+    <td class="tg-c3ow">v</td>
+    <td class="tg-c3ow">v</td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow">v </td>
+    <td class="tg-c3ow">v</td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+  </tr>
+</tbody></table>
+
 - Mặc dù nhóm đã cố gắng hoàn thiện ứng dụng, tuy nhiên vẫn còn một số chức năng chưa được hoàn thiện.
 - Trong thời gian có hạn, với sự nỗ lực của hai thành viên, nhóm đã hoàn thiện được một số chức năng cơ bản của ứng dụng.
 - Nhóm đã học được rất nhiều từ việc xây dựng ứng dụng này, từ việc thiết kế cơ sở dữ liệu, thiết kế giao diện, viết code, kiểm thử, ...
