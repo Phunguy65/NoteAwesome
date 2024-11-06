@@ -108,6 +108,22 @@
 ```
 
 - Trong đó:
+    - Nhóm *file* hỗ trợ khởi tạo ứng dụng:
+        - [**NoteAwesomeEnv.java**:](../src/main/java/com/note_awesome/NoteAwesomeEnv.java) chứa các **Resource** và **ViewComponent**.
+        - [**NoteAwesomeFX.java**:](../src/main/java/com/note_awesome/NoteAwesomeFX.java) chứa hàm **main**.
+        - [**StageInitializer.java**:](../src/main/java/com/note_awesome/StageInitializer.java) khởi tạo **Stage**.
+        - [**StageReadyEvent.java**:](../src/main/java/com/note_awesome/StageReadyEvent.java) xử lý sự kiện **Stage** sẵn sàng.
+        - [**NoteAwesomeApplication.java**:](../src/main/java/com/note_awesome/NoteAwesomeApplication.java) điểm bắt đầu sau khi hàm **main** được gọi.
+          ```bash
+            .
+            ├── NoteAwesomeApplication.java
+            ├── NoteAwesomeEnv.java
+            ├── NoteAwesomeFX.java
+            ├── NoteEditor.java
+            ├── StageInitializer.java
+            ├── StageReadyEvent.java
+            ```
+
     - **Model**:
         - Thể hiện ở folder [**models**](../src/main/java/com/note_awesome/models/).
         - Tầng này chứa các class, enum đảm nhiệm vai trò:
