@@ -160,6 +160,9 @@
     mvn spring-boot:run
     ```
 
+:bulb: Hàm [**main**](src/main/java/com/note_awesome/NoteAwesomeFX.java) là hàm chạy chính của ứng dụng.
+
+```java
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- USAGE EXAMPLES -->
